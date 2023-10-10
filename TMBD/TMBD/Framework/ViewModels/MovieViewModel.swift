@@ -9,7 +9,7 @@ import Foundation
 
 class MovieViewModel: ObservableObject {
   private let useCase: MovieUseCase
-  
+  private var currentPage = 1 // Keep track of the current page number
   @Published var movies: [Movie] = []
   @Published var errorMessage: String?
   
@@ -20,14 +20,16 @@ class MovieViewModel: ObservableObject {
   @MainActor
   func getMovies() async {
     do {
-      let resultMovie = try await useCase.getMovies()
+      // Fetch movies for the current page
+      let resultMovie = try await useCase.getMovies(page: currentPage)
       if let resultMovie = resultMovie {
-        movies = resultMovie
+        movies.append(contentsOf: resultMovie)
+        currentPage += 1 // Increment the current page number for the next fetch
       }
     } catch {
       errorMessage = "Failed to fetch movies: \(error.localizedDescription)"
     }
-    
   }
 }
+
 
