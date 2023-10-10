@@ -18,12 +18,12 @@ class NetworkApiService {
   
   private let apiKey = "12e629d7051e2adf10c4ba97a9c12fcb"
   
+  /// Function to get movies from API
+  /// - Parameter url: The URL to get movies from
+  /// - Returns: An array of movies
   func getMovies(url: URL) async throws -> [Movie] {
     var headers: HTTPHeaders = [:]
     headers["Authorization"] = "Bearer \(apiKey)"
-    
-    print("Request URL: \(url)")
-    print("Headers: \(headers)")
     
     let taskRequest = AF.request(url, method: .get, headers: headers).validate()
     let response = await taskRequest.serializingData().response

@@ -19,6 +19,9 @@ class MovieUseCase: MovieUseCaseProtocol {
     self.repository = repository
   }
   
+  /// A function to get movies from the API
+  /// - Parameter page: The page to get movies from
+  /// - Returns: Returns an array of movies
   func getMovies(page: Int) async throws -> [Movie]? {
     return try await repository.getMovies(page: page)
   }
