@@ -29,6 +29,9 @@ class MovieRepository: MovieApiProtocol {
     self.service = service
   }
   
+  /// A function to get movies from the API
+  /// - Parameter page: The page to get movies from
+  /// - Returns: Returns an array of movies
   func getMovies(page: Int) async throws -> [Movie] {
     let apiKey = Api.Routes.apiKey
     let apiUrl = "\(Api.base)\(Api.Routes.movies)?api_key=\(apiKey)&page=\(page)"
