@@ -18,15 +18,16 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
-  func getMovies() {
-    Task {
-      do {
-        movies = try await useCase.getMovies()
-      } catch {
-        errorMessage = error.localizedDescription
-        print(error)
+  func getMovies() async {
+    do {
+      let resultMovie = try await useCase.getMovies()
+      if let resultMovie = resultMovie {
+        movies = resultMovie
       }
+    } catch {
+      errorMessage = "Failed to fetch movies: \(error.localizedDescription)"
     }
+    
   }
 }
 

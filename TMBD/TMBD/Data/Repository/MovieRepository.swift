@@ -12,12 +12,12 @@ struct Api {
   
   struct Routes {
     static let movies = "/popular"
-    static let apiKey = "?api_key=12e629d7051e2adf10c4ba97a9c12fcb"
+    static let apiKey = "12e629d7051e2adf10c4ba97a9c12fcb"
   }
 }
 
 protocol MovieApiProtocol {
-  func getMovies() async throws -> [Movie]?
+  func getMovies() async throws -> [Movie]
 }
 
 class MovieRepository: MovieApiProtocol {
@@ -29,11 +29,20 @@ class MovieRepository: MovieApiProtocol {
     self.service = service
   }
   
-  func getMovies() async throws -> [Movie]? {
-    let urlString = "\(Api.base)\(Api.Routes.movies)\(Api.Routes.apiKey)"
-    guard let url = URL(string: urlString) else {
-      throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
-    }
+  func getMovies() async throws -> [Movie] {
+      let apiUrl = "\(Api.base)\(Api.Routes.movies)"
+      print(apiUrl) // Make sure the URL is correct before making the request
+      guard let url = URL(string: apiUrl) else {
+          debugPrint("Invalid URL")
+          return []
+      }
+
+      do {
+          return try await service.getMovies(url: url)
+      } catch {
+          debugPrint("Error fetching movies: \(error)")
+          throw error
+      }
   }
 }
 

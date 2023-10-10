@@ -8,26 +8,40 @@
 import Foundation
 import Alamofire
 
+enum NetworkError: Error {
+  case requestFailed
+  case decodingFailed
+}
+
 class NetworkApiService {
   static var shared = NetworkApiService()
   
-  func getAmiibo(url: URL) async -> [Movie]? {
-    let taskRequest = AF.request(url, method: .get).validate()
+  private let apiKey = "12e629d7051e2adf10c4ba97a9c12fcb"
+  
+  func getMovies(url: URL) async throws -> [Movie] {
+    var headers: HTTPHeaders = [:]
+    headers["Authorization"] = "Bearer \(apiKey)"
+    
+    print("Request URL: \(url)")
+    print("Headers: \(headers)")
+    
+    let taskRequest = AF.request(url, method: .get, headers: headers).validate()
     let response = await taskRequest.serializingData().response
     
     switch response.result {
     case .success(let data):
       do {
-        return try JSONDecoder().decode([Movie].self, from: data)
+        let response = try JSONDecoder().decode(MovieResponse.self, from: data)
+        return response.results
       } catch {
-        return nil
+        debugPrint("Error decoding JSON: \(error)")
+        throw NetworkError.decodingFailed
       }
     case let .failure(error):
       debugPrint(error.localizedDescription)
-      return nil
+      throw error
     }
   }
-  
 }
 
 
