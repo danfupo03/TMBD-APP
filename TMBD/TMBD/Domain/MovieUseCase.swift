@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieUseCaseProtocol {
-  func getMovies() async throws -> [Movie]?
+  func getMovies(page: Int) async throws -> [Movie]?
 }
 
 class MovieUseCase: MovieUseCaseProtocol {
@@ -19,8 +19,8 @@ class MovieUseCase: MovieUseCaseProtocol {
     self.repository = repository
   }
   
-  func getMovies() async throws -> [Movie]? {
-    return try await repository.getMovies()
+  func getMovies(page: Int) async throws -> [Movie]? {
+    return try await repository.getMovies(page: page)
   }
 }
 

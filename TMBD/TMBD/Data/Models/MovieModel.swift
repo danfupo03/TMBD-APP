@@ -21,6 +21,14 @@ struct Movie: Codable, Hashable, Identifiable {
   var video: Bool
   var vote_average: Double
   var vote_count: Int 
+  
+  var fullBackDrop: URL {
+    return URL(string: "https://image.tmdb.org/t/p/original/\(backdrop_path)")!
+  }
+  
+  var fullPoster: URL {
+    return URL(string: "https://image.tmdb.org/t/p/original/\(poster_path)")!
+  }
 }
 
 struct MovieResponse: Codable {

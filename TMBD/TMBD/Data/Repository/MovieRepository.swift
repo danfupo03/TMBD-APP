@@ -17,7 +17,7 @@ struct Api {
 }
 
 protocol MovieApiProtocol {
-  func getMovies() async throws -> [Movie]
+  func getMovies(page: Int) async throws -> [Movie]
 }
 
 class MovieRepository: MovieApiProtocol {
@@ -29,20 +29,20 @@ class MovieRepository: MovieApiProtocol {
     self.service = service
   }
   
-  func getMovies() async throws -> [Movie] {
-      let apiUrl = "\(Api.base)\(Api.Routes.movies)"
-      print(apiUrl) // Make sure the URL is correct before making the request
-      guard let url = URL(string: apiUrl) else {
-          debugPrint("Invalid URL")
-          return []
-      }
-
-      do {
-          return try await service.getMovies(url: url)
-      } catch {
-          debugPrint("Error fetching movies: \(error)")
-          throw error
-      }
+  func getMovies(page: Int) async throws -> [Movie] {
+    let apiKey = Api.Routes.apiKey
+    let apiUrl = "\(Api.base)\(Api.Routes.movies)?api_key=\(apiKey)&page=\(page)"
+    guard let url = URL(string: apiUrl) else {
+      debugPrint("Invalid URL")
+      return []
+    }
+    
+    do {
+      return try await service.getMovies(url: url)
+    } catch {
+      debugPrint("Error fetching movies: \(error)")
+      throw error
+    }
   }
 }
 
