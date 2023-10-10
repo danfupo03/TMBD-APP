@@ -11,14 +11,14 @@ import Alamofire
 class NetworkApiService {
   static var shared = NetworkApiService()
   
-  func getMovies(url: URL) async -> [Movies]? {
+  func getAmiibo(url: URL) async -> [Movie]? {
     let taskRequest = AF.request(url, method: .get).validate()
     let response = await taskRequest.serializingData().response
     
     switch response.result {
     case .success(let data):
       do {
-        return try JSONDecoder().decode([Movies].self, from: data)
+        return try JSONDecoder().decode([Movie].self, from: data)
       } catch {
         return nil
       }
@@ -27,5 +27,8 @@ class NetworkApiService {
       return nil
     }
   }
+  
 }
+
+
 

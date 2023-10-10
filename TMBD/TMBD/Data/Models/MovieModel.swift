@@ -7,14 +7,10 @@
 
 import Foundation
 
-struct Movies: Codable {
-  var results: [Movie]
-}
-
-struct Movie: Codable {
+struct Movie: Codable, Hashable, Identifiable {
+  var id: Int
   var adult: Bool
   var backdrop_path: String
-  var id: Int
   var original_language: String
   var original_title: String
   var overview: String
@@ -25,4 +21,8 @@ struct Movie: Codable {
   var video: Bool
   var vote_average: Int
   var vote_count: Int 
+}
+
+struct MovieResponse: Codable {
+  var result: [Movie]
 }

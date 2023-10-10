@@ -17,7 +17,7 @@ struct Api {
 }
 
 protocol MovieApiProtocol {
-  func getMovies() async -> [Movies]?
+  func getMovies() async throws -> [Movie]?
 }
 
 class MovieRepository: MovieApiProtocol {
@@ -29,7 +29,11 @@ class MovieRepository: MovieApiProtocol {
     self.service = service
   }
   
-  func getMovies() async -> [Movies]? {
-    return await service.getMovies(url: URL(string: "\(Api.base)\(Api.Routes.movies)\(Api.Routes.apiKey)")!)
+  func getMovies() async throws -> [Movie]? {
+    let urlString = "\(Api.base)\(Api.Routes.movies)\(Api.Routes.apiKey)"
+    guard let url = URL(string: urlString) else {
+      throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+    }
   }
 }
+
