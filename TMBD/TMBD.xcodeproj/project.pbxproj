@@ -94,9 +94,10 @@
 		69004E262AD5C7A100954749 /* TMBD */ = {
 			isa = PBXGroup;
 			children = (
+				69004E562AD5C85200954749 /* Framework */,
+				69004E542AD5C82C00954749 /* Domain */,
 				69004E512AD5C7C800954749 /* Data */,
 				69004E272AD5C7A100954749 /* TMBDApp.swift */,
-				69004E292AD5C7A100954749 /* ContentView.swift */,
 				69004E2B2AD5C7A200954749 /* Assets.xcassets */,
 				69004E2D2AD5C7A200954749 /* Preview Content */,
 			);
@@ -131,6 +132,7 @@
 		69004E512AD5C7C800954749 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				69004E552AD5C84500954749 /* Repository */,
 				69004E522AD5C7D900954749 /* Models */,
 			);
 			path = Data;
@@ -149,6 +151,44 @@
 			children = (
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		69004E542AD5C82C00954749 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		69004E552AD5C84500954749 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		69004E562AD5C85200954749 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				69004E5A2AD5C86C00954749 /* ViewModels */,
+				69004E572AD5C85900954749 /* Views */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		69004E572AD5C85900954749 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				69004E292AD5C7A100954749 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		69004E5A2AD5C86C00954749 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
