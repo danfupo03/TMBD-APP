@@ -14,6 +14,11 @@
 		69004E392AD5C7A200954749 /* TMBDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E382AD5C7A200954749 /* TMBDTests.swift */; };
 		69004E432AD5C7A200954749 /* TMBDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E422AD5C7A200954749 /* TMBDUITests.swift */; };
 		69004E452AD5C7A200954749 /* TMBDUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E442AD5C7A200954749 /* TMBDUITestsLaunchTests.swift */; };
+		69004E5C2AD5C8DF00954749 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E5B2AD5C8DF00954749 /* MovieModel.swift */; };
+		69004E5E2AD5CA0A00954749 /* NetworkApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E5D2AD5CA0A00954749 /* NetworkApiService.swift */; };
+		69004E612AD5CA2B00954749 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 69004E602AD5CA2B00954749 /* Alamofire */; };
+		69004E642AD5CA3F00954749 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 69004E632AD5CA3F00954749 /* SDWebImageSwiftUI */; };
+		69004E662AD5CA7C00954749 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E652AD5CA7C00954749 /* MovieRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,9 @@
 		69004E3E2AD5C7A200954749 /* TMBDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMBDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69004E422AD5C7A200954749 /* TMBDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBDUITests.swift; sourceTree = "<group>"; };
 		69004E442AD5C7A200954749 /* TMBDUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBDUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		69004E5B2AD5C8DF00954749 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		69004E5D2AD5CA0A00954749 /* NetworkApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApiService.swift; sourceTree = "<group>"; };
+		69004E652AD5CA7C00954749 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69004E642AD5CA3F00954749 /* SDWebImageSwiftUI in Frameworks */,
+				69004E612AD5CA2B00954749 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				69004E532AD5C7E500954749 /* Network */,
+				69004E5B2AD5C8DF00954749 /* MovieModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,6 +160,7 @@
 		69004E532AD5C7E500954749 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				69004E5D2AD5CA0A00954749 /* NetworkApiService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -163,6 +175,7 @@
 		69004E552AD5C84500954749 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				69004E652AD5CA7C00954749 /* MovieRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -207,6 +220,10 @@
 			dependencies = (
 			);
 			name = TMBD;
+			packageProductDependencies = (
+				69004E602AD5CA2B00954749 /* Alamofire */,
+				69004E632AD5CA3F00954749 /* SDWebImageSwiftUI */,
+			);
 			productName = TMBD;
 			productReference = 69004E242AD5C7A100954749 /* TMBD.app */;
 			productType = "com.apple.product-type.application";
@@ -279,6 +296,10 @@
 				Base,
 			);
 			mainGroup = 69004E1B2AD5C7A100954749;
+			packageReferences = (
+				69004E5F2AD5CA2B00954749 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				69004E622AD5CA3F00954749 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = 69004E252AD5C7A100954749 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -321,8 +342,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69004E5C2AD5C8DF00954749 /* MovieModel.swift in Sources */,
 				69004E2A2AD5C7A100954749 /* ContentView.swift in Sources */,
 				69004E282AD5C7A100954749 /* TMBDApp.swift in Sources */,
+				69004E662AD5CA7C00954749 /* MovieRepository.swift in Sources */,
+				69004E5E2AD5CA0A00954749 /* NetworkApiService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +676,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		69004E5F2AD5CA2B00954749 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+		69004E622AD5CA3F00954749 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		69004E602AD5CA2B00954749 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69004E5F2AD5CA2B00954749 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		69004E632AD5CA3F00954749 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69004E622AD5CA3F00954749 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 69004E1C2AD5C7A100954749 /* Project object */;
 }
