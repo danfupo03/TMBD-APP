@@ -13,14 +13,13 @@ struct MovieCard: View {
   var movie: Movie
   
   var body: some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading) {
       // Poster Image
       WebImage(url: movie.fullPoster)
         .resizable()
         .aspectRatio(contentMode: .fit)
-        .cornerRadius(10)
-        .clipped()
-        .padding(.bottom, 8)
+        .cornerRadius(5)
+        .frame(width: 150, height: 225)
       
       // Movie Title
       Text(movie.title)
@@ -48,10 +47,10 @@ struct MovieCard: View {
       }
       
     }
+    .frame(minWidth: 0, maxWidth: 150, minHeight: 0, maxHeight: .infinity)
     .padding()
     .background(Color.white)
     .cornerRadius(15)
-    .shadow(radius: 5)
   }
 }
 

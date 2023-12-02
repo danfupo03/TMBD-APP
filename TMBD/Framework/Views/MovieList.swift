@@ -14,33 +14,34 @@ struct MovieList: View {
   
   var body: some View {
     NavigationView {
-      VStack(alignment: .leading) {
-        Text("Popular Movies").font(.largeTitle).foregroundStyle(.white)
-        ScrollView(.horizontal) {
-          HStack {
-            ForEach(vm.popularMovies) { movie in
-              NavigationLink(destination: MovieDetailView(movie: movie)){
-                MovieCard(movie: movie)
-              }.buttonStyle(PlainButtonStyle())
+      ScrollView {
+        VStack(alignment: .leading) {
+          Text("Popular Movies").font(.largeTitle).padding(.top)
+          ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+              ForEach(vm.popularMovies) { movie in
+                NavigationLink(destination: MovieDetailView(movie: movie)){
+                  MovieCard(movie: movie)
+                }.buttonStyle(PlainButtonStyle())
+              }
+            }
+          } //.padding(.bottom, 8)
+          
+          Spacer()
+          
+          Text("Top Rated Movies").font(.largeTitle).padding(.top)
+          ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+              ForEach(vm.topRatedMovies) { movie in
+                NavigationLink(destination: MovieDetailView(movie: movie)){
+                  MovieCard(movie: movie)
+                }.buttonStyle(PlainButtonStyle())
+              }
             }
           }
         }
-        
-        Spacer()
-        
-        Text("Top Rated Movies").font(.largeTitle).foregroundStyle(.white)
-        ScrollView(.horizontal) {
-          HStack {
-            ForEach(vm.topRatedMovies) { movie in
-              NavigationLink(destination: MovieDetailView(movie: movie)){
-                MovieCard(movie: movie)
-              }.buttonStyle(PlainButtonStyle())
-            }
-          }
-        }
+        .padding()
       }
-      .padding()
-      .background(Color(red: 0.14, green: 0.18, blue: 0.20))
     }
     .onAppear {
       Task {
