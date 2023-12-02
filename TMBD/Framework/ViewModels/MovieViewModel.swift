@@ -9,8 +9,10 @@ import Foundation
 
 class MovieViewModel: ObservableObject {
   private let useCase: MovieUseCase
-  private var currentPage = 1
-  @Published var movies: [Movie] = []
+  private var popularPage = 1
+  private var topPage = 1
+  @Published var popularMovies: [Movie] = []
+  @Published var topRatedMovies: [Movie] = []
   @Published var errorMessage: String?
   
   init(useCase: MovieUseCase = MovieUseCase.shared) {
@@ -19,16 +21,29 @@ class MovieViewModel: ObservableObject {
   
   @MainActor
   /// A function to get movies from the API
-  func getMovies() async {
+  func getPopular() async {
     do {
       /// Fetch movies for the current page
-      let resultMovie = try await useCase.getMovies(page: currentPage)
+      let resultMovie = try await useCase.getPopular(page: popularPage)
       if let resultMovie = resultMovie {
-        movies.append(contentsOf: resultMovie)
-        currentPage += 1 /// Increment the current page number for the next fetch
+        popularMovies.append(contentsOf: resultMovie)
+        popularPage += 1 /// Increment the current page number for the next fetch
       }
     } catch {
-      errorMessage = "Failed to fetch movies: \(error.localizedDescription)"
+      errorMessage = "Failed to fetch popular movies: \(error.localizedDescription)"
+    }
+  }
+  
+  @MainActor
+  func getTopRated() async {
+    do {
+      let resultMovie = try await useCase.getTopRated(page: topPage)
+      if let resultMovie = resultMovie {
+        topRatedMovies.append(contentsOf: resultMovie)
+        topPage += 1
+      }
+    } catch {
+      errorMessage = "Failed to fetch top rated movies: \(error.localizedDescription)"
     }
   }
 }

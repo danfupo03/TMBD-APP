@@ -13,37 +13,39 @@ struct MovieList: View {
   @State private var isLoading = false
   
   var body: some View {
-    NavigationStack {
-      ScrollView {
-        Text("Movie List").font(.largeTitle)
-        ForEach(vm.movies) { movie in
-          NavigationLink(destination: MovieDetailView(movie: movie)){
-            MovieCard(movie: movie)
-          }.buttonStyle(PlainButtonStyle())
-        }
-        if isLoading {
-          ProgressView()
-        } else {
-          Button(action: {
-            isLoading = true
-            Task {
-              await vm.getMovies()
-              isLoading = false
+    NavigationView {
+      VStack(alignment: .leading) {
+        Text("Popular Movies").font(.largeTitle).foregroundStyle(.white)
+        ScrollView(.horizontal) {
+          HStack {
+            ForEach(vm.popularMovies) { movie in
+              NavigationLink(destination: MovieDetailView(movie: movie)){
+                MovieCard(movie: movie)
+              }.buttonStyle(PlainButtonStyle())
             }
-          }) {
-            Text("Load More")
-              .padding()
-              .background(Color.gray)
-              .foregroundColor(.white)
-              .cornerRadius(10)
           }
-          .padding()
+        }
+        
+        Spacer()
+        
+        Text("Top Rated Movies").font(.largeTitle).foregroundStyle(.white)
+        ScrollView(.horizontal) {
+          HStack {
+            ForEach(vm.topRatedMovies) { movie in
+              NavigationLink(destination: MovieDetailView(movie: movie)){
+                MovieCard(movie: movie)
+              }.buttonStyle(PlainButtonStyle())
+            }
+          }
         }
       }
+      .padding()
+      .background(Color(red: 0.14, green: 0.18, blue: 0.20))
     }
     .onAppear {
       Task {
-        await vm.getMovies()
+        await vm.getPopular()
+        await vm.getTopRated()
       }
     }
   }

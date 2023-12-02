@@ -8,7 +8,8 @@
 import Foundation
 
 protocol MovieUseCaseProtocol {
-  func getMovies(page: Int) async throws -> [Movie]?
+  func getPopular(page: Int) async throws -> [Movie]?
+  func getTopRated(page: Int) async throws -> [Movie]?
 }
 
 class MovieUseCase: MovieUseCaseProtocol {
@@ -22,8 +23,13 @@ class MovieUseCase: MovieUseCaseProtocol {
   /// A function to get movies from the API
   /// - Parameter page: The page to get movies from
   /// - Returns: Returns an array of movies
-  func getMovies(page: Int) async throws -> [Movie]? {
-    return try await repository.getMovies(page: page)
+  func getPopular(page: Int) async throws -> [Movie]? {
+    return try await repository.getPopular(page: page)
   }
+  
+  func getTopRated(page: Int) async throws -> [Movie]? {
+    return try await repository.getTopRated(page: page)
+  }
+  
 }
 

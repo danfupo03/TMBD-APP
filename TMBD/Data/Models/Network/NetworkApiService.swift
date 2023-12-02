@@ -16,23 +16,33 @@ enum NetworkError: Error {
 class NetworkApiService {
   static var shared = NetworkApiService()
   
-  private let apiKey = "12e629d7051e2adf10c4ba97a9c12fcb"
+  let apiKey = "12e629d7051e2adf10c4ba97a9c12fcb"
   
-  /// Function to get movies from API
-  /// - Parameter url: The URL to get movies from
-  /// - Returns: An array of movies
-  func getMovies(url: URL) async throws -> [Movie] {
+  /// Function to make a generic API request
+  /// - Parameters:
+  ///   - url: The URL for the request
+  ///   - method: The HTTP method for the request
+  ///   - parameters: The parameters for the request
+  /// - Returns: The response data
+  func get<T: Decodable>(url: URL, method: HTTPMethod, parameters: Parameters? = nil) async throws -> T {
     var headers: HTTPHeaders = [:]
     headers["Authorization"] = "Bearer \(apiKey)"
     
-    let taskRequest = AF.request(url, method: .get, headers: headers).validate()
+    let taskRequest = AF.request(url, method: method, parameters: parameters, headers: headers).validate()
     let response = await taskRequest.serializingData().response
     
     switch response.result {
     case .success(let data):
       do {
         let response = try JSONDecoder().decode(MovieResponse.self, from: data)
-        return response.results
+        
+        // Assuming `MovieResponse` has a property `results` which is an array
+        guard let decodedData = response.results as? T else {
+          debugPrint("Error: Unexpected structure in JSON response")
+          throw NetworkError.decodingFailed
+        }
+        
+        return decodedData
       } catch {
         debugPrint("Error decoding JSON: \(error)")
         throw NetworkError.decodingFailed
