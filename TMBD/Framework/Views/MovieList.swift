@@ -14,9 +14,10 @@ struct MovieList: View {
   
   var body: some View {
     NavigationView {
-      ScrollView {
+      ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
-          Text("Popular Movies").font(.largeTitle).padding(.top)
+          Text("Popular Movies").font(.custom("AmericanTypewriter", fixedSize: 34)
+              .weight(.heavy))
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
               ForEach(vm.popularMovies) { movie in
@@ -25,11 +26,12 @@ struct MovieList: View {
                 }.buttonStyle(PlainButtonStyle())
               }
             }
-          } //.padding(.bottom, 8)
+          } .padding(.bottom, 8)
           
           Spacer()
           
-          Text("Top Rated Movies").font(.largeTitle).padding(.top)
+          Text("Top Rated Movies").font(.custom("AmericanTypewriter", fixedSize: 34)
+              .weight(.heavy))
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
               ForEach(vm.topRatedMovies) { movie in

@@ -24,6 +24,7 @@ struct MovieCard: View {
       // Movie Title
       Text(movie.title)
         .font(.headline)
+        .foregroundStyle(colorScheme == .dark ? .white : .black)
         .lineLimit(5)
         .multilineTextAlignment(.leading)
       
@@ -49,13 +50,14 @@ struct MovieCard: View {
     }
     .frame(minWidth: 0, maxWidth: 150, minHeight: 0, maxHeight: .infinity)
     .padding()
-    .background(Color.white)
+    .background(colorScheme == .dark ? .black : .white)
     .cornerRadius(15)
   }
 }
 
 #Preview {
   MovieCard(movie: Movie(id: 968051,
+                         genre_ids: [27, 93],
                          adult: false,
                          backdrop_path: "/mRGmNnh6pBAGGp6fMBMwI8iTBUO.jpg",
                          original_language: "en",

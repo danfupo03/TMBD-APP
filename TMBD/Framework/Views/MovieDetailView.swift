@@ -12,41 +12,45 @@ struct MovieDetailView: View {
   var movie: Movie
   
   var body: some View {
-    ScrollView {
-      VStack {
-        Text(movie.original_title).font(.largeTitle)
-        WebImage(url: movie.fullPoster)
-          .resizable()
-          .frame(width: 320, height: 500)
-          .cornerRadius(10)
-        RoundedRectangle(cornerRadius: 10)
-          .fill(Color.gray)
-          .frame(width: 320, height: 150)
-          .padding()
-          .overlay(
-            VStack(alignment: .center, spacing: 10) {
-              Text("Overview:")
-                .font(.headline)
-                .foregroundColor(.white)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.top)
-              Text(movie.overview)
-                .foregroundColor(.white)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(5)
-                .font(.body)
-                .padding([.leading, .trailing], 30)
-                .padding(.bottom)
-            }
-          )
-        Spacer()
-      }
+    ZStack() {
+      WebImage(url: movie.fullPoster)
+        .resizable()
+        .scaledToFill()
+        .ignoresSafeArea()
+        .opacity(0.9)
+        .offset(x: -25, y: 0)
+      
+      Rectangle()
+        .foregroundColor(Color.black)
+        .opacity(0.8)
+        .frame(width: 430, height: 410)
+        .cornerRadius(10)
+        .offset(x: 0, y: 233)
+      
+      VStack(alignment: .leading, spacing: 10) {
+        HStack {
+          WebImage(url: movie.fullPoster)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 100)
+            .cornerRadius(10)
+            .padding(.trailing, 30)
+          
+          Text(movie.title)
+            .font(Font.custom("Inter", size: 25).weight(.bold))
+            .foregroundColor(.white)
+        }
+        
+      } .offset(x: 0, y: 60)
+      
     }
+    //.frame(width: 430, height: 932)
   }
 }
 
 #Preview {
   MovieDetailView(movie: Movie(id: 968051,
+                               genre_ids: [27, 93],
                                adult: false,
                                backdrop_path: "/mRGmNnh6pBAGGp6fMBMwI8iTBUO.jpg",
                                original_language: "en",
