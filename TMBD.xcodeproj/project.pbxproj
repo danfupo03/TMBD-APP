@@ -26,6 +26,8 @@
 		69004E722AD5EB9200954749 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E712AD5EB9200954749 /* MovieDetailView.swift */; };
 		6950EEBE2B1D4F63004A04DA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBD2B1D4F63004A04DA /* Tab.swift */; };
 		6950EEC02B1D50C8004A04DA /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBF2B1D50C8004A04DA /* Home.swift */; };
+		6975EFFE2B227B1700FD05A7 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975EFFD2B227B1700FD05A7 /* TabShape.swift */; };
+		6975F0002B2280DA00FD05A7 /* TabPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975EFFF2B2280DA00FD05A7 /* TabPosition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		69004E712AD5EB9200954749 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		6950EEBD2B1D4F63004A04DA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		6950EEBF2B1D50C8004A04DA /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		6975EFFD2B227B1700FD05A7 /* TabShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabShape.swift; sourceTree = "<group>"; };
+		6975EFFF2B2280DA00FD05A7 /* TabPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPosition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,7 +216,6 @@
 				69004E292AD5C7A100954749 /* ContentView.swift */,
 				69004E6C2AD5CD0900954749 /* MovieList.swift */,
 				69004E712AD5EB9200954749 /* MovieDetailView.swift */,
-				6950EEBF2B1D50C8004A04DA /* Home.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 		69004E6E2AD5EA4600954749 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6975F0012B2284FD00FD05A7 /* TabBar */,
 				69004E6F2AD5EA5D00954749 /* MovieCard.swift */,
 			);
 			path = Components;
@@ -239,6 +243,16 @@
 				6950EEBD2B1D4F63004A04DA /* Tab.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		6975F0012B2284FD00FD05A7 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6950EEBF2B1D50C8004A04DA /* Home.swift */,
+				6975EFFD2B227B1700FD05A7 /* TabShape.swift */,
+				6975EFFF2B2280DA00FD05A7 /* TabPosition.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6975F0002B2280DA00FD05A7 /* TabPosition.swift in Sources */,
 				69004E722AD5EB9200954749 /* MovieDetailView.swift in Sources */,
 				69004E5C2AD5C8DF00954749 /* MovieModel.swift in Sources */,
 				69004E2A2AD5C7A100954749 /* ContentView.swift in Sources */,
@@ -390,6 +405,7 @@
 				69004E6D2AD5CD0900954749 /* MovieList.swift in Sources */,
 				69004E5E2AD5CA0A00954749 /* NetworkApiService.swift in Sources */,
 				6950EEC02B1D50C8004A04DA /* Home.swift in Sources */,
+				6975EFFE2B227B1700FD05A7 /* TabShape.swift in Sources */,
 				69004E702AD5EA5D00954749 /* MovieCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
