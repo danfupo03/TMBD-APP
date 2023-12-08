@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
   var body: some View {
-    MovieList()
-//    Home()
-//      .preferredColorScheme(.light)
+    //MovieList()
+    Home()
+      .preferredColorScheme(.light)
   }
 }
 

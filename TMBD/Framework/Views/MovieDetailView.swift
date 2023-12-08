@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct MovieDetailView: View {
   var movie: Movie
+  @Environment(\.dismiss) var dismiss
   
   var body: some View {
     ZStack() {
@@ -50,8 +51,13 @@ struct MovieDetailView: View {
             .foregroundStyle(.white)
           
         } .padding([.trailing, .leading], 70)
+        
+        Button("Press to dismiss") {
+          dismiss()
+        }
+        .padding(.top, 20)
+        
       }
-      
     }
   }
 }

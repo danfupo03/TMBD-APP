@@ -11,38 +11,47 @@ import SDWebImageSwiftUI
 struct MovieList: View {
   @StateObject var vm = MovieViewModel()
   @State private var isLoading = false
+  @State private var showingSheet = false
+  @State private var selectedMovie: Movie?
   
   var body: some View {
     NavigationView {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
           Text("Popular Movies").font(.custom("AmericanTypewriter", fixedSize: 34)
-              .weight(.heavy))
+            .weight(.heavy))
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
               ForEach(vm.popularMovies) { movie in
-                NavigationLink(destination: MovieDetailView(movie: movie)){
-                  MovieCard(movie: movie)
-                }.buttonStyle(PlainButtonStyle())
+                MovieCard(movie: movie)
+                  .onTapGesture {
+                    selectedMovie = movie
+                    showingSheet = true
+                  }
               }
             }
           } .padding(.bottom, 8)
           
-          Spacer()
-          
           Text("Top Rated Movies").font(.custom("AmericanTypewriter", fixedSize: 34)
-              .weight(.heavy))
+            .weight(.heavy))
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
               ForEach(vm.topRatedMovies) { movie in
-                NavigationLink(destination: MovieDetailView(movie: movie)){
-                  MovieCard(movie: movie)
-                }.buttonStyle(PlainButtonStyle())
+                MovieCard(movie: movie)
+                  .onTapGesture {
+                    selectedMovie = movie
+                    showingSheet = true
+                  }
               }
             }
           }
         }
         .padding()
+      }
+    }
+    .sheet(isPresented: $showingSheet) {
+      if let selectedMovie = selectedMovie {
+        MovieDetailView(movie: selectedMovie)
       }
     }
     .onAppear {
@@ -53,6 +62,7 @@ struct MovieList: View {
     }
   }
 }
+
 
 #Preview {
   MovieList()
