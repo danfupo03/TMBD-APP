@@ -19,6 +19,7 @@ struct Api {
 protocol MovieApiProtocol {
   func getPopular(page: Int) async throws -> [Movie]
   func getTopRated(page: Int) async throws -> [Movie]
+  func getMovieDetail(id: Int) async throws -> DetailMovieModel
 }
 
 class MovieRepository: MovieApiProtocol {
@@ -53,6 +54,18 @@ class MovieRepository: MovieApiProtocol {
       debugPrint("Invalid URL")
       return[]
     }
+    
+    do {
+      return try await service.get(url: url, method: .get)
+    } catch {
+      debugPrint("Error fetching movies: \(error)")
+      throw error
+    }
+  }
+
+  func getMovieDetail(id: Int) async throws -> DetailMovieModel {
+    let apiUrl = "\(Api.base)/\(id)"
+    let url = URL(string: apiUrl) ?? URL(string: "\(Api.base)/\(id)")!
     
     do {
       return try await service.get(url: url, method: .get)

@@ -10,7 +10,9 @@ import SDWebImageSwiftUI
 
 struct MovieDetailView: View {
   var movie: Movie
+  @StateObject var vm = MovieViewModel()
   @Environment(\.dismiss) var dismiss
+  
   
   var body: some View {
     ZStack() {
@@ -28,7 +30,7 @@ struct MovieDetailView: View {
       
       VStack {
         HStack {
-          WebImage(url: movie.fullPoster)
+          WebImage(url: movie.fullBackDrop)
             .resizable()
             .scaledToFit()
             .frame(width: 100)
@@ -50,6 +52,20 @@ struct MovieDetailView: View {
           Text(movie.overview)
             .foregroundStyle(.white)
           
+          Text("Genres").font(.title)
+            .foregroundStyle(.white)
+            .font(.largeTitle)
+            .padding([.top, .bottom])
+          
+          Text(genreNames(for: movie.genre_ids).joined(separator: ", "))
+            .foregroundStyle(.white)
+          
+          if let budget = vm.detailMovie?.budget {
+                          Text("Budget: \(budget)")
+                      } else {
+                          Text("Budget not available")
+                      }
+          
         } .padding([.trailing, .leading], 70)
         
         Button("Press to dismiss") {
@@ -59,6 +75,11 @@ struct MovieDetailView: View {
         
       }
     }
+    .onAppear {
+      Task {
+        await vm.getMovieDetail(id: movie.id)
+      }
+    }
   }
 }
 
@@ -66,9 +87,9 @@ struct MovieDetailView: View {
   MovieDetailView(movie: Movie(id: 901362,
                                genre_ids: [16, 10751, 10402, 14, 35],
                                adult: false,
-                               backdrop_path: "/mRGmNnh6pBAGGp6fMBMwI8iTBUO.jpg",
+                               backdrop_path: "/45zVtZx6Tzx3RKeDziK25K9geFf.jpg",
                                original_language: "en",
-                               original_title: "The Nun II",
+                               original_title: "Trolls Band Together",
                                overview: "When Branch's brother, Floyd, is kidnapped for his musical talents by a pair of nefarious pop-star villains, Branch and Poppy embark on a harrowing and emotional journey to reunite the other brothers and rescue Floyd from a fate even worse than pop-culture obscurity.",
                                popularity: 4160.929,
                                poster_path: "/bkpPTZUdq31UGDovmszsg2CchiI.jpg",

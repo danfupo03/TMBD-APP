@@ -14,6 +14,7 @@ class MovieViewModel: ObservableObject {
   @Published var popularMovies: [Movie] = []
   @Published var topRatedMovies: [Movie] = []
   @Published var errorMessage: String?
+  @Published var detailMovie: DetailMovieModel?
   
   init(useCase: MovieUseCase = MovieUseCase.shared) {
     self.useCase = useCase
@@ -44,6 +45,16 @@ class MovieViewModel: ObservableObject {
       }
     } catch {
       errorMessage = "Failed to fetch top rated movies: \(error.localizedDescription)"
+    }
+  }
+
+  @MainActor
+  func getMovieDetail(id: Int) async -> DetailMovieModel? {
+    do {
+      return try await useCase.getMovieDetail(id: id)
+    } catch {
+      errorMessage = "Failed to fetch movie detail: \(error.localizedDescription)"
+      return nil
     }
   }
 }

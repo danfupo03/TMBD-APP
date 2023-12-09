@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Home: View {
+struct TabBar: View {
   @State private var activeTab: Tab = .home
   
   @Namespace private var animation
