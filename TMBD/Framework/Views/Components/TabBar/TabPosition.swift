@@ -30,3 +30,7 @@ extension View {
       }
   }
 }
+
+#Preview {
+  ContentView()
+}

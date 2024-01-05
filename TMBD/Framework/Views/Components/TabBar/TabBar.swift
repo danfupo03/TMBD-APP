@@ -59,7 +59,6 @@ struct TabBar: View {
         .fill(.white)
         .ignoresSafeArea()
         .shadow(color: tint.opacity(0.2), radius: 5, x: 0, y: -5)
-        .blur(radius: 2)
         .padding(.top, 25)
     })
     .animation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7), value: activeTab)
