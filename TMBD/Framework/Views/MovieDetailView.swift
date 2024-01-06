@@ -60,12 +60,13 @@ struct MovieDetailView: View {
           Text(genreNames(for: movie.genre_ids).joined(separator: ", "))
             .foregroundStyle(.white)
           
-          if let budget = vm.detailMovie?.budget {
-                          Text("Budget: \(budget)")
-                      } else {
-                          Text("Budget not available")
-                      }
+          Text(vm.detailMovie?.status ?? "")
           
+          if let revenue = vm.detailMovie?.revenue {
+                          Text("Revenue: \(revenue)")
+                      } else {
+                          Text("Revenue not available")
+                      }
         } .padding([.trailing, .leading], 70)
         
         Button("Press to dismiss") {

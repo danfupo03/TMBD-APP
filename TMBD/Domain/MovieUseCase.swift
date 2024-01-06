@@ -10,7 +10,7 @@ import Foundation
 protocol MovieUseCaseProtocol {
   func getPopular(page: Int) async throws -> [Movie]?
   func getTopRated(page: Int) async throws -> [Movie]?
-  func getMovieDetail(id: Int) async throws -> DetailMovieModel?
+  func getMovieDetail(id: Int) async throws -> DetailMovie?
 }
 
 class MovieUseCase: MovieUseCaseProtocol {
@@ -32,7 +32,7 @@ class MovieUseCase: MovieUseCaseProtocol {
     return try await repository.getTopRated(page: page)
   }
   
-  func getMovieDetail(id: Int) async throws -> DetailMovieModel? {
+  func getMovieDetail(id: Int) async throws -> DetailMovie? {
     return try await repository.getMovieDetail(id: id)
   }
   

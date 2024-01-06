@@ -11,6 +11,7 @@ import Alamofire
 enum NetworkError: Error {
   case requestFailed
   case decodingFailed
+  case invalidURL
 }
 
 class NetworkApiService {
@@ -34,17 +35,10 @@ class NetworkApiService {
     switch response.result {
     case .success(let data):
       do {
-        let response = try JSONDecoder().decode(MovieResponse.self, from: data)
-        
-        // Assuming `MovieResponse` has a property `results` which is an array
-        guard let decodedData = response.results as? T else {
-          debugPrint("Error: Unexpected structure in JSON response")
-          throw NetworkError.decodingFailed
-        }
-        
+        let decodedData = try JSONDecoder().decode(T.self, from: data)
         return decodedData
       } catch {
-        debugPrint("Error decoding JSON: \(error)")
+        debugPrint("Network: Error decoding JSON: \(error)")
         throw NetworkError.decodingFailed
       }
     case let .failure(error):
@@ -52,6 +46,7 @@ class NetworkApiService {
       throw error
     }
   }
+  
 }
 
 

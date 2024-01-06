@@ -19,7 +19,7 @@ struct Api {
 protocol MovieApiProtocol {
   func getPopular(page: Int) async throws -> [Movie]
   func getTopRated(page: Int) async throws -> [Movie]
-  func getMovieDetail(id: Int) async throws -> DetailMovieModel
+  func getMovieDetail(id: Int) async throws -> DetailMovie
 }
 
 class MovieRepository: MovieApiProtocol {
@@ -41,9 +41,10 @@ class MovieRepository: MovieApiProtocol {
     }
     
     do {
-      return try await service.get(url: url, method: .get)
+      let response: MovieResponse = try await service.get(url: url, method: .get)
+      return response.results
     } catch {
-      debugPrint("Error fetching movies: \(error)")
+      debugPrint("Rep: Error fetching movies: \(error)")
       throw error
     }
   }
@@ -56,25 +57,34 @@ class MovieRepository: MovieApiProtocol {
     }
     
     do {
-      return try await service.get(url: url, method: .get)
+      let response: MovieResponse = try await service.get(url: url, method: .get)
+      return response.results
     } catch {
-      debugPrint("Error fetching movies: \(error)")
-      throw error
-    }
-  }
-
-  func getMovieDetail(id: Int) async throws -> DetailMovieModel {
-    let apiUrl = "\(Api.base)/\(id)"
-    let url = URL(string: apiUrl) ?? URL(string: "\(Api.base)/\(id)")!
-    
-    do {
-      return try await service.get(url: url, method: .get)
-    } catch {
-      debugPrint("Error fetching movies: \(error)")
+      debugPrint("Rep: Error fetching movies: \(error)")
       throw error
     }
   }
   
+  func getMovieDetail(id: Int) async throws -> DetailMovie {
+      let apiUrl = "\(Api.base)/\(id)"
+      guard let url = constructURL(apiUrl: apiUrl) else {
+          debugPrint("Rep: Invalid URL")
+          throw NetworkError.invalidURL
+      }
+      
+      do {
+          return try await service.get(url: url, method: .get)
+      } catch {
+          debugPrint("Rep: Error fetching movie details: \(error)")
+          throw error
+      }
+  }
+
+  /// Helper method to construct the URL without the page parameter
+  private func constructURL(apiUrl: String) -> URL? {
+      let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)"
+      return URL(string: urlString)
+  }
   
   /// Helper method to construct the URL with the page parameter
   private func constructURL(apiUrl: String, page: Int) -> URL? {

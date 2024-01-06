@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DetailMovieModel: Codable, Identifiable {
+struct DetailMovie: Codable, Identifiable {
     var budget: Int
     var id: Int
     var production_companies: [ProductionCompanies]

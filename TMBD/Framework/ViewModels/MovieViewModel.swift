@@ -14,7 +14,7 @@ class MovieViewModel: ObservableObject {
   @Published var popularMovies: [Movie] = []
   @Published var topRatedMovies: [Movie] = []
   @Published var errorMessage: String?
-  @Published var detailMovie: DetailMovieModel?
+  @Published var detailMovie: DetailMovie?
   
   init(useCase: MovieUseCase = MovieUseCase.shared) {
     self.useCase = useCase
@@ -31,7 +31,7 @@ class MovieViewModel: ObservableObject {
         popularPage += 1 /// Increment the current page number for the next fetch
       }
     } catch {
-      errorMessage = "Failed to fetch popular movies: \(error.localizedDescription)"
+      errorMessage = "VM: Failed to fetch popular movies: \(error.localizedDescription)"
     }
   }
   
@@ -49,7 +49,7 @@ class MovieViewModel: ObservableObject {
   }
 
   @MainActor
-  func getMovieDetail(id: Int) async -> DetailMovieModel? {
+  func getMovieDetail(id: Int) async -> DetailMovie? {
     do {
       return try await useCase.getMovieDetail(id: id)
     } catch {
