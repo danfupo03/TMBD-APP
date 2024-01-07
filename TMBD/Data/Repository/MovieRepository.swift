@@ -66,24 +66,24 @@ class MovieRepository: MovieApiProtocol {
   }
   
   func getMovieDetail(id: Int) async throws -> DetailMovie {
-      let apiUrl = "\(Api.base)/\(id)"
-      guard let url = constructURL(apiUrl: apiUrl) else {
-          debugPrint("Rep: Invalid URL")
-          throw NetworkError.invalidURL
-      }
-      
-      do {
-          return try await service.get(url: url, method: .get)
-      } catch {
-          debugPrint("Rep: Error fetching movie details: \(error)")
-          throw error
-      }
+    let apiUrl = "\(Api.base)/\(id)"
+    guard let url = constructURL(apiUrl: apiUrl) else {
+      debugPrint("Rep: Invalid URL")
+      throw NetworkError.invalidURL
+    }
+    
+    do {
+      return try await service.get(url: url, method: .get)
+    } catch {
+      debugPrint("Rep: Error fetching movie details: \(error)")
+      throw error
+    }
   }
-
+  
   /// Helper method to construct the URL without the page parameter
   private func constructURL(apiUrl: String) -> URL? {
-      let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)"
-      return URL(string: urlString)
+    let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)"
+    return URL(string: urlString)
   }
   
   /// Helper method to construct the URL with the page parameter

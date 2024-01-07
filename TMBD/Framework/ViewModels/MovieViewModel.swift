@@ -9,12 +9,14 @@ import Foundation
 
 class MovieViewModel: ObservableObject {
   private let useCase: MovieUseCase
+  
   private var popularPage = 1
   private var topPage = 1
+  @Published var errorMessage: String?
+  
   @Published var popularMovies: [Movie] = []
   @Published var topRatedMovies: [Movie] = []
-  @Published var errorMessage: String?
-  @Published var detailMovie: DetailMovie?
+  @Published var detailMovie: DetailMovie = DetailMovie(budget: 0, id: 0, production_companies: [], status: "", title: "", revenue: 0, runtime: 0)
   
   init(useCase: MovieUseCase = MovieUseCase.shared) {
     self.useCase = useCase
@@ -47,15 +49,15 @@ class MovieViewModel: ObservableObject {
       errorMessage = "Failed to fetch top rated movies: \(error.localizedDescription)"
     }
   }
-
+  
   @MainActor
-  func getMovieDetail(id: Int) async -> DetailMovie? {
-    do {
-      return try await useCase.getMovieDetail(id: id)
-    } catch {
-      errorMessage = "Failed to fetch movie detail: \(error.localizedDescription)"
-      return nil
-    }
+  func getMovieDetail(id: Int) async throws {
+      do {
+          self.detailMovie = try await useCase.getMovieDetail(id: id)
+      } catch {
+          self.errorMessage = "Failed to fetch movie detail: \(error.localizedDescription)"
+          throw error
+      }
   }
 }
 

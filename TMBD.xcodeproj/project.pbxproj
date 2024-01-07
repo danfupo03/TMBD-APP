@@ -24,6 +24,7 @@
 		69004E6D2AD5CD0900954749 /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E6C2AD5CD0900954749 /* MovieList.swift */; };
 		69004E702AD5EA5D00954749 /* MovieCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E6F2AD5EA5D00954749 /* MovieCard.swift */; };
 		69004E722AD5EB9200954749 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69004E712AD5EB9200954749 /* MovieDetailView.swift */; };
+		690F0FC82B4A106500480E90 /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690F0FC72B4A106500480E90 /* StarRating.swift */; };
 		6950EEBE2B1D4F63004A04DA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBD2B1D4F63004A04DA /* Tab.swift */; };
 		6950EEC02B1D50C8004A04DA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBF2B1D50C8004A04DA /* TabBar.swift */; };
 		6975EFFE2B227B1700FD05A7 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975EFFD2B227B1700FD05A7 /* TabShape.swift */; };
@@ -68,6 +69,7 @@
 		69004E6C2AD5CD0900954749 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
 		69004E6F2AD5EA5D00954749 /* MovieCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCard.swift; sourceTree = "<group>"; };
 		69004E712AD5EB9200954749 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		690F0FC72B4A106500480E90 /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
 		6950EEBD2B1D4F63004A04DA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		6950EEBF2B1D50C8004A04DA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		6975EFFD2B227B1700FD05A7 /* TabShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabShape.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			children = (
 				6975F0012B2284FD00FD05A7 /* TabBar */,
 				69004E6F2AD5EA5D00954749 /* MovieCard.swift */,
+				690F0FC72B4A106500480E90 /* StarRating.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 			files = (
 				6975F0002B2280DA00FD05A7 /* TabPosition.swift in Sources */,
 				69004E722AD5EB9200954749 /* MovieDetailView.swift in Sources */,
+				690F0FC82B4A106500480E90 /* StarRating.swift in Sources */,
 				69004E5C2AD5C8DF00954749 /* MovieModel.swift in Sources */,
 				69004E2A2AD5C7A100954749 /* ContentView.swift in Sources */,
 				69004E282AD5C7A100954749 /* TMBDApp.swift in Sources */,

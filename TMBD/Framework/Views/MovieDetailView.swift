@@ -13,74 +13,56 @@ struct MovieDetailView: View {
   @StateObject var vm = MovieViewModel()
   @Environment(\.dismiss) var dismiss
   
-  
   var body: some View {
-    ZStack() {
-      WebImage(url: movie.fullPoster)
-        .resizable()
-        .scaledToFill()
-        .ignoresSafeArea()
-        .opacity(0.9)
-        .offset(x: -25, y: 0)
-      
-      Rectangle()
-        .foregroundColor(Color.black)
-        .opacity(0.8)
-        .ignoresSafeArea()
-      
+    ScrollView {
       VStack {
-        HStack {
-          WebImage(url: movie.fullBackDrop)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 100)
-            .cornerRadius(10)
-            .padding(.trailing, 30)
+        WebImage(url: movie.fullPoster)
+          .resizable()
+          .aspectRatio(contentMode: .fill)
+          .frame(height: UIScreen.main.bounds.height / 2 + 130)
+        
+        // Movie Information Section
+        ZStack {
+          Color.black
+            .frame(height: UIScreen.main.bounds.height / 2)
+            .shadow(color: .gray, radius: 10)
           
-          Text(movie.title)
-            .font(Font.custom("Inter", size: 25).weight(.bold))
-            .foregroundColor(.white)
+          let stars = movie.vote_average / 2
+          let rating = movie.vote_average
+          let ratingText = String(format: "%.1f", rating)
+          
+          VStack(alignment: .leading, spacing: 20) {
+            
+            HStack {
+              StarRating(stars).frame(width: 100)
+              Text(ratingText)
+                .foregroundStyle(.yellow)
+            }
+            
+            Text(movie.title)
+              .font(.title)
+              .foregroundColor(.white)
+            
+            Text("Release Date: \(movie.release_date)")
+              .font(.subheadline)
+              .foregroundColor(.white)
+            
+            Text("Genres: \(genreNames(for: movie.genre_ids).joined(separator: ", "))")
+              .foregroundStyle(.white)
+              .font(.subheadline)
+            
+            Text(movie.overview)
+              .font(.body)
+              .foregroundColor(.white)
+              .lineLimit(nil) // Allow multiline text
+            
+            Spacer()
+          }
+          .padding()
         }
-        .frame(width: 350)
-        
-        VStack (alignment: .leading) {
-          Text("Overview").font(.title)
-            .foregroundStyle(.white)
-            .font(.largeTitle)
-            .padding([.top, .bottom])
-          
-          Text(movie.overview)
-            .foregroundStyle(.white)
-          
-          Text("Genres").font(.title)
-            .foregroundStyle(.white)
-            .font(.largeTitle)
-            .padding([.top, .bottom])
-          
-          Text(genreNames(for: movie.genre_ids).joined(separator: ", "))
-            .foregroundStyle(.white)
-          
-          Text(vm.detailMovie?.status ?? "")
-          
-          if let revenue = vm.detailMovie?.revenue {
-                          Text("Revenue: \(revenue)")
-                      } else {
-                          Text("Revenue not available")
-                      }
-        } .padding([.trailing, .leading], 70)
-        
-        Button("Press to dismiss") {
-          dismiss()
-        }
-        .padding(.top, 20)
-        
       }
     }
-    .onAppear {
-      Task {
-        await vm.getMovieDetail(id: movie.id)
-      }
-    }
+    .edgesIgnoringSafeArea(.all)
   }
 }
 
@@ -97,6 +79,6 @@ struct MovieDetailView: View {
                                release_date: "2023-09-06",
                                title: "Trolls Band Together",
                                video: false,
-                               vote_average: 7,
+                               vote_average: 7.45,
                                vote_count: 776))
 }
