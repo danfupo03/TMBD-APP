@@ -50,9 +50,13 @@ struct MovieDetailView: View {
               .foregroundColor(.white)
             
             HStack {
-              Text(movie.release_date)
+              Text(dateFormatter(date: movie.release_date))
                 .font(.subheadline)
                 .foregroundColor(.white)
+              
+              Text("·")
+                .font(.subheadline)
+                .foregroundStyle(.white)
               
               Text(runtimeFormatter(runtime: vm.detailMovie.runtime))
                 .font(.subheadline)
@@ -80,6 +84,16 @@ struct MovieDetailView: View {
             Spacer()
           }
           .padding()
+          
+          // View Buttons
+          ViewButtons(action: {
+            dismiss()
+          }, systemName: "xmark")
+          .offset(x: -175, y: -770)
+          
+          ViewButtons(action: {}, systemName: "bookmark")
+            .offset(x: 175, y: -770)
+          
         }
       }
     }

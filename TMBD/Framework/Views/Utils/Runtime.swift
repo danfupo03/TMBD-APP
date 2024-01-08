@@ -13,8 +13,8 @@ func runtimeFormatter(runtime: Int) -> String {
   result = runtime / 60
   
   if result > 0 {
-    return "\(result)h \(runtime % 60)m"
+    return "\(result)h \(runtime % 60)min"
   } else {
-    return "\(runtime % 60)m"
+    return "\(runtime % 60)min"
   }
 }
