@@ -21,6 +21,7 @@ struct MovieDetailView: View {
           .aspectRatio(contentMode: .fill)
           .frame(height: UIScreen.main.bounds.height / 2 + 130)
         
+        
         // Movie Information Section
         ZStack {
           Color.black
@@ -29,7 +30,10 @@ struct MovieDetailView: View {
           
           let stars = movie.vote_average / 2
           let rating = movie.vote_average
+          let voteCount = movie.vote_count
+          
           let ratingText = String(format: "%.1f", rating)
+          let voteText = String(voteCount)
           
           VStack(alignment: .leading, spacing: 20) {
             
@@ -37,24 +41,41 @@ struct MovieDetailView: View {
               StarRating(stars).frame(width: 100)
               Text(ratingText)
                 .foregroundStyle(.yellow)
+              Text("(\(voteText) reviews)")
+                .foregroundStyle(.white)
             }
             
             Text(movie.title)
               .font(.title)
               .foregroundColor(.white)
             
-            Text("Release Date: \(movie.release_date)")
-              .font(.subheadline)
-              .foregroundColor(.white)
+            HStack {
+              Text(movie.release_date)
+                .font(.subheadline)
+                .foregroundColor(.white)
+              
+              Text(runtimeFormatter(runtime: vm.detailMovie.runtime))
+                .font(.subheadline)
+                .foregroundStyle(.white)
+            }
             
-            Text("Genres: \(genreNames(for: movie.genre_ids).joined(separator: ", "))")
-              .foregroundStyle(.white)
-              .font(.subheadline)
+            HStack(spacing: 3) {
+              ForEach(genreNames(for: movie.genre_ids), id: \.self) { genreName in
+                Text(genreName)
+                  .padding(.horizontal, 10)
+                  .padding(.vertical, 5)
+                  .background(Color.gray.opacity(0.4))
+                  .foregroundStyle(.white)
+                  .font(.subheadline)
+                  .cornerRadius(25.0)
+                  .lineLimit(1)
+              }
+            }
             
             Text(movie.overview)
               .font(.body)
               .foregroundColor(.white)
-              .lineLimit(nil) // Allow multiline text
+              .lineLimit(nil)
             
             Spacer()
           }
@@ -63,6 +84,11 @@ struct MovieDetailView: View {
       }
     }
     .edgesIgnoringSafeArea(.all)
+    .onAppear {
+      Task {
+        try await vm.getMovieDetail(id: movie.id)
+      }
+    }
   }
 }
 

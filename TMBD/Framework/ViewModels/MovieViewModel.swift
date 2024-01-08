@@ -55,8 +55,7 @@ class MovieViewModel: ObservableObject {
       do {
           self.detailMovie = try await useCase.getMovieDetail(id: id)
       } catch {
-          self.errorMessage = "Failed to fetch movie detail: \(error.localizedDescription)"
-          throw error
+          errorMessage = "Failed to fetch movie detail: \(error.localizedDescription)"
       }
   }
 }
