@@ -20,12 +20,12 @@ struct CrewCard: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .cornerRadius(5)
-        .frame(width: 150, height: 225)
+        .frame(width: 100, height: 150)
       
       // Crew Name
       Text(crew.name)
         .font(.headline)
-        .lineLimit(5)
+        .lineLimit(3)
         .multilineTextAlignment(.leading)
         .foregroundStyle(.white)
       
@@ -35,9 +35,7 @@ struct CrewCard: View {
         .foregroundColor(.gray)
       
     }
-    .frame(minWidth: 0, maxWidth: 150, minHeight: 0, maxHeight: .infinity)
-    .padding()
-    .cornerRadius(15)
+    .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: .infinity)
   }
 }
 

@@ -16,15 +16,34 @@ struct MovieDetailView: View {
   
   var body: some View {
     ScrollView {
+      
+      
+      
       VStack {
+        
+        // View Buttons
+        
+        HStack {
+          ViewButtons(action: {
+            dismiss()
+          }, systemName: "xmark")
+          
+          Spacer()
+          
+          ViewButtons(action: {}, systemName: "bookmark")
+        }
         WebImage(url: movie.fullPoster)
           .resizable()
           .aspectRatio(contentMode: .fit)
+        
+        
         
         // Movie Information Section
         ZStack {
           Color.black
             .shadow(color: .gray, radius: 10)
+          
+          
           
           let stars = movie.vote_average / 2
           let rating = movie.vote_average
@@ -85,34 +104,38 @@ struct MovieDetailView: View {
               .font(.body)
               .foregroundColor(.white)
               .lineLimit(nil)
+              .padding(.bottom, 15)
+            
+            Text("Stars")
+              .foregroundStyle(.white)
+              .font(.title3)
             
             ScrollView(.horizontal, showsIndicators: false) {
-              HStack (spacing: 10) {
-                ForEach(vm.movieCredits.crew) { crew in
-                  CrewCard(crew: crew)
-                }
-              }
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-              HStack (spacing: 10) {
-                ForEach(vm.movieCredits.cast) { cast in
+              LazyHStack (spacing: 20) {
+                ForEach(vm.movieCredits.cast.prefix(5)) { cast in
                   CastCard(cast: cast)
                 }
               }
             }
+            .frame(width: .infinity, height: 230)
+            .padding(.bottom, 15)
+            
+            Text("Screenplay")
+              .foregroundStyle(.white)
+              .font(.title3)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+              LazyHStack (spacing: 20) {
+                ForEach(vm.movieCredits.crew.filter { $0.job == "Director" || $0.job == "Screenplay" }) { crew in
+                  CrewCard(crew: crew)
+                }
+              }
+            }
+            .frame(width: .infinity, height: 230)
+            .padding(.bottom, 15)
+            
           }
           .padding()
-          
-          // View Buttons
-          ViewButtons(action: {
-            dismiss()
-          }, systemName: "xmark")
-          .offset(x: -175, y: -770)
-          
-          ViewButtons(action: {}, systemName: "bookmark")
-            .offset(x: 175, y: -770)
-          
         }
       }
     }
