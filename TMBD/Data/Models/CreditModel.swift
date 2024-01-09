@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Credit: Codable, Identifiable {
+struct Cast: Codable, Identifiable {
   var adult: Bool
   var gender: Int
   var id: Int
@@ -15,14 +15,31 @@ struct Credit: Codable, Identifiable {
   var name: String
   var original_name: String
   var popularity: Double
-  var profile_path: String
+  var profile_path: String?
   var character: String
   
   var fullProfilePath: URL {
-    return URL(string: "https://image.tmdb.org/t/p/original/\(profile_path)")!
+    return URL(string: "https://image.tmdb.org/t/p/original/\(profile_path ?? "")")!
+  }
+}
+
+struct Crew: Codable, Identifiable {
+  var adult: Bool
+  var gender: Int
+  var id: Int
+  var known_for_department: String
+  var name: String
+  var original_name: String
+  var popularity: Double
+  var profile_path: String?
+  var job: String
+  
+  var fullProfilePath: URL {
+    return URL(string: "https://image.tmdb.org/t/p/original/\(profile_path ?? "")")!
   }
 }
 
 struct CreditResponse: Codable {
-  var cast: [Credit]
+  var cast: [Cast]
+  var crew: [Crew]
 }

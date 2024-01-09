@@ -20,6 +20,7 @@ protocol MovieApiProtocol {
   func getPopular(page: Int) async throws -> [Movie]
   func getTopRated(page: Int) async throws -> [Movie]
   func getMovieDetail(id: Int) async throws -> DetailMovie
+  func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew])
 }
 
 class MovieRepository: MovieApiProtocol {
@@ -76,6 +77,22 @@ class MovieRepository: MovieApiProtocol {
       return try await service.get(url: url, method: .get)
     } catch {
       debugPrint("Rep: Error fetching movie details: \(error)")
+      throw error
+    }
+  }
+  
+  func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew]) {
+    let apiUrl = "\(Api.base)/\(id)/credits"
+    guard let url = constructURL(apiUrl: apiUrl) else {
+      debugPrint("Rep: Invalid URL")
+      return ([], [])
+    }
+    
+    do {
+      let response: CreditResponse = try await service.get(url: url, method: .get)
+      return (response.cast, response.crew)
+    } catch {
+      debugPrint("Rep: Error fetching credits: \(error)")
       throw error
     }
   }

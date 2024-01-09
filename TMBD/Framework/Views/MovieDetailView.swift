@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct MovieDetailView: View {
   var movie: Movie
+  
   @StateObject var vm = MovieViewModel()
   @Environment(\.dismiss) var dismiss
   
@@ -18,14 +19,11 @@ struct MovieDetailView: View {
       VStack {
         WebImage(url: movie.fullPoster)
           .resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(height: UIScreen.main.bounds.height / 2 + 130)
-        
+          .aspectRatio(contentMode: .fit)
         
         // Movie Information Section
         ZStack {
           Color.black
-            .frame(height: UIScreen.main.bounds.height / 2)
             .shadow(color: .gray, radius: 10)
           
           let stars = movie.vote_average / 2
@@ -35,7 +33,7 @@ struct MovieDetailView: View {
           let ratingText = String(format: "%.1f", rating)
           let voteText = String(voteCount)
           
-          VStack(alignment: .leading, spacing: 20) {
+          VStack(alignment: .leading, spacing: 10) {
             
             HStack {
               StarRating(stars).frame(width: 100)
@@ -44,6 +42,7 @@ struct MovieDetailView: View {
               Text("(\(voteText) reviews)")
                 .foregroundStyle(.white)
             }
+            .padding(.bottom, 10)
             
             Text(movie.title)
               .font(.title)
@@ -62,6 +61,7 @@ struct MovieDetailView: View {
                 .font(.subheadline)
                 .foregroundStyle(.white)
             }
+            .padding(.bottom, 15)
             
             HStack(spacing: 3) {
               ForEach(genreNames(for: movie.genre_ids), id: \.self) { genreName in
@@ -75,13 +75,32 @@ struct MovieDetailView: View {
                   .lineLimit(1)
               }
             }
+            .padding(.bottom, 15)
+            
+            Text("Overview")
+              .foregroundStyle(.white)
+              .font(.title3)
             
             Text(movie.overview)
               .font(.body)
               .foregroundColor(.white)
               .lineLimit(nil)
             
-            Spacer()
+            ScrollView(.horizontal, showsIndicators: false) {
+              HStack (spacing: 10) {
+                ForEach(vm.movieCredits.crew) { crew in
+                  CrewCard(crew: crew)
+                }
+              }
+            }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+              HStack (spacing: 10) {
+                ForEach(vm.movieCredits.cast) { cast in
+                  CastCard(cast: cast)
+                }
+              }
+            }
           }
           .padding()
           
@@ -97,10 +116,12 @@ struct MovieDetailView: View {
         }
       }
     }
+    .background(Color.black)
     .edgesIgnoringSafeArea(.all)
     .onAppear {
       Task {
         try await vm.getMovieDetail(id: movie.id)
+        await vm.getMovieCredits(id: movie.id)
       }
     }
   }

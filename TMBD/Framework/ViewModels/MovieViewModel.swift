@@ -17,20 +17,19 @@ class MovieViewModel: ObservableObject {
   @Published var popularMovies: [Movie] = []
   @Published var topRatedMovies: [Movie] = []
   @Published var detailMovie: DetailMovie = DetailMovie(budget: 0, id: 0, production_companies: [], status: "", title: "", revenue: 0, runtime: 0)
+  @Published var movieCredits: (cast: [Cast], crew: [Crew]) = ([], [])
   
   init(useCase: MovieUseCase = MovieUseCase.shared) {
     self.useCase = useCase
   }
   
   @MainActor
-  /// A function to get movies from the API
   func getPopular() async {
     do {
-      /// Fetch movies for the current page
       let resultMovie = try await useCase.getPopular(page: popularPage)
       if let resultMovie = resultMovie {
         popularMovies.append(contentsOf: resultMovie)
-        popularPage += 1 /// Increment the current page number for the next fetch
+        popularPage += 1
       }
     } catch {
       errorMessage = "VM: Failed to fetch popular movies: \(error.localizedDescription)"
@@ -52,12 +51,23 @@ class MovieViewModel: ObservableObject {
   
   @MainActor
   func getMovieDetail(id: Int) async throws {
-      do {
-          self.detailMovie = try await useCase.getMovieDetail(id: id)
-      } catch {
-          errorMessage = "Failed to fetch movie detail: \(error.localizedDescription)"
-      }
+    do {
+      self.detailMovie = try await useCase.getMovieDetail(id: id)
+    } catch {
+      errorMessage = "Failed to fetch movie detail: \(error.localizedDescription)"
+    }
   }
+  
+  @MainActor
+  func getMovieCredits(id: Int) async {
+    do {
+      let (cast, crew) = try await useCase.getMovieCredits(id: id)
+      movieCredits = (cast: movieCredits.cast + cast, crew: movieCredits.crew + crew)
+    } catch {
+      errorMessage = "Failed to fetch movie credits: \(error.localizedDescription)"
+    }
+  }
+  
 }
 
 

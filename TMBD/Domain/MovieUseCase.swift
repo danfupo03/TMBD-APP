@@ -11,6 +11,7 @@ protocol MovieUseCaseProtocol {
   func getPopular(page: Int) async throws -> [Movie]?
   func getTopRated(page: Int) async throws -> [Movie]?
   func getMovieDetail(id: Int) async throws -> DetailMovie
+  func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew])
 }
 
 class MovieUseCase: MovieUseCaseProtocol {
@@ -34,6 +35,10 @@ class MovieUseCase: MovieUseCaseProtocol {
   
   func getMovieDetail(id: Int) async throws -> DetailMovie {
     return try await repository.getMovieDetail(id: id)
+  }
+  
+  func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew]) {
+    return try await repository.getMovieCredits(id: id)
   }
   
 }
