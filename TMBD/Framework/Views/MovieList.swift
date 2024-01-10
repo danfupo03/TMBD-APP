@@ -18,8 +18,9 @@ struct MovieList: View {
     NavigationView {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
-          Text("Popular Movies").font(.custom("AmericanTypewriter", fixedSize: 34)
-            .weight(.heavy))
+          
+          Text("Popular").font(.title).fontWeight(.bold)
+          
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
               ForEach(vm.popularMovies) { movie in
@@ -32,8 +33,8 @@ struct MovieList: View {
             }
           } .padding(.bottom, 8)
           
-          Text("Top Rated Movies").font(.custom("AmericanTypewriter", fixedSize: 34)
-            .weight(.heavy))
+          Text("Top Rated").font(.title).fontWeight(.bold)
+          
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
               ForEach(vm.topRatedMovies) { movie in
@@ -45,6 +46,35 @@ struct MovieList: View {
               }
             }
           }
+          
+          Text("Now Playing").font(.title).fontWeight(.bold)
+          
+          ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+              ForEach(vm.nowPlayingMovies) { movie in
+                MovieCard(movie: movie)
+                  .onTapGesture {
+                    selectedMovie = movie
+                    showingSheet = true
+                  }
+              }
+            }
+          }
+          
+          Text("Upcoming").font(.title).fontWeight(.bold)
+          
+          ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+              ForEach(vm.upcomingMovies) { movie in
+                MovieCard(movie: movie)
+                  .onTapGesture {
+                    selectedMovie = movie
+                    showingSheet = true
+                  }
+              }
+            }
+          }
+          
         }
         .padding()
       }
@@ -58,6 +88,8 @@ struct MovieList: View {
       Task {
         await vm.getPopular()
         await vm.getTopRated()
+        await vm.getNowPlaying()
+        await vm.getUpcoming()
       }
     }
   }

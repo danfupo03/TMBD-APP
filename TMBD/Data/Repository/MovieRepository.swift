@@ -13,12 +13,17 @@ struct Api {
   struct Routes {
     static let popularMovies = "/popular"
     static let topRatedMovies = "/top_rated"
+    static let nowPlayingMovies = "/now_playing"
+    static let upcomingMovies = "/upcoming"
+    
   }
 }
 
 protocol MovieApiProtocol {
   func getPopular(page: Int) async throws -> [Movie]
   func getTopRated(page: Int) async throws -> [Movie]
+  func getNowPlaying(page: Int) async throws -> [Movie]
+  func getUpcoming(page: Int) async throws -> [Movie]
   func getMovieDetail(id: Int) async throws -> DetailMovie
   func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew])
 }
@@ -52,6 +57,38 @@ class MovieRepository: MovieApiProtocol {
   
   func getTopRated(page:Int) async throws -> [Movie] {
     let apiUrl = "\(Api.base)\(Api.Routes.topRatedMovies)"
+    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+      debugPrint("Invalid URL")
+      return[]
+    }
+    
+    do {
+      let response: MovieResponse = try await service.get(url: url, method: .get)
+      return response.results
+    } catch {
+      debugPrint("Rep: Error fetching movies: \(error)")
+      throw error
+    }
+  }
+  
+  func getNowPlaying(page:Int) async throws -> [Movie] {
+    let apiUrl = "\(Api.base)\(Api.Routes.nowPlayingMovies)"
+    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+      debugPrint("Invalid URL")
+      return[]
+    }
+    
+    do {
+      let response: MovieResponse = try await service.get(url: url, method: .get)
+      return response.results
+    } catch {
+      debugPrint("Rep: Error fetching movies: \(error)")
+      throw error
+    }
+  }
+  
+  func getUpcoming(page:Int) async throws -> [Movie] {
+    let apiUrl = "\(Api.base)\(Api.Routes.upcomingMovies)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
       debugPrint("Invalid URL")
       return[]
