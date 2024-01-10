@@ -16,34 +16,32 @@ struct MovieDetailView: View {
   
   var body: some View {
     ScrollView {
-      
-      
-      
       VStack {
         
-        // View Buttons
-        
-        HStack {
-          ViewButtons(action: {
-            dismiss()
-          }, systemName: "xmark")
+        ZStack(alignment: .top) {
           
-          Spacer()
+          // Poster
+          WebImage(url: movie.fullPoster)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
           
-          ViewButtons(action: {}, systemName: "bookmark")
+          // View Buttons
+          HStack {
+            ViewButtons(action: {
+              dismiss()
+            }, systemName: "xmark")
+            
+            Spacer()
+            
+            ViewButtons(action: {}, systemName: "bookmark")
+          }
+          .padding()
         }
-        WebImage(url: movie.fullPoster)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-        
-        
         
         // Movie Information Section
         ZStack {
           Color.black
             .shadow(color: .gray, radius: 10)
-          
-          
           
           let stars = movie.vote_average / 2
           let rating = movie.vote_average
@@ -106,34 +104,58 @@ struct MovieDetailView: View {
               .lineLimit(nil)
               .padding(.bottom, 15)
             
-            Text("Stars")
-              .foregroundStyle(.white)
-              .font(.title3)
+            HStack {
+              Text("Stars")
+                .foregroundStyle(.white)
+                .font(.title3)
+              
+              Image(systemName: "star")
+                .foregroundStyle(.white)
+                .font(.subheadline)
+            }
             
             ScrollView(.horizontal, showsIndicators: false) {
               LazyHStack (spacing: 20) {
                 ForEach(vm.movieCredits.cast.prefix(5)) { cast in
                   CastCard(cast: cast)
+                    .frame(maxWidth: .infinity, maxHeight: 230)
                 }
               }
             }
-            .frame(width: .infinity, height: 230)
+            
             .padding(.bottom, 15)
             
-            Text("Screenplay")
-              .foregroundStyle(.white)
-              .font(.title3)
+            HStack {
+              Text("Screenplay")
+                .foregroundStyle(.white)
+                .font(.title3)
+              
+              Image(systemName: "movieclapper")
+                .foregroundStyle(.white)
+                .font(.subheadline)
+            }
             
             ScrollView(.horizontal, showsIndicators: false) {
               LazyHStack (spacing: 20) {
-                ForEach(vm.movieCredits.crew.filter { $0.job == "Director" || $0.job == "Screenplay" }) { crew in
+                ForEach(vm.movieCredits.crew.filter { $0.job == "Director"}) { crew in
                   CrewCard(crew: crew)
+                    .frame(maxWidth: .infinity, maxHeight: 230)
                 }
               }
             }
-            .frame(width: .infinity, height: 230)
             .padding(.bottom, 15)
             
+            Text("Production companies")
+              .foregroundStyle(.white)
+              .font(.title3)
+              .padding(.bottom, 5)
+            
+            HStack {
+              Text(vm.detailMovie.production_companies.map { $0.name }.joined(separator: ", "))
+                .foregroundStyle(.white)
+                .font(.subheadline)
+            }
+            .padding(.bottom, 15)
           }
           .padding()
         }
