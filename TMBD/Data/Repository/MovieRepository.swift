@@ -25,6 +25,7 @@ protocol MovieApiProtocol {
   func getTopRated(page: Int) async throws -> [Movie]
   func getNowPlaying(page: Int) async throws -> [Movie]
   func getUpcoming(page: Int) async throws -> [Movie]
+  func getTrending(page: Int) async throws -> [Movie]
   func getMovieDetail(id: Int) async throws -> DetailMovie
   func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew])
 }
@@ -90,6 +91,22 @@ class MovieRepository: MovieApiProtocol {
   
   func getUpcoming(page:Int) async throws -> [Movie] {
     let apiUrl = "\(Api.base)\(Api.Routes.upcomingMovies)"
+    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+      debugPrint("Invalid URL")
+      return[]
+    }
+    
+    do {
+      let response: MovieResponse = try await service.get(url: url, method: .get)
+      return response.results
+    } catch {
+      debugPrint("Rep: Error fetching movies: \(error)")
+      throw error
+    }
+  }
+  
+  func getTrending(page:Int) async throws -> [Movie] {
+    let apiUrl = "\(Api.baseT)\(Api.Routes.trendingToday)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
       debugPrint("Invalid URL")
       return[]

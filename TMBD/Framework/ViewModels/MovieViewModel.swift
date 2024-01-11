@@ -14,12 +14,14 @@ class MovieViewModel: ObservableObject {
   private var topPage = 1
   private var nowPage = 1
   private var upcomingPage = 1
+  private var trendingPage = 1
   @Published var errorMessage: String?
   
   @Published var popularMovies: [Movie] = []
   @Published var topRatedMovies: [Movie] = []
   @Published var nowPlayingMovies: [Movie] = []
   @Published var upcomingMovies: [Movie] = []
+  @Published var trendingMovies: [Movie] = []
   @Published var detailMovie: DetailMovie = DetailMovie(budget: 0, id: 0, production_companies: [], status: "", title: "", revenue: 0, runtime: 0)
   @Published var movieCredits: (cast: [Cast], crew: [Crew]) = ([], [])
   
@@ -78,6 +80,19 @@ class MovieViewModel: ObservableObject {
       }
     } catch {
       errorMessage = "Failed to fetch upcoming movies: \(error.localizedDescription)"
+    }
+  }
+  
+  @MainActor
+  func getTrending(pages: Int) async {
+    do {
+      let resultMovie = try await useCase.getTrending(page: trendingPage)
+      if let resultMovie = resultMovie {
+        trendingMovies.append(contentsOf: resultMovie)
+        trendingPage += 1
+      }
+    } catch {
+      errorMessage = "Failed to fetch top rated movies: \(error.localizedDescription)"
     }
   }
   

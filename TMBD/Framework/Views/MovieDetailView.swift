@@ -145,10 +145,15 @@ struct MovieDetailView: View {
             }
             .padding(.bottom, 15)
             
-            Text("Production companies")
-              .foregroundStyle(.white)
-              .font(.title3)
-              .padding(.bottom, 5)
+            HStack {
+              Text("Production companies")
+                .foregroundStyle(.white)
+                .font(.title3)
+              
+              Image(systemName: "house.fill")
+                .foregroundStyle(.white)
+                .font(.subheadline)
+            }
             
             HStack {
               Text(vm.detailMovie.production_companies.map { $0.name }.joined(separator: ", "))

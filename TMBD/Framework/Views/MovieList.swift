@@ -19,7 +19,8 @@ struct MovieList: View {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
           
-          if let randomMovie = vm.popularMovies.randomElement() {
+          //Random recommendation of the day
+          if let randomMovie = vm.trendingMovies.randomElement() {
             Recommendation(movie: randomMovie)
               .onTapGesture {
                 selectedMovie = randomMovie
@@ -27,6 +28,7 @@ struct MovieList: View {
               } .padding(.bottom, 8)
           }
           
+          //Trending movies
           Text("Trending Today").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -41,6 +43,7 @@ struct MovieList: View {
             }
           } .padding(.bottom, 8)
           
+          //Top rated movies
           Text("People's Favorites").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -55,6 +58,7 @@ struct MovieList: View {
             }
           } .padding(.bottom, 8)
           
+          //Now playing movies
           Text("Now in Cinemas").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -69,6 +73,7 @@ struct MovieList: View {
             }
           } .padding(.bottom, 8)
           
+          //Upcoming movies
           Text("Coming Soon").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -101,6 +106,7 @@ struct MovieList: View {
         await vm.getTopRated()
         await vm.getNowPlaying()
         await vm.getUpcoming(pages: 5)
+        await vm.getTrending(pages: 1)
       }
     }
   }
@@ -109,7 +115,7 @@ struct MovieList: View {
 extension DateFormatter {
   static let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd" // Adjust the format based on your "release_date" format
+    formatter.dateFormat = "yyyy-MM-dd"
     return formatter
   }()
 }
