@@ -67,15 +67,17 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
-  func getUpcoming() async {
+  func getUpcoming(pages: Int) async {
     do {
-      let resultMovie = try await useCase.getUpcoming(page: upcomingPage)
-      if let resultMovie = resultMovie {
-        upcomingMovies.append(contentsOf: resultMovie)
-        upcomingPage += 1
+      for _ in 1...pages {
+        let resultMovie = try await useCase.getUpcoming(page: upcomingPage)
+        if let resultMovie = resultMovie {
+          upcomingMovies.append(contentsOf: resultMovie)
+          upcomingPage += 1
+        }
       }
     } catch {
-      errorMessage = "Failed to fetch top rated movies: \(error.localizedDescription)"
+      errorMessage = "Failed to fetch upcoming movies: \(error.localizedDescription)"
     }
   }
   

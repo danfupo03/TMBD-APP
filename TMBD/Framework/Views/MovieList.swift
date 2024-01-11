@@ -19,7 +19,15 @@ struct MovieList: View {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
           
-          Text("Popular").font(.title).fontWeight(.bold)
+          if let randomMovie = vm.popularMovies.randomElement() {
+            Recommendation(movie: randomMovie)
+              .onTapGesture {
+                selectedMovie = randomMovie
+                showingSheet = true
+              } .padding(.bottom, 8)
+          }
+          
+          Text("Trending Today").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -33,7 +41,7 @@ struct MovieList: View {
             }
           } .padding(.bottom, 8)
           
-          Text("Top Rated").font(.title).fontWeight(.bold)
+          Text("People's Favorites").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -45,9 +53,9 @@ struct MovieList: View {
                   }
               }
             }
-          }
+          } .padding(.bottom, 8)
           
-          Text("Now Playing").font(.title).fontWeight(.bold)
+          Text("Now in Cinemas").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -59,13 +67,16 @@ struct MovieList: View {
                   }
               }
             }
-          }
+          } .padding(.bottom, 8)
           
-          Text("Upcoming").font(.title).fontWeight(.bold)
+          Text("Coming Soon").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-              ForEach(vm.upcomingMovies) { movie in
+              ForEach(vm.upcomingMovies.filter { movie in
+                let releaseDate = DateFormatter.dateFormatter.date(from: movie.release_date) ?? Date.distantPast
+                return releaseDate > Date()
+              }) { movie in
                 MovieCard(movie: movie)
                   .onTapGesture {
                     selectedMovie = movie
@@ -73,7 +84,7 @@ struct MovieList: View {
                   }
               }
             }
-          }
+          } .padding(.bottom, 8)
           
         }
         .padding()
@@ -89,12 +100,19 @@ struct MovieList: View {
         await vm.getPopular()
         await vm.getTopRated()
         await vm.getNowPlaying()
-        await vm.getUpcoming()
+        await vm.getUpcoming(pages: 5)
       }
     }
   }
 }
 
+extension DateFormatter {
+  static let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd" // Adjust the format based on your "release_date" format
+    return formatter
+  }()
+}
 
 #Preview {
   MovieList()

@@ -9,7 +9,6 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct MovieCard: View {
-  @Environment(\.colorScheme) var colorScheme
   var movie: Movie
   
   var body: some View {
@@ -24,7 +23,6 @@ struct MovieCard: View {
       // Movie Title
       Text(movie.title)
         .font(.headline)
-        .foregroundStyle(colorScheme == .dark ? .white : .black)
         .lineLimit(5)
         .multilineTextAlignment(.leading)
       
@@ -50,7 +48,6 @@ struct MovieCard: View {
     }
     .frame(minWidth: 0, maxWidth: 150, minHeight: 0, maxHeight: .infinity)
     .padding()
-    .background(colorScheme == .dark ? .black : .white)
     .cornerRadius(15)
   }
 }

@@ -9,13 +9,14 @@ import Foundation
 
 struct Api {
   static let base = "https://api.themoviedb.org/3/movie"
+  static let baseT = "https://api.themoviedb.org/3/trending/movie"
   
   struct Routes {
     static let popularMovies = "/popular"
     static let topRatedMovies = "/top_rated"
     static let nowPlayingMovies = "/now_playing"
     static let upcomingMovies = "/upcoming"
-    
+    static let trendingToday = "/day"
   }
 }
 
