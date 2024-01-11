@@ -8,21 +8,21 @@
 import SwiftUI
 
 enum Tab: String, CaseIterable {
-  case home = "Home"
-  case services = "Services"
-  case partners = "Partners"
-  case activity = "Activity"
+  case movies = "Movies"
+  case series = "Series"
+  case actors = "Actors"
+  case profile = "Profile"
   
   var systemImage: String {
     switch self {
-    case .home:
-      return "house"
-    case .services:
-      return "envelope.open.badge.clock"
-    case .partners:
-      return "hand.raised"
-    case .activity:
-      return "bell"
+    case .movies:
+      return "movieclapper"
+    case .series:
+      return "tv"
+    case .actors:
+      return "star.circle"
+    case .profile:
+      return "person"
     }
   }
   

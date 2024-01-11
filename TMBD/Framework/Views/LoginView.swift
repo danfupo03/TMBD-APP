@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct LoginView: View {
-  @State var email = ""
   @StateObject var vm = LoginViewModel()
+  
+  /// Used by the coordinator to manage the flow
+  let goMenu: () -> Void
   
   var body: some View {
     VStack(alignment: .center) {
       Spacer().frame(height: 48)
       
-      Text("Hola de nuevo").font(.largeTitle)
+      Text("Movie App").font(.largeTitle)
       
       Spacer()
       
@@ -35,10 +37,17 @@ struct LoginView: View {
       
       Button {
         vm.setCurrentUser()
+        goMenu()
       } label: {
         Text("Acceder")
       }
-    } .padding()
+    }.onAppear {
+      vm.getCurrentUser()
+      
+      if vm.email != "" {
+        goMenu()
+      }
+    }.padding()
       .alert(isPresented: $vm.showAlert) {
         Alert(
           title: Text("Oops!"),
@@ -49,5 +58,5 @@ struct LoginView: View {
 }
 
 #Preview {
-  LoginView()
+  LoginView(goMenu: {})
 }

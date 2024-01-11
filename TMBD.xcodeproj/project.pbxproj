@@ -44,6 +44,7 @@
 		69FBF1732B507A4900CAE9A7 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FBF1722B507A4900CAE9A7 /* UserRepository.swift */; };
 		69FBF1752B507AFC00CAE9A7 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FBF1742B507AFC00CAE9A7 /* UserUseCase.swift */; };
 		69FBF1792B507B5100CAE9A7 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FBF1782B507B5100CAE9A7 /* LoginViewModel.swift */; };
+		69FBF17B2B507C9300CAE9A7 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FBF17A2B507C9300CAE9A7 /* CoordinatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		69FBF1722B507A4900CAE9A7 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		69FBF1742B507AFC00CAE9A7 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		69FBF1782B507B5100CAE9A7 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		69FBF17A2B507C9300CAE9A7 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 				69004E6C2AD5CD0900954749 /* MovieList.swift */,
 				69004E712AD5EB9200954749 /* MovieDetailView.swift */,
 				69FBF16A2B50758D00CAE9A7 /* LoginView.swift */,
+				69FBF17A2B507C9300CAE9A7 /* CoordinatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6975F0002B2280DA00FD05A7 /* TabPosition.swift in Sources */,
+				69FBF17B2B507C9300CAE9A7 /* CoordinatorView.swift in Sources */,
 				69004E722AD5EB9200954749 /* MovieDetailView.swift in Sources */,
 				690F0FC82B4A106500480E90 /* StarRating.swift in Sources */,
 				69004E5C2AD5C8DF00954749 /* MovieModel.swift in Sources */,

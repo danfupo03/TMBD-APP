@@ -36,7 +36,3 @@ struct TabShape: Shape {
     }
   }
 }
-
-#Preview {
-  ContentView()
-}

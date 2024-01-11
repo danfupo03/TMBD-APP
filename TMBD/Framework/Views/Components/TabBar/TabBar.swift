@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBar: View {
-  @State private var activeTab: Tab = .home
+  @State private var activeTab: Tab = .movies
   
   @Namespace private var animation
   @State private var tabShapePosition: CGPoint = .zero
@@ -19,19 +19,19 @@ struct TabBar: View {
     VStack(spacing: 0) {
       TabView(selection: $activeTab) {
         MovieList()
-          .tag(Tab.home)
+          .tag(Tab.movies)
           //.toolbar(.hidden, for: .tabBar)
         
         Text("Services")
-          .tag(Tab.services)
+          .tag(Tab.series)
           //.toolbar(.hidden, for: .tabBar)
         
         Text("Partners")
-          .tag(Tab.partners)
+          .tag(Tab.actors)
           //.toolbar(.hidden, for: .tabBar)
         
         Text("Activity")
-          .tag(Tab.activity)
+          .tag(Tab.profile)
           //.toolbar(.hidden, for: .tabBar)
       }
       
@@ -109,8 +109,4 @@ struct TabItem: View {
       }
     }
   }
-}
-
-#Preview {
-  ContentView()
 }
