@@ -16,7 +16,7 @@ struct Recommendation: View {
       
       HStack {
         Spacer()
-        Text("Recommendation of the day")
+        Text("Recommendations")
           .font(.title2)
           .fontWeight(.bold)
           .padding(.top, 8)
@@ -28,7 +28,7 @@ struct Recommendation: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .cornerRadius(5)
-        .frame(width: .infinity, height: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
       
       HStack {
         Spacer()
