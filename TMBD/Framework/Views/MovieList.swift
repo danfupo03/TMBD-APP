@@ -20,10 +20,10 @@ struct MovieList: View {
         VStack(alignment: .leading) {
           
           //Random recommendation of the day
-          if let randomMovie = vm.trendingMovies.randomElement() {
-            Recommendation(movie: randomMovie)
+          ForEach(vm.trendingMovies.prefix(1)) { movie in
+            Recommendation(movie: movie)
               .onTapGesture {
-                selectedMovie = randomMovie
+                selectedMovie = movie
                 showingSheet = true
               } .padding(.bottom, 8)
           }
@@ -106,7 +106,7 @@ struct MovieList: View {
         await vm.getTopRated()
         await vm.getNowPlaying()
         await vm.getUpcoming(pages: 5)
-        await vm.getTrending(pages: 1)
+        await vm.getTrending(pages: 2)
       }
     }
   }

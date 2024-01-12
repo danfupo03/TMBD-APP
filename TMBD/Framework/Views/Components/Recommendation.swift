@@ -16,7 +16,7 @@ struct Recommendation: View {
       
       HStack {
         Spacer()
-        Text("Recommendations")
+        Text("Recommendation")
           .font(.title2)
           .fontWeight(.bold)
           .padding(.top, 8)
