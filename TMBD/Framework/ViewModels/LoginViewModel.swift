@@ -9,28 +9,28 @@ import Foundation
 
 class LoginViewModel: ObservableObject {
   @Published var email = ""
-  @Published var password = ""
   @Published var messageAlert = ""
   @Published var showAlert = false
+  @Published var password = ""
   
-  var userRequirement: UserRequirementProtocol
+  var useCase: UserUseCaseProtocol
   
-  init(userRequirement: UserRequirementProtocol = UserRequirement.shared) {
-    self.userRequirement = userRequirement
-  }
-  
-  @MainActor
-  func setCurrentUser() {
-    if self.email != "" {
-      self.userRequirement.setCurrentUser(email: self.email)
-    } else {
-      self.messageAlert = "Correo inválido"
-      self.showAlert = true
-    }
+  init(useCase: UserUseCaseProtocol = UserUseCase.shared) {
+    self.useCase = useCase
   }
   
   @MainActor
   func getCurrentUser() {
-    self.email = self.userRequirement.getCurrentUser() ?? ""
+    self.email = self.useCase.getCurrentUser() ?? ""
+  }
+  
+  @MainActor
+  func setCurrentUser() {
+    if email.isEmpty {
+      self.messageAlert = "Correo inválido"
+      self.showAlert = true
+    } else {
+      self.useCase.setCurrentUser(self.email)
+    }
   }
 }

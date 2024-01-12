@@ -7,26 +7,28 @@
 
 import Foundation
 
-protocol UserRequirementProtocol {
-  func setCurrentUser(email: String)
+import Foundation
+
+protocol UserUseCaseProtocol {
   func getCurrentUser() -> String?
+  func setCurrentUser(_ email: String)
   func removeCurrentUser()
 }
 
-class UserRequirement: UserRequirementProtocol {
-  static let shared = UserRequirement()
+class UserUseCase: UserUseCaseProtocol {
+  static let shared = UserUseCase()
   let dataRepository: UserRepository
   
   init(dataRepository: UserRepository = UserRepository.shared) {
     self.dataRepository = dataRepository
   }
   
-  func setCurrentUser(email: String) {
-    self.dataRepository.setCurrentUser(email: email)
-  }
-  
   func getCurrentUser() -> String? {
     return self.dataRepository.getCurrentUser()
+  }
+  
+  func setCurrentUser(_ email: String) {
+    self.dataRepository.setCurrentUser(email)
   }
   
   func removeCurrentUser() {

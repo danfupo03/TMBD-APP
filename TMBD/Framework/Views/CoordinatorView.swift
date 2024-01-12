@@ -5,16 +5,17 @@
 //  Created by Dan FuPo on 11/01/24.
 //
 
-import SwiftUI
 import FlowStacks
+import SwiftUI
 
 struct CoordinatorView: View {
-  @State var routes: Routes<Screen> = [.root(.login)]
   
   enum Screen {
     case login
     case menu
   }
+  
+  @State var routes: Routes<Screen> = [.root(.login)]
   
   var body: some View {
     Router($routes) { screen, _ in
@@ -22,11 +23,11 @@ struct CoordinatorView: View {
       case .login:
         LoginView(
           goMenu: { routes.presentCover(.menu) }
-        )
+        ).preferredColorScheme(.light)
       case .menu:
-        ContentView(
+        TabBar(
           goRoot: { routes.presentCover(.login) }
-        )
+        ).preferredColorScheme(.light)
       }
     }
   }

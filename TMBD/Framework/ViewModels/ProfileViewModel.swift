@@ -10,20 +10,20 @@ import Foundation
 class ProfileViewModel: ObservableObject {
   @Published var email = ""
   
-  var userRequirement: UserRequirementProtocol
+  var useCase: UserUseCase
   
-  init(userRequirement: UserRequirementProtocol = UserRequirement.shared) {
-    self.userRequirement = userRequirement
+  init(useCase: UserUseCase = UserUseCase.shared) {
+    self.useCase = useCase
   }
   
   @MainActor
   func getCurrentUser() {
-    self.email = self.userRequirement.getCurrentUser() ?? ""
+    self.email = self.useCase.getCurrentUser() ?? ""
   }
   
   @MainActor
   func logOut() {
     self.email = ""
-    self.userRequirement.removeCurrentUser()
+    self.useCase.removeCurrentUser()
   }
 }

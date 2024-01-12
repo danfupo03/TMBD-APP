@@ -11,7 +11,7 @@ struct ContentView: View {
   let goRoot: () -> Void
   
   var body: some View {
-    TabBar()
+    TabBar(goRoot: goRoot)
       .preferredColorScheme(.light)
   }
 }

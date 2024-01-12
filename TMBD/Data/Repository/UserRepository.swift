@@ -9,7 +9,7 @@ import Foundation
 
 protocol UserServiceProtocol {
   func getCurrentUser() -> String?
-  func setCurrentUser(email:String)
+  func setCurrentUser(_ email: String)
   func removeCurrentUser()
 }
 
@@ -25,7 +25,7 @@ class UserRepository: UserServiceProtocol {
     self.localService.getCurrentUser()
   }
   
-  func setCurrentUser(email: String) {
+  func setCurrentUser(_ email: String) {
     self.localService.setCurrentUser(email)
   }
   

@@ -14,9 +14,9 @@ struct TabBar: View {
   
   let goRoot: () -> Void
   
-  init() {
+  init(goRoot: @escaping () -> Void) {
+    self.goRoot = goRoot
     UITabBar.appearance().isHidden = true
-    goRoot = {}
   }
   
   var body: some View {
@@ -24,19 +24,19 @@ struct TabBar: View {
       TabView(selection: $activeTab) {
         MovieList()
           .tag(Tab.movies)
-          //.toolbar(.hidden, for: .tabBar)
+        //.toolbar(.hidden, for: .tabBar)
         
         Text("Services")
           .tag(Tab.series)
-          //.toolbar(.hidden, for: .tabBar)
+        //.toolbar(.hidden, for: .tabBar)
         
         Text("Partners")
           .tag(Tab.actors)
-          //.toolbar(.hidden, for: .tabBar)
+        //.toolbar(.hidden, for: .tabBar)
         
         ProfileView(goRoot: goRoot)
           .tag(Tab.profile)
-          //.toolbar(.hidden, for: .tabBar)
+        //.toolbar(.hidden, for: .tabBar)
       }
       
       CustomTabBar()
