@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Api {
+struct MovieApi {
   static let base = "https://api.themoviedb.org/3/movie"
   static let baseT = "https://api.themoviedb.org/3/trending/movie"
   
@@ -42,7 +42,7 @@ class MovieRepository: MovieApiProtocol {
   /// - Parameter page: The page to get movies from
   /// - Returns: Returns an array of movies
   func getPopular(page: Int) async throws -> [Movie] {
-    let apiUrl = "\(Api.base)\(Api.Routes.popularMovies)"
+    let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.popularMovies)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
       debugPrint("Invalid URL")
       return []
@@ -58,7 +58,7 @@ class MovieRepository: MovieApiProtocol {
   }
   
   func getTopRated(page:Int) async throws -> [Movie] {
-    let apiUrl = "\(Api.base)\(Api.Routes.topRatedMovies)"
+    let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.topRatedMovies)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
       debugPrint("Invalid URL")
       return[]
@@ -74,7 +74,7 @@ class MovieRepository: MovieApiProtocol {
   }
   
   func getNowPlaying(page:Int) async throws -> [Movie] {
-    let apiUrl = "\(Api.base)\(Api.Routes.nowPlayingMovies)"
+    let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.nowPlayingMovies)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
       debugPrint("Invalid URL")
       return[]
@@ -90,7 +90,7 @@ class MovieRepository: MovieApiProtocol {
   }
   
   func getUpcoming(page:Int) async throws -> [Movie] {
-    let apiUrl = "\(Api.base)\(Api.Routes.upcomingMovies)"
+    let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.upcomingMovies)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
       debugPrint("Invalid URL")
       return[]
@@ -106,7 +106,7 @@ class MovieRepository: MovieApiProtocol {
   }
   
   func getTrending(page:Int) async throws -> [Movie] {
-    let apiUrl = "\(Api.baseT)\(Api.Routes.trendingToday)"
+    let apiUrl = "\(MovieApi.baseT)\(MovieApi.Routes.trendingToday)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
       debugPrint("Invalid URL")
       return[]
@@ -122,7 +122,7 @@ class MovieRepository: MovieApiProtocol {
   }
   
   func getMovieDetail(id: Int) async throws -> DetailMovie {
-    let apiUrl = "\(Api.base)/\(id)"
+    let apiUrl = "\(MovieApi.base)/\(id)"
     guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Rep: Invalid URL")
       throw NetworkError.invalidURL
@@ -137,7 +137,7 @@ class MovieRepository: MovieApiProtocol {
   }
   
   func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew]) {
-    let apiUrl = "\(Api.base)/\(id)/credits"
+    let apiUrl = "\(MovieApi.base)/\(id)/credits"
     guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Rep: Invalid URL")
       return ([], [])
