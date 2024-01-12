@@ -9,12 +9,16 @@ import SwiftUI
 
 struct TabBar: View {
   @State private var activeTab: Tab = .movies
-  
   @Namespace private var animation
   @State private var tabShapePosition: CGPoint = .zero
+  
+  let goRoot: () -> Void
+  
   init() {
     UITabBar.appearance().isHidden = true
+    goRoot = {}
   }
+  
   var body: some View {
     VStack(spacing: 0) {
       TabView(selection: $activeTab) {
@@ -30,7 +34,7 @@ struct TabBar: View {
           .tag(Tab.actors)
           //.toolbar(.hidden, for: .tabBar)
         
-        Text("Activity")
+        ProfileView(goRoot: goRoot)
           .tag(Tab.profile)
           //.toolbar(.hidden, for: .tabBar)
       }
