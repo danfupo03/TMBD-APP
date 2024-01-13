@@ -9,7 +9,7 @@ import Foundation
 
 struct TVApi {
   static let base = "https://api.themoviedb.org/3/tv"
-  static let baseT = "https://api.themoviedb.org/3/trending/movie"
+  static let baseT = "https://api.themoviedb.org/3/trending/tv"
   
   struct Routes {
     static let popularTV = "/popular"
@@ -47,7 +47,7 @@ class TVRepository: TVApiProtocol {
       let response: TVResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching series: \(error)")
+      debugPrint("Rep: Error fetching popular tv shows: \(error)")
       throw error
     }
   }
@@ -63,7 +63,7 @@ class TVRepository: TVApiProtocol {
       let response: TVResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching series: \(error)")
+      debugPrint("Rep: Error fetching top rated tv shows: \(error)")
       throw error
     }
   }
@@ -79,7 +79,7 @@ class TVRepository: TVApiProtocol {
       let response: TVResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching series: \(error)")
+      debugPrint("Rep: Error fetching airing today tv shows: \(error)")
       throw error
     }
   }
@@ -95,7 +95,7 @@ class TVRepository: TVApiProtocol {
       let response: TVResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching series: \(error)")
+      debugPrint("Rep: Error fetching on the air tv shows: \(error)")
       throw error
     }
   }
@@ -111,7 +111,7 @@ class TVRepository: TVApiProtocol {
       let response: TVResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching series: \(error)")
+      debugPrint("Rep: Error fetching trending tv shows: \(error)")
       throw error
     }
   }

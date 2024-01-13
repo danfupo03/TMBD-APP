@@ -21,7 +21,7 @@ struct MovieList: View {
           
           //Random recommendation of the day
           ForEach(vm.trendingMovies.prefix(1)) { movie in
-            Recommendation(movie: movie)
+            MovieRec(movie: movie)
               .onTapGesture {
                 selectedMovie = movie
                 showingSheet = true

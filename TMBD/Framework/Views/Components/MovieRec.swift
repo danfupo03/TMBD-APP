@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct Recommendation: View {
+struct MovieRec: View {
   var movie: Movie
   
   var body: some View {
@@ -66,7 +66,7 @@ struct Recommendation: View {
 }
 
 #Preview {
-  Recommendation(movie: Movie(id: 968051,
+  MovieRec(movie: Movie(id: 968051,
                               genre_ids: [27, 93],
                               adult: false,
                               backdrop_path: "/mRGmNnh6pBAGGp6fMBMwI8iTBUO.jpg",

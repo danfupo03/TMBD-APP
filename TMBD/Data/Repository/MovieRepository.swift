@@ -52,7 +52,7 @@ class MovieRepository: MovieApiProtocol {
       let response: MovieResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching movies: \(error)")
+      debugPrint("Rep: Error fetching popular movies: \(error)")
       throw error
     }
   }
@@ -68,7 +68,7 @@ class MovieRepository: MovieApiProtocol {
       let response: MovieResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching movies: \(error)")
+      debugPrint("Rep: Error fetching top rated movies: \(error)")
       throw error
     }
   }
@@ -84,7 +84,7 @@ class MovieRepository: MovieApiProtocol {
       let response: MovieResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching movies: \(error)")
+      debugPrint("Rep: Error fetching now playing movies: \(error)")
       throw error
     }
   }
@@ -100,7 +100,7 @@ class MovieRepository: MovieApiProtocol {
       let response: MovieResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching movies: \(error)")
+      debugPrint("Rep: Error fetching upcoming movies: \(error)")
       throw error
     }
   }
@@ -116,7 +116,7 @@ class MovieRepository: MovieApiProtocol {
       let response: MovieResponse = try await service.get(url: url, method: .get)
       return response.results
     } catch {
-      debugPrint("Rep: Error fetching movies: \(error)")
+      debugPrint("Rep: Error fetching trending movies: \(error)")
       throw error
     }
   }

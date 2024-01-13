@@ -18,14 +18,14 @@ struct TVList: View {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
           
-          //          //Random recommendation of the day
-          //          ForEach(vm.trendingMovies.prefix(1)) { movie in
-          //            Recommendation(movie: movie)
-          //              .onTapGesture {
-          //                selectedMovie = movie
-          //                showingSheet = true
-          //              } .padding(.bottom, 8)
-          //          }
+          //Random recommendation of the day
+          ForEach(vm.trendingTV.prefix(1)) { tv in
+            TVRec(tv: tv)
+              .onTapGesture {
+                selectedSerie = tv
+                showingSheet = true
+              } .padding(.bottom, 8)
+          }
           
           //Trending movies
           Text("Trending Today").font(.title).fontWeight(.bold)
