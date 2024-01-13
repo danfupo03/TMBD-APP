@@ -26,7 +26,7 @@ struct TabBar: View {
           .tag(Tab.movies)
         //.toolbar(.hidden, for: .tabBar)
         
-        Text("Services")
+        TVList()
           .tag(Tab.series)
         //.toolbar(.hidden, for: .tabBar)
         
