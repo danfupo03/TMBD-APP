@@ -93,7 +93,7 @@ struct TVList: View {
     }
     .sheet(isPresented: $showingSheet) {
       if let selectedSerie = selectedSerie {
-        //MovieDetailView(movie: selectedMovie)
+        TVDetailView(tv: selectedSerie)
       }
     }
     .onAppear {
