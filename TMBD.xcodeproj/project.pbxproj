@@ -273,16 +273,13 @@
 		69004E572AD5C85900954749 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				69469E352B531BBA007F9CA0 /* Main */,
 				6950EEBC2B1D4F54004A04DA /* Utils */,
 				69004E6E2AD5EA4600954749 /* Components */,
 				69004E292AD5C7A100954749 /* ContentView.swift */,
-				69004E6C2AD5CD0900954749 /* MovieList.swift */,
-				69004E712AD5EB9200954749 /* MovieDetailView.swift */,
-				69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */,
-				69FBF16A2B50758D00CAE9A7 /* LoginView.swift */,
 				69FBF17A2B507C9300CAE9A7 /* CoordinatorView.swift */,
+				69FBF16A2B50758D00CAE9A7 /* LoginView.swift */,
 				69572CF72B50CB6F004AB403 /* ProfileView.swift */,
-				695297942B51F14C00C7D322 /* TVList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -301,17 +298,52 @@
 		69004E6E2AD5EA4600954749 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				69469E332B531B2C007F9CA0 /* Extra */,
+				69469E322B531B1A007F9CA0 /* TV */,
+				69469E312B531B01007F9CA0 /* Movies */,
 				6975F0012B2284FD00FD05A7 /* TabBar */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		69469E312B531B01007F9CA0 /* Movies */ = {
+			isa = PBXGroup;
+			children = (
 				69004E6F2AD5EA5D00954749 /* MovieCard.swift */,
+				6938AFC12B4F440F00050FCF /* MovieRec.swift */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		69469E322B531B1A007F9CA0 /* TV */ = {
+			isa = PBXGroup;
+			children = (
+				695297962B51F1E200C7D322 /* TVCard.swift */,
+				69469E2F2B53157D007F9CA0 /* TVRec.swift */,
+			);
+			path = TV;
+			sourceTree = "<group>";
+		};
+		69469E332B531B2C007F9CA0 /* Extra */ = {
+			isa = PBXGroup;
+			children = (
 				690F0FC72B4A106500480E90 /* StarRating.swift */,
 				69E411992B4B796E00E7EF3C /* ViewButtons.swift */,
 				693D18552B4CBB6F00E7B4AE /* CastCard.swift */,
 				693D18572B4CC97100E7B4AE /* CrewCard.swift */,
-				6938AFC12B4F440F00050FCF /* MovieRec.swift */,
-				695297962B51F1E200C7D322 /* TVCard.swift */,
-				69469E2F2B53157D007F9CA0 /* TVRec.swift */,
 			);
-			path = Components;
+			path = Extra;
+			sourceTree = "<group>";
+		};
+		69469E352B531BBA007F9CA0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */,
+				695297942B51F14C00C7D322 /* TVList.swift */,
+				69004E6C2AD5CD0900954749 /* MovieList.swift */,
+				69004E712AD5EB9200954749 /* MovieDetailView.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		6950EEBC2B1D4F54004A04DA /* Utils */ = {
