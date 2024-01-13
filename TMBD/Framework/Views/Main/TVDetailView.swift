@@ -74,9 +74,10 @@ struct TVDetailView: View {
                 .font(.subheadline)
                 .foregroundStyle(.white)
               
-              //              Text(runtimeFormatter(runtime: vm.detailMovie.runtime))
-              //                .font(.subheadline)
-              //                .foregroundStyle(.white)
+              Text(vm.detailTV.homepage)
+                .font(.subheadline)
+                .foregroundStyle(.white)
+              
             }
             .padding(.bottom, 15)
             
@@ -114,37 +115,6 @@ struct TVDetailView: View {
                 .font(.subheadline)
             }
             
-            //            ScrollView(.horizontal, showsIndicators: false) {
-            //              LazyHStack (spacing: 20) {
-            //                ForEach(vm.movieCredits.cast.prefix(5)) { cast in
-            //                  CastCard(cast: cast)
-            //                    .frame(maxWidth: .infinity, maxHeight: 230)
-            //                }
-            //              }
-            //            }
-            //
-            //            .padding(.bottom, 15)
-            //
-            //            HStack {
-            //              Text("Screenplay")
-            //                .foregroundStyle(.white)
-            //                .font(.title3)
-            //
-            //              Image(systemName: "movieclapper")
-            //                .foregroundStyle(.white)
-            //                .font(.subheadline)
-            //            }
-            //
-            //            ScrollView(.horizontal, showsIndicators: false) {
-            //              LazyHStack (spacing: 20) {
-            //                ForEach(vm.movieCredits.crew.filter { $0.job == "Director"}) { crew in
-            //                  CrewCard(crew: crew)
-            //                    .frame(maxWidth: .infinity, maxHeight: 230)
-            //                }
-            //              }
-            //            }
-            //            .padding(.bottom, 15)
-            
             HStack {
               Text("Production companies")
                 .foregroundStyle(.white)
@@ -155,13 +125,6 @@ struct TVDetailView: View {
                 .font(.subheadline)
             }
             
-//            HStack {
-//              Text(vm.detailMovie.production_companies.map { $0.name }.joined(separator: ", "))
-//                .foregroundStyle(.white)
-//                .font(.subheadline)
-//            }
-//            .padding(.bottom, 15)
-            
           }
           .padding()
         }
@@ -171,8 +134,7 @@ struct TVDetailView: View {
     .edgesIgnoringSafeArea(.all)
     .onAppear {
       Task {
-        //try await vm.getMovieDetail(id: movie.id)
-        //await vm.getMovieCredits(id: movie.id)
+        try await vm.getTVDetail(id: 1396)
       }
     }
   }

@@ -22,7 +22,13 @@ class MovieViewModel: ObservableObject {
   @Published var nowPlayingMovies: [Movie] = []
   @Published var upcomingMovies: [Movie] = []
   @Published var trendingMovies: [Movie] = []
-  @Published var detailMovie: DetailMovie = DetailMovie(budget: 0, id: 0, production_companies: [], status: "", title: "", revenue: 0, runtime: 0)
+  @Published var detailMovie: DetailMovie = DetailMovie(budget: 0, 
+                                                        id: 0,
+                                                        production_companies: [],
+                                                        status: "",
+                                                        title: "",
+                                                        revenue: 0,
+                                                        runtime: 0)
   @Published var movieCredits: (cast: [Cast], crew: [Crew]) = ([], [])
   
   init(useCase: MovieUseCase = MovieUseCase.shared) {

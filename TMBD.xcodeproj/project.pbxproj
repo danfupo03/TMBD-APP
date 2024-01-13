@@ -31,6 +31,7 @@
 		693D18582B4CC97100E7B4AE /* CrewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693D18572B4CC97100E7B4AE /* CrewCard.swift */; };
 		69469E2E2B5311B8007F9CA0 /* TVDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */; };
 		69469E302B53157E007F9CA0 /* TVRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E2F2B53157D007F9CA0 /* TVRec.swift */; };
+		69469E372B531DE3007F9CA0 /* DetailTVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E362B531DE3007F9CA0 /* DetailTVModel.swift */; };
 		6950EEBE2B1D4F63004A04DA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBD2B1D4F63004A04DA /* Tab.swift */; };
 		6950EEC02B1D50C8004A04DA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBF2B1D50C8004A04DA /* TabBar.swift */; };
 		6952978D2B51EB6300C7D322 /* TVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952978C2B51EB6300C7D322 /* TVModel.swift */; };
@@ -100,6 +101,7 @@
 		693D18572B4CC97100E7B4AE /* CrewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewCard.swift; sourceTree = "<group>"; };
 		69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailView.swift; sourceTree = "<group>"; };
 		69469E2F2B53157D007F9CA0 /* TVRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVRec.swift; sourceTree = "<group>"; };
+		69469E362B531DE3007F9CA0 /* DetailTVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVModel.swift; sourceTree = "<group>"; };
 		6950EEBD2B1D4F63004A04DA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		6950EEBF2B1D50C8004A04DA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		6952978C2B51EB6300C7D322 /* TVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVModel.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				69831DB62B23DDC200A3D61F /* DetailMovieModel.swift */,
 				693D18532B4CA96900E7B4AE /* CreditModel.swift */,
 				6952978C2B51EB6300C7D322 /* TVModel.swift */,
+				69469E362B531DE3007F9CA0 /* DetailTVModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				69004E722AD5EB9200954749 /* MovieDetailView.swift in Sources */,
 				690F0FC82B4A106500480E90 /* StarRating.swift in Sources */,
 				69004E5C2AD5C8DF00954749 /* MovieModel.swift in Sources */,
+				69469E372B531DE3007F9CA0 /* DetailTVModel.swift in Sources */,
 				695297972B51F1E200C7D322 /* TVCard.swift in Sources */,
 				693D18582B4CC97100E7B4AE /* CrewCard.swift in Sources */,
 				695297932B51EF5300C7D322 /* TVViewModel.swift in Sources */,

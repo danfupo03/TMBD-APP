@@ -26,6 +26,7 @@ protocol TVApiProtocol {
   func getAiringToday(page: Int) async throws -> [TV]
   func getOnTheAir(page: Int) async throws -> [TV]
   func getTrending(page: Int) async throws -> [TV]
+  func getTVDetail(id: Int) async throws -> DetailTV
 }
 
 class TVRepository: TVApiProtocol {
@@ -112,6 +113,22 @@ class TVRepository: TVApiProtocol {
       return response.results
     } catch {
       debugPrint("Rep: Error fetching trending tv shows: \(error)")
+      throw error
+    }
+  }
+  
+  func getTVDetail(id: Int) async throws -> DetailTV {
+    let apiURL = "\(TVApi.base)/\(id)"
+    guard let url = constructURL(apiUrl: apiURL) else {
+      debugPrint("Rep: Invalid URL")
+      throw NetworkError.invalidURL
+    }
+    
+    do {
+      print(apiURL)
+      return try await service.get(url: url, method: .get)
+    } catch {
+      debugPrint("Rep: Error fetching movie details: \(error)")
       throw error
     }
   }

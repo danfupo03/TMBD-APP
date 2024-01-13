@@ -22,6 +22,19 @@ class TVViewModel: ObservableObject {
   @Published var airingTV: [TV] = []
   @Published var onAirTV: [TV] = []
   @Published var trendingTV: [TV] = []
+  @Published var detailTV: DetailTV = DetailTV(id: 0,
+                                               episode_run_time: [],
+                                               homepage: "",
+                                               in_production: false,
+                                               last_air_date: "",
+                                               number_of_episodes: 0,
+                                               number_of_seasons: 0,
+                                               origin_country: [],
+                                               original_language: "",
+                                               production_companies: [],
+                                               status: "",
+                                               tagline: "",
+                                               type: "")
   
   init(useCase: TVUseCase = TVUseCase.shared) {
     self.useCase = useCase
@@ -89,6 +102,15 @@ class TVViewModel: ObservableObject {
       }
     } catch {
       errorMessage = "Failed to fetch popular series: \(error.localizedDescription)"
+    }
+  }
+  
+  @MainActor
+  func getTVDetail(id: Int) async throws {
+    do {
+      self.detailTV = try await useCase.getTVDetail(id: id)
+    } catch {
+      errorMessage = "Failed to fetch tv shows detail: \(error.localizedDescription)"
     }
   }
 }
