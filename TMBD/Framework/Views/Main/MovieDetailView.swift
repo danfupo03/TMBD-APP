@@ -122,7 +122,6 @@ struct MovieDetailView: View {
                 }
               }
             }
-            
             .padding(.bottom, 15)
             
             HStack {

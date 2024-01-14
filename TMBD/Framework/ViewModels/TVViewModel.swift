@@ -37,6 +37,7 @@ class TVViewModel: ObservableObject {
                                                status: "",
                                                tagline: "",
                                                type: "")
+  @Published var tvCredits: (cast: [Cast], crew: [Crew]) = ([], [])
   
   init(useCase: TVUseCase = TVUseCase.shared) {
     self.useCase = useCase
@@ -113,6 +114,16 @@ class TVViewModel: ObservableObject {
       self.detailTV = try await useCase.getTVDetail(id: id)
     } catch {
       errorMessage = "Failed to fetch tv shows detail: \(error.localizedDescription)"
+    }
+  }
+  
+  @MainActor
+  func getTVCredits(id: Int, season: Int) async {
+    do {
+      let (cast, crew) = try await useCase.getTVCredits(id: id, season: season)
+      tvCredits = (cast: tvCredits.cast + cast, crew: tvCredits.crew + crew)
+    } catch {
+      errorMessage = "Failed to fetch movie credits: \(error.localizedDescription)"
     }
   }
 }

@@ -137,6 +137,16 @@ struct TVDetailView: View {
                   .font(.subheadline)
               }
               
+              ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack (spacing: 20) {
+                  ForEach(vm.tvCredits.cast.prefix(10)) { cast in
+                    CastCard(cast: cast)
+                      .frame(maxWidth: .infinity, maxHeight: 230)
+                  }
+                }
+              }
+              .padding(.bottom, 15)
+              
               HStack {
                 Text("Screenplay")
                   .foregroundStyle(.white)
@@ -184,6 +194,7 @@ struct TVDetailView: View {
     .onAppear {
       Task {
         try await vm.getTVDetail(id: tv.id)
+        await vm.getTVCredits(id: tv.id, season: vm.detailTV.number_of_seasons)
       }
     }
   }

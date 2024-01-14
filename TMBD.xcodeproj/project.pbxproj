@@ -352,8 +352,8 @@
 		69469E352B531BBA007F9CA0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */,
 				695297942B51F14C00C7D322 /* TVList.swift */,
+				69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */,
 				69469E3A2B535402007F9CA0 /* TVEpisodes.swift */,
 				69004E6C2AD5CD0900954749 /* MovieList.swift */,
 				69004E712AD5EB9200954749 /* MovieDetailView.swift */,
