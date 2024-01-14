@@ -13,175 +13,173 @@ struct TVDetailView: View {
   
   @StateObject var vm = TVViewModel()
   @Environment(\.dismiss) var dismiss
-  @State private var showingSheet = false
   
   var body: some View {
-    ScrollView {
-      VStack {
-        
-        ZStack(alignment: .top) {
+    NavigationView {
+      ScrollView {
+        VStack {
           
-          // Poster
-          WebImage(url: tv.fullPoster)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-          
-          // View Buttons
-          HStack {
-            ViewButtons(action: {
-              dismiss()
-            }, systemName: "xmark")
+          ZStack(alignment: .top) {
             
-            Spacer()
+            // Poster
+            WebImage(url: tv.fullPoster)
+              .resizable()
+              .aspectRatio(contentMode: .fit)
             
-            ViewButtons(action: {}, systemName: "bookmark")
-          }
-          .padding()
-        }
-        
-        // Movie Information Section
-        ZStack {
-          Color.black
-            .shadow(color: .gray, radius: 10)
-          
-          let stars = tv.vote_average / 2
-          let rating = tv.vote_average
-          let voteCount = tv.vote_count
-          
-          let ratingText = String(format: "%.1f", rating)
-          let voteText = String(voteCount)
-          
-          VStack(alignment: .leading, spacing: 10) {
-            
+            // View Buttons
             HStack {
-              StarRating(stars).frame(width: 100)
-              Text(ratingText)
-                .foregroundStyle(.yellow)
-              Text("(\(voteText) reviews)")
-                .foregroundStyle(.white)
+              ViewButtons(action: {
+                dismiss()
+              }, systemName: "xmark")
+              
+              Spacer()
+              
+              ViewButtons(action: {}, systemName: "bookmark")
             }
-            .padding(.bottom, 10)
+            .padding()
+          }
+          
+          // Movie Information Section
+          ZStack {
+            Color.black
+              .shadow(color: .gray, radius: 10)
             
-            Text(tv.name)
-              .font(.title)
-              .foregroundColor(.white)
+            let stars = tv.vote_average / 2
+            let rating = tv.vote_average
+            let voteCount = tv.vote_count
             
-            HStack {
-              Text(dateFormatter(date: tv.first_air_date))
-                .font(.subheadline)
+            let ratingText = String(format: "%.1f", rating)
+            let voteText = String(voteCount)
+            
+            VStack(alignment: .leading, spacing: 10) {
+              
+              HStack {
+                StarRating(stars).frame(width: 100)
+                Text(ratingText)
+                  .foregroundStyle(.yellow)
+                Text("(\(voteText) reviews)")
+                  .foregroundStyle(.white)
+              }
+              .padding(.bottom, 10)
+              
+              Text(tv.name)
+                .font(.title)
                 .foregroundColor(.white)
               
-              Text("·")
-                .font(.subheadline)
-                .foregroundStyle(.white)
-              
-              let seasons = vm.detailTV.number_of_seasons
-              let textSeasons = String(seasons)
-              
-              Text("\(textSeasons) seasons")
-                .font(.subheadline)
-                .foregroundStyle(.white)
-              
-              Text("·")
-                .font(.subheadline)
-                .foregroundStyle(.white)
-              
-              Button("Episodes") {
-                showingSheet.toggle()
-              }
-              
-            }
-            .padding(.bottom, 15)
-            
-            HStack(spacing: 3) {
-              ForEach(genreNames(for: tv.genre_ids), id: \.self) { genreName in
-                Text(genreName)
-                  .padding(.horizontal, 10)
-                  .padding(.vertical, 5)
-                  .background(Color.gray.opacity(0.4))
-                  .foregroundStyle(.white)
+              HStack {
+                Text(dateFormatter(date: tv.first_air_date))
                   .font(.subheadline)
-                  .cornerRadius(25.0)
-                  .lineLimit(1)
+                  .foregroundColor(.white)
+                
+                Text("·")
+                  .font(.subheadline)
+                  .foregroundStyle(.white)
+                
+                let numberSeasons = vm.detailTV.number_of_seasons
+                let textSeasons = String(numberSeasons)
+                
+                Text("\(textSeasons) seasons")
+                  .font(.subheadline)
+                  .foregroundStyle(.white)
+                
+                Text("·")
+                  .font(.subheadline)
+                  .foregroundStyle(.white)
+                
+                NavigationLink(destination: TVEpisodes(tv: tv)) {
+                  Text("Seasons")
+                }
+                
               }
-            }
-            .padding(.bottom, 15)
-            
-            Text("Overview")
-              .foregroundStyle(.white)
-              .font(.title3)
-            
-            Text(tv.overview)
-              .font(.body)
-              .foregroundColor(.white)
-              .lineLimit(nil)
               .padding(.bottom, 15)
-            
-            Text("Status")
-              .foregroundStyle(.white)
-              .font(.title3)
-            
-            Text(vm.detailTV.status)
-              .font(.body)
-              .foregroundColor(.white)
-              .lineLimit(nil)
-              .padding(.bottom, 15)
-            
-            HStack {
-              Text("Stars")
-                .foregroundStyle(.white)
-                .font(.title3)
               
-              Image(systemName: "star.circle")
-                .foregroundStyle(.white)
-                .font(.subheadline)
-            }
-            
-            HStack {
-              Text("Screenplay")
-                .foregroundStyle(.white)
-                .font(.title3)
-              
-              Image(systemName: "movieclapper")
-                .foregroundStyle(.white)
-                .font(.subheadline)
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-              LazyHStack (spacing: 20) {
-                ForEach(vm.detailTV.created_by) { person in
-                  CreatedByCard(person: person)
+              HStack(spacing: 3) {
+                ForEach(genreNames(for: tv.genre_ids), id: \.self) { genreName in
+                  Text(genreName)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color.gray.opacity(0.4))
+                    .foregroundStyle(.white)
+                    .font(.subheadline)
+                    .cornerRadius(25.0)
+                    .lineLimit(1)
                 }
               }
-            }
-            .padding(.bottom, 15)
-            
-            HStack {
-              Text("Production companies")
+              .padding(.bottom, 15)
+              
+              Text("Overview")
                 .foregroundStyle(.white)
                 .font(.title3)
               
-              Image(systemName: "house.fill")
+              Text(tv.overview)
+                .font(.body)
+                .foregroundColor(.white)
+                .lineLimit(nil)
+                .padding(.bottom, 15)
+              
+              Text("Status")
                 .foregroundStyle(.white)
-                .font(.subheadline)
+                .font(.title3)
+              
+              Text(vm.detailTV.status)
+                .font(.body)
+                .foregroundColor(.white)
+                .lineLimit(nil)
+                .padding(.bottom, 15)
+              
+              HStack {
+                Text("Stars")
+                  .foregroundStyle(.white)
+                  .font(.title3)
+                
+                Image(systemName: "star.circle")
+                  .foregroundStyle(.white)
+                  .font(.subheadline)
+              }
+              
+              HStack {
+                Text("Screenplay")
+                  .foregroundStyle(.white)
+                  .font(.title3)
+                
+                Image(systemName: "movieclapper")
+                  .foregroundStyle(.white)
+                  .font(.subheadline)
+              }
+              
+              ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack (spacing: 20) {
+                  ForEach(vm.detailTV.created_by) { person in
+                    CreatedByCard(person: person)
+                  }
+                }
+              }
+              .padding(.bottom, 15)
+              
+              HStack {
+                Text("Production companies")
+                  .foregroundStyle(.white)
+                  .font(.title3)
+                
+                Image(systemName: "house.fill")
+                  .foregroundStyle(.white)
+                  .font(.subheadline)
+              }
+              
+              HStack {
+                Text(vm.detailTV.production_companies.map { $0.name }.joined(separator: ", "))
+                  .foregroundStyle(.white)
+                  .font(.subheadline)
+              }
+              .padding(.bottom, 15)
+              
             }
-            
-            HStack {
-              Text(vm.detailTV.production_companies.map { $0.name }.joined(separator: ", "))
-                .foregroundStyle(.white)
-                .font(.subheadline)
-            }
-            .padding(.bottom, 15)
-            
+            .padding()
           }
-          .padding()
         }
       }
-    }
-    .background(Color.black)
-    .edgesIgnoringSafeArea(.all)
-    .sheet(isPresented: $showingSheet) {
-      TVEpisodes()
+      .background(Color.black)
+      .edgesIgnoringSafeArea(.all)
     }
     .onAppear {
       Task {

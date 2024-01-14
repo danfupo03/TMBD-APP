@@ -125,10 +125,9 @@ class TVRepository: TVApiProtocol {
     }
     
     do {
-      print(apiURL)
       return try await service.get(url: url, method: .get)
     } catch {
-      debugPrint("Rep: Error fetching movie details: \(error)")
+      debugPrint("Rep: Error fetching tv show details: \(error)")
       throw error
     }
   }

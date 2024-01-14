@@ -33,6 +33,7 @@ class TVViewModel: ObservableObject {
                                                origin_country: [],
                                                original_language: "",
                                                production_companies: [],
+                                               seasons: [Seasons(id: 0, episode_count: 0, name: "", overview: "", season_number: 0, vote_average: 0)],
                                                status: "",
                                                tagline: "",
                                                type: "")
