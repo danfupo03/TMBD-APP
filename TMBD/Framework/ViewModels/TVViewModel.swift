@@ -23,6 +23,7 @@ class TVViewModel: ObservableObject {
   @Published var onAirTV: [TV] = []
   @Published var trendingTV: [TV] = []
   @Published var detailTV: DetailTV = DetailTV(id: 0,
+                                               created_by: [],
                                                episode_run_time: [],
                                                homepage: "",
                                                in_production: false,

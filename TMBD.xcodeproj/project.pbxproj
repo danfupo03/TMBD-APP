@@ -32,6 +32,8 @@
 		69469E2E2B5311B8007F9CA0 /* TVDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */; };
 		69469E302B53157E007F9CA0 /* TVRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E2F2B53157D007F9CA0 /* TVRec.swift */; };
 		69469E372B531DE3007F9CA0 /* DetailTVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E362B531DE3007F9CA0 /* DetailTVModel.swift */; };
+		69469E3B2B535402007F9CA0 /* TVEpisodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E3A2B535402007F9CA0 /* TVEpisodes.swift */; };
+		69469E3D2B535AEC007F9CA0 /* CreatedByCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69469E3C2B535AEC007F9CA0 /* CreatedByCard.swift */; };
 		6950EEBE2B1D4F63004A04DA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBD2B1D4F63004A04DA /* Tab.swift */; };
 		6950EEC02B1D50C8004A04DA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950EEBF2B1D50C8004A04DA /* TabBar.swift */; };
 		6952978D2B51EB6300C7D322 /* TVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952978C2B51EB6300C7D322 /* TVModel.swift */; };
@@ -102,6 +104,8 @@
 		69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailView.swift; sourceTree = "<group>"; };
 		69469E2F2B53157D007F9CA0 /* TVRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVRec.swift; sourceTree = "<group>"; };
 		69469E362B531DE3007F9CA0 /* DetailTVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVModel.swift; sourceTree = "<group>"; };
+		69469E3A2B535402007F9CA0 /* TVEpisodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVEpisodes.swift; sourceTree = "<group>"; };
+		69469E3C2B535AEC007F9CA0 /* CreatedByCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedByCard.swift; sourceTree = "<group>"; };
 		6950EEBD2B1D4F63004A04DA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		6950EEBF2B1D50C8004A04DA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		6952978C2B51EB6300C7D322 /* TVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVModel.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 				69E411992B4B796E00E7EF3C /* ViewButtons.swift */,
 				693D18552B4CBB6F00E7B4AE /* CastCard.swift */,
 				693D18572B4CC97100E7B4AE /* CrewCard.swift */,
+				69469E3C2B535AEC007F9CA0 /* CreatedByCard.swift */,
 			);
 			path = Extra;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 			children = (
 				69469E2D2B5311B8007F9CA0 /* TVDetailView.swift */,
 				695297942B51F14C00C7D322 /* TVList.swift */,
+				69469E3A2B535402007F9CA0 /* TVEpisodes.swift */,
 				69004E6C2AD5CD0900954749 /* MovieList.swift */,
 				69004E712AD5EB9200954749 /* MovieDetailView.swift */,
 			);
@@ -533,6 +539,7 @@
 				69004E2A2AD5C7A100954749 /* ContentView.swift in Sources */,
 				69004E282AD5C7A100954749 /* TMBDApp.swift in Sources */,
 				69FBF1752B507AFC00CAE9A7 /* UserUseCase.swift in Sources */,
+				69469E3B2B535402007F9CA0 /* TVEpisodes.swift in Sources */,
 				69831DB72B23DDC200A3D61F /* DetailMovieModel.swift in Sources */,
 				69004E662AD5CA7C00954749 /* MovieRepository.swift in Sources */,
 				6952978F2B51EC7300C7D322 /* TVRepository.swift in Sources */,
@@ -542,6 +549,7 @@
 				69572CFA2B50CBAF004AB403 /* ProfileViewModel.swift in Sources */,
 				69FBF16B2B50758E00CAE9A7 /* LoginView.swift in Sources */,
 				6950EEBE2B1D4F63004A04DA /* Tab.swift in Sources */,
+				69469E3D2B535AEC007F9CA0 /* CreatedByCard.swift in Sources */,
 				69FBF1712B50798E00CAE9A7 /* LocalService.swift in Sources */,
 				6938AFC22B4F440F00050FCF /* MovieRec.swift in Sources */,
 				69572CF82B50CB6F004AB403 /* ProfileView.swift in Sources */,

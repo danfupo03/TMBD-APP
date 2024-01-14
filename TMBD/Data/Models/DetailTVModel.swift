@@ -9,7 +9,7 @@ import Foundation
 
 struct DetailTV: Codable, Identifiable {
   var id: Int
-  //var created_by: [CreatedBy]
+  var created_by: [CreatedBy]
   var episode_run_time: [Int]
   var homepage: String
   var in_production: Bool
@@ -31,7 +31,6 @@ struct DetailTV: Codable, Identifiable {
 struct CreatedBy: Codable, Identifiable {
   var id: Int
   var name: String
-  var gender: Int
   var profile_path: String?
   
   var fullProfile: URL {

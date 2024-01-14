@@ -13,6 +13,7 @@ struct TVDetailView: View {
   
   @StateObject var vm = TVViewModel()
   @Environment(\.dismiss) var dismiss
+  @State private var showingSheet = false
   
   var body: some View {
     ScrollView {
@@ -74,9 +75,20 @@ struct TVDetailView: View {
                 .font(.subheadline)
                 .foregroundStyle(.white)
               
-              Text(vm.detailTV.homepage)
+              let seasons = vm.detailTV.number_of_seasons
+              let textSeasons = String(seasons)
+              
+              Text("\(textSeasons) seasons")
                 .font(.subheadline)
                 .foregroundStyle(.white)
+              
+              Text("·")
+                .font(.subheadline)
+                .foregroundStyle(.white)
+              
+              Button("Episodes") {
+                showingSheet.toggle()
+              }
               
             }
             .padding(.bottom, 15)
@@ -105,15 +117,44 @@ struct TVDetailView: View {
               .lineLimit(nil)
               .padding(.bottom, 15)
             
+            Text("Status")
+              .foregroundStyle(.white)
+              .font(.title3)
+            
+            Text(vm.detailTV.status)
+              .font(.body)
+              .foregroundColor(.white)
+              .lineLimit(nil)
+              .padding(.bottom, 15)
+            
             HStack {
               Text("Stars")
                 .foregroundStyle(.white)
                 .font(.title3)
               
-              Image(systemName: "star")
+              Image(systemName: "star.circle")
                 .foregroundStyle(.white)
                 .font(.subheadline)
             }
+            
+            HStack {
+              Text("Screenplay")
+                .foregroundStyle(.white)
+                .font(.title3)
+              
+              Image(systemName: "movieclapper")
+                .foregroundStyle(.white)
+                .font(.subheadline)
+            }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+              LazyHStack (spacing: 20) {
+                ForEach(vm.detailTV.created_by) { person in
+                  CreatedByCard(person: person)
+                }
+              }
+            }
+            .padding(.bottom, 15)
             
             HStack {
               Text("Production companies")
@@ -125,6 +166,13 @@ struct TVDetailView: View {
                 .font(.subheadline)
             }
             
+            HStack {
+              Text(vm.detailTV.production_companies.map { $0.name }.joined(separator: ", "))
+                .foregroundStyle(.white)
+                .font(.subheadline)
+            }
+            .padding(.bottom, 15)
+            
           }
           .padding()
         }
@@ -132,9 +180,12 @@ struct TVDetailView: View {
     }
     .background(Color.black)
     .edgesIgnoringSafeArea(.all)
+    .sheet(isPresented: $showingSheet) {
+      TVEpisodes()
+    }
     .onAppear {
       Task {
-        try await vm.getTVDetail(id: 1396)
+        try await vm.getTVDetail(id: tv.id)
       }
     }
   }
