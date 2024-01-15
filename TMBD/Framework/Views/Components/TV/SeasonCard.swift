@@ -13,7 +13,7 @@ struct SeasonCard: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      HStack {
+      HStack(spacing: 40) {
         // Season poster
         WebImage(url: season.poster)
           .resizable()
@@ -58,7 +58,6 @@ struct SeasonCard: View {
       .padding(.bottom)
       
       Text("Overview:")
-        .font(.subheadline)
       
       Text(season.overview)
         .font(.subheadline)

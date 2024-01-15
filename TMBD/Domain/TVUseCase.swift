@@ -15,6 +15,7 @@ protocol TVUseCaseProtocol {
   func getTrending(page: Int) async throws -> [TV]?
   func getTVDetail(id: Int) async throws -> DetailTV
   func getTVCredits(id: Int, season: Int) async throws -> (cast: [Cast], crew: [Crew])
+  func getEpisodes(id: Int, season: Int) async throws -> SeasonDetail
 }
 
 class TVUseCase: TVUseCaseProtocol {
@@ -51,5 +52,9 @@ class TVUseCase: TVUseCaseProtocol {
   
   func getTVCredits(id: Int, season: Int) async throws -> (cast: [Cast], crew: [Crew]) {
     return try await repository.getTVCredits(id: id, season: season)
+  }
+  
+  func getEpisodes(id: Int, season: Int) async throws -> SeasonDetail {
+    return try await repository.getEpisodes(id: id, season: season)
   }
 }

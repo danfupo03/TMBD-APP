@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct SeasonDetail {
+struct SeasonDetail: Codable, Identifiable {
   var id: Int
-  var air_date: String
+  var air_date: String?
   var episodes: [Episode]
   var name: String
   var overview: String
@@ -22,7 +22,7 @@ struct SeasonDetail {
   }
 }
 
-struct Episode {
+struct Episode: Codable, Identifiable {
   var id: Int
   var air_date: String
   var episode_number: Int
