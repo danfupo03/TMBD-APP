@@ -30,7 +30,6 @@ struct SeasonCard: View {
             .foregroundColor(.gray)
             .padding(.bottom, 10)
           
-          // Rating
           HStack {
             let count = season.episode_count
             let countText = String(count)
@@ -41,27 +40,38 @@ struct SeasonCard: View {
           }
           .padding(.bottom, 10)
           
+          // Rating
           HStack {
-            Text("Rating: ")
+            Text("Rating:")
               .font(.subheadline)
-              .foregroundStyle(.gray)
+              .foregroundColor(.gray)
             
             let rating = season.vote_average
-            let ratingText = String(format: "%.1f/10", rating)
             
-            Text(ratingText)
-              .font(.subheadline)
-              .foregroundColor(rating >= 8.0 ? .green : (rating >= 5.0 ? .yellow : .red))
+            if rating == 0.0 {
+              Text("No rating")
+                .font(.subheadline)
+                .foregroundColor(.orange)
+              
+            } else {
+              let ratingText = String(format: "%.1f/10", rating)
+              
+              Text(ratingText)
+                .font(.subheadline)
+                .foregroundColor(rating >= 8.0 ? .green : (rating >= 5.0 ? .yellow : .red))
+            }
           }
         }
       }
       .padding(.bottom)
       
-      Text("Overview:")
-      
-      Text(season.overview)
-        .font(.subheadline)
-        .padding([.bottom, .trailing], 10)
+      if season.overview != "" {
+        Text("Overview:")
+        
+        Text(season.overview)
+          .font(.subheadline)
+          .padding([.bottom, .trailing], 10)
+      }
     }
     .padding()
   }

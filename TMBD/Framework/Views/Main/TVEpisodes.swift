@@ -19,12 +19,32 @@ struct TVEpisodes: View {
         Color.black
         
         VStack(alignment: .leading) {
-          Text("Seasons").font(.largeTitle)
-          ForEach(vm.detailTV.seasons) { season in
-            DisclosureGroup(season.name) {
-              SeasonCard(season: season)
+          VStack(alignment: .leading) {
+            Text("Seasons").font(.title)
+            ForEach(vm.detailTV.seasons) { season in
+              DisclosureGroup(season.name) {
+                SeasonCard(season: season)
+              }
             }
           }
+          .padding(.bottom, 20)
+          
+          VStack(alignment: .leading) {
+            Text("Last episode to air").font(.title)
+            LastEpisode(last: vm.detailTV.last_episode_to_air)
+          }
+          
+          if vm.detailTV.next_episode_to_air != nil {
+            VStack(alignment: .leading) {
+              Text("Next episode to air")
+                .font(.title)
+                .padding(.bottom, 15)
+              
+              Text(vm.detailTV.next_episode_to_air?.name ?? "")
+              Text(vm.detailTV.next_episode_to_air?.air_date ?? "")
+            }
+          }
+          
         }
       }
     }
@@ -41,8 +61,8 @@ struct TVEpisodes: View {
 }
 
 #Preview {
-  TVEpisodes(tv: TV(id: 1396,
-                    genre_ids: [18, 80],
+  TVEpisodes(tv: TV(id: 79744,
+                    genre_ids: [18, 80, 35],
                     adult: false,
                     backdrop_path: "/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg",
                     origin_country: ["US"],

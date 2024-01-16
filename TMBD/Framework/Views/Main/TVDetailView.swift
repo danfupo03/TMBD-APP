@@ -93,19 +93,21 @@ struct TVDetailView: View {
               }
               .padding(.bottom, 15)
               
-              HStack(spacing: 3) {
-                ForEach(genreNames(for: tv.genre_ids), id: \.self) { genreName in
-                  Text(genreName)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(Color.gray.opacity(0.4))
-                    .foregroundStyle(.white)
-                    .font(.subheadline)
-                    .cornerRadius(25.0)
-                    .lineLimit(1)
+              if !tv.genre_ids.isEmpty {
+                HStack(spacing: 3) {
+                  ForEach(genreNames(for: tv.genre_ids), id: \.self) { genreName in
+                    Text(genreName)
+                      .padding(.horizontal, 10)
+                      .padding(.vertical, 5)
+                      .background(Color.gray.opacity(0.4))
+                      .foregroundStyle(.white)
+                      .font(.subheadline)
+                      .cornerRadius(25.0)
+                      .lineLimit(1)
+                  }
                 }
+                .padding(.bottom, 15)
               }
-              .padding(.bottom, 15)
               
               Text("Overview")
                 .foregroundStyle(.white)
@@ -123,7 +125,7 @@ struct TVDetailView: View {
               
               Text(vm.detailTV.status)
                 .font(.body)
-                .foregroundColor(.white)
+                .foregroundColor(getStatusColor(status: vm.detailTV.status))
                 .lineLimit(nil)
                 .padding(.bottom, 15)
               

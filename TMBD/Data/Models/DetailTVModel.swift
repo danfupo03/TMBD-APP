@@ -14,8 +14,8 @@ struct DetailTV: Codable, Identifiable {
   var homepage: String
   var in_production: Bool
   var last_air_date : String
-  //var last_episode_to_air: LastEpisodeToAir
-  //var next_episode_to_air: NextEpisodeToAir
+  var last_episode_to_air: LastEpisodeToAir
+  var next_episode_to_air: NextEpisodeToAir?
   var number_of_episodes: Int
   var number_of_seasons: Int
   var origin_country: [String]
@@ -41,11 +41,12 @@ struct LastEpisodeToAir: Codable, Identifiable {
   var id: Int
   var name: String
   var overview: String
-  var vote_average: Int
+  var vote_average: Double
   var vote_count: Int
+  var air_date: String
   var episode_number: Int
   var episode_type: String
-  var runtime: Int
+  var runtime: Int?
   var season_number: Int
   var still_path: String?
   
@@ -57,19 +58,7 @@ struct LastEpisodeToAir: Codable, Identifiable {
 struct NextEpisodeToAir: Codable, Identifiable {
   var id: Int
   var name: String
-  var overview: String
-  var vote_average: Int
-  var vote_count: Int
   var air_date: String
-  var episode_number: Int
-  var episode_type: String
-  var runtime: Int
-  var season_number: Int
-  var still_path: String?
-  
-  var stillPath2: URL {
-    return URL(string: "https://image.tmdb.org/t/p/original/\(still_path ?? "")")!
-  }
 }
 
 struct Seasons: Codable, Identifiable {
