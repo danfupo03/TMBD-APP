@@ -38,11 +38,19 @@ struct TVCard: View {
           .foregroundColor(.gray)
         
         let rating = tv.vote_average
-        let ratingText = String(format: "%.1f/10", rating)
         
-        Text(ratingText)
-          .font(.subheadline)
-          .foregroundColor(rating >= 8.0 ? .green : (rating >= 5.0 ? .yellow : .red))
+        if rating == 0.0 {
+          Text("No rating yet")
+            .font(.subheadline)
+            .foregroundColor(.orange)
+          
+        } else {
+          let ratingText = String(format: "%.1f/10", rating)
+          
+          Text(ratingText)
+            .font(.subheadline)
+            .foregroundColor(rating >= 8.0 ? .green : (rating >= 5.0 ? .yellow : .red))
+        }
       }
       
     }
@@ -54,14 +62,14 @@ struct TVCard: View {
 
 #Preview {
   TVCard(tv: TV(id: 15260,
-                   genre_ids: [16, 35, 10765],
-                   adult: false,
-                   origin_country: ["US"],
-                   original_name: "Adventure Time",
-                   overview: "Hook up with Finn and Jake as they travel the Land of Ooo searching for adventure. But remember, adventure isn’t always easy. Sometimes you’ve got to battle fire gnomes that torture old ladies, save a smelly hot dog princess from the Ice King, and thaw out a bunch of frozen businessmen. What the cabbage?!",
-                   popularity: 2441.479,
-                   first_air_date: "2010-04-05",
-                   name: "Adventure Time",
-                   vote_average: 8.476,
-                   vote_count: 2577))
+                genre_ids: [16, 35, 10765],
+                adult: false,
+                origin_country: ["US"],
+                original_name: "Adventure Time",
+                overview: "Hook up with Finn and Jake as they travel the Land of Ooo searching for adventure. But remember, adventure isn’t always easy. Sometimes you’ve got to battle fire gnomes that torture old ladies, save a smelly hot dog princess from the Ice King, and thaw out a bunch of frozen businessmen. What the cabbage?!",
+                popularity: 2441.479,
+                first_air_date: "2010-04-05",
+                name: "Adventure Time",
+                vote_average: 0.0,
+                vote_count: 2577))
 }

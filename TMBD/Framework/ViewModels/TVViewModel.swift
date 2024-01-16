@@ -38,7 +38,7 @@ class TVViewModel: ObservableObject {
                                                tagline: "",
                                                type: "")
   @Published var tvCredits: (cast: [Cast], crew: [Crew]) = ([], [])
-  @Published var tvEpisodes: SeasonDetail = SeasonDetail(id: 0, air_date: "", episodes: [], name: "", overview: "", season_number: 0, vote_average: 0.0)
+  @Published var seasonDetail: SeasonDetail = SeasonDetail(id: 0, air_date: "", episodes: [], name: "", overview: "", season_number: 0, vote_average: 0.0)
   
   init(useCase: TVUseCase = TVUseCase.shared) {
     self.useCase = useCase
@@ -131,7 +131,7 @@ class TVViewModel: ObservableObject {
   @MainActor
   func getEpisodes(id: Int, season: Int) async {
     do {
-      self.tvEpisodes = try await useCase.getEpisodes(id: id, season: season)
+      self.seasonDetail = try await useCase.getEpisodes(id: id, season: season)
     } catch {
       errorMessage = "Failed to fetch tv episodes: \(error.localizedDescription)"
     }

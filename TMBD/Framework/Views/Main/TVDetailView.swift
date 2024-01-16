@@ -127,44 +127,48 @@ struct TVDetailView: View {
                 .lineLimit(nil)
                 .padding(.bottom, 15)
               
-              HStack {
-                Text("Stars")
-                  .foregroundStyle(.white)
-                  .font(.title3)
+              if !vm.tvCredits.cast.isEmpty {
+                HStack {
+                  Text("Stars")
+                    .foregroundStyle(.white)
+                    .font(.title3)
+                  
+                  Image(systemName: "star.circle")
+                    .foregroundStyle(.white)
+                    .font(.subheadline)
+                }
                 
-                Image(systemName: "star.circle")
-                  .foregroundStyle(.white)
-                  .font(.subheadline)
-              }
-              
-              ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack (spacing: 20) {
-                  ForEach(vm.tvCredits.cast.prefix(10)) { cast in
-                    CastCard(cast: cast)
-                      .frame(maxWidth: .infinity, maxHeight: 230)
+                ScrollView(.horizontal, showsIndicators: false) {
+                  LazyHStack (spacing: 20) {
+                    ForEach(vm.tvCredits.cast.prefix(10)) { cast in
+                      CastCard(cast: cast)
+                        .frame(maxWidth: .infinity, maxHeight: 230)
+                    }
                   }
                 }
+                .padding(.bottom, 15)
               }
-              .padding(.bottom, 15)
               
-              HStack {
-                Text("Screenplay")
-                  .foregroundStyle(.white)
-                  .font(.title3)
+              if !vm.detailTV.created_by.isEmpty {
+                HStack {
+                  Text("Screenplay")
+                    .foregroundStyle(.white)
+                    .font(.title3)
+                  
+                  Image(systemName: "movieclapper")
+                    .foregroundStyle(.white)
+                    .font(.subheadline)
+                }
                 
-                Image(systemName: "movieclapper")
-                  .foregroundStyle(.white)
-                  .font(.subheadline)
-              }
-              
-              ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack (spacing: 20) {
-                  ForEach(vm.detailTV.created_by) { person in
-                    CreatedByCard(person: person)
+                ScrollView(.horizontal, showsIndicators: false) {
+                  LazyHStack (spacing: 20) {
+                    ForEach(vm.detailTV.created_by) { person in
+                      CreatedByCard(person: person)
+                    }
                   }
                 }
+                .padding(.bottom, 15)
               }
-              .padding(.bottom, 15)
               
               HStack {
                 Text("Production companies")
@@ -176,13 +180,14 @@ struct TVDetailView: View {
                   .font(.subheadline)
               }
               
-              HStack {
-                Text(vm.detailTV.production_companies.map { $0.name }.joined(separator: ", "))
-                  .foregroundStyle(.white)
-                  .font(.subheadline)
+              if !vm.detailTV.production_companies.isEmpty {
+                HStack {
+                  Text(vm.detailTV.production_companies.map { $0.name }.joined(separator: ", "))
+                    .foregroundStyle(.white)
+                    .font(.subheadline)
+                }
+                .padding(.bottom, 15)
               }
-              .padding(.bottom, 15)
-              
             }
             .padding()
           }

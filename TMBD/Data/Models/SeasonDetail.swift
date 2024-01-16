@@ -24,12 +24,12 @@ struct SeasonDetail: Codable, Identifiable {
 
 struct Episode: Codable, Identifiable {
   var id: Int
-  var air_date: String
+  var air_date: String?
   var episode_number: Int
   var episode_type: String
   var name: String
   var overview: String
-  var runtime: Int
+  var runtime: Int?
   var vote_average: Double
   var still_path: String?
   

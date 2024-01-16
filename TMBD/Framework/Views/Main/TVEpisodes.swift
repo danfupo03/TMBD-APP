@@ -23,9 +23,6 @@ struct TVEpisodes: View {
           ForEach(vm.detailTV.seasons) { season in
             DisclosureGroup(season.name) {
               SeasonCard(season: season)
-              ForEach(vm.tvEpisodes.episodes) { episode in
-                EpisodesCard(episode: episode)
-              }
             }
           }
         }
@@ -37,7 +34,6 @@ struct TVEpisodes: View {
     .onAppear {
       Task {
         try await vm.getTVDetail(id: tv.id)
-        await vm.getEpisodes(id: tv.id, season: vm.detailTV.number_of_seasons)
       }
     }
     

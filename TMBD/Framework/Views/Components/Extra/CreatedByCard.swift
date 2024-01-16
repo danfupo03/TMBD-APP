@@ -31,9 +31,8 @@ struct CreatedByCard: View {
       Text("as Creator")
         .font(.subheadline)
         .foregroundColor(.gray)
-      
     }
-    .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 200)
+    .frame(width: 100)
   }
 }
 

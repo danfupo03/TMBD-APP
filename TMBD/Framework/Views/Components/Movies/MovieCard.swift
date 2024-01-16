@@ -38,11 +38,19 @@ struct MovieCard: View {
           .foregroundColor(.gray)
         
         let rating = movie.vote_average
-        let ratingText = String(format: "%.1f/10", rating)
         
-        Text(ratingText)
-          .font(.subheadline)
-          .foregroundColor(rating >= 8.0 ? .green : (rating >= 5.0 ? .yellow : .red))
+        if rating == 0.0 {
+          Text("No rating yet")
+            .font(.subheadline)
+            .foregroundColor(.orange)
+          
+        } else {
+          let ratingText = String(format: "%.1f/10", rating)
+          
+          Text(ratingText)
+            .font(.subheadline)
+            .foregroundColor(rating >= 8.0 ? .green : (rating >= 5.0 ? .yellow : .red))
+        }
       }
       
     }
@@ -65,6 +73,6 @@ struct MovieCard: View {
                          release_date: "2023-09-06",
                          title: "The Nun II",
                          video: false,
-                         vote_average: 7,
+                         vote_average: 0.0,
                          vote_count: 776))
 }

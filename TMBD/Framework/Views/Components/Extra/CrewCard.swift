@@ -33,9 +33,8 @@ struct CrewCard: View {
       Text("as \(crew.job)")
         .font(.subheadline)
         .foregroundColor(.gray)
-      
     }
-    .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: .infinity)
+    .frame(width: 100)
   }
 }
 
