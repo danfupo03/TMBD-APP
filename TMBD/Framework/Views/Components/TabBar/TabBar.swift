@@ -30,7 +30,7 @@ struct TabBar: View {
           .tag(Tab.series)
         //.toolbar(.hidden, for: .tabBar)
         
-        Text("Partners")
+        PeopleList()
           .tag(Tab.actors)
         //.toolbar(.hidden, for: .tabBar)
         
