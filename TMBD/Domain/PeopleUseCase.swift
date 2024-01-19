@@ -9,6 +9,7 @@ import Foundation
 
 protocol PeopleUseCaseProtocol {
   func getPopular(page: Int) async throws -> [People]?
+  func getPerson(id: Int) async throws -> DetailPeople
 }
 
 class PeopleUseCase: PeopleUseCaseProtocol {
@@ -21,5 +22,9 @@ class PeopleUseCase: PeopleUseCaseProtocol {
   
   func getPopular(page: Int) async throws -> [People]? {
     return try await repository.getPopular(page: page)
+  }
+  
+  func getPerson(id: Int) async throws -> DetailPeople {
+    return try await repository.getPerson(id: id)
   }
 }

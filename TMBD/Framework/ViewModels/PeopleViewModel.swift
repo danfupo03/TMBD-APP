@@ -14,21 +14,37 @@ class PeopleViewModel: ObservableObject {
   @Published var errorMessage: String?
   
   @Published var popularPeople: [People] = []
+  @Published var detailPerson: DetailPeople = DetailPeople(id: 0,
+                                                           biography: "",
+                                                           birthday: "",
+                                                           deathday: "",
+                                                           place_of_birth: "")
   
   init(useCase: PeopleUseCase = PeopleUseCase.shared) {
     self.useCase = useCase
   }
   
   @MainActor
-  func getPopular() async {
+  func getPopular(pages: Int) async {
     do {
-      let resultPeople = try await useCase.getPopular(page: popularPage)
-      if let resultPeople = resultPeople {
-        popularPeople.append(contentsOf: resultPeople)
-        popularPage += 1
+      for _ in 1...pages {
+        let resultPerson = try await useCase.getPopular(page: popularPage)
+        if let resultPerson = resultPerson {
+          popularPeople.removeAll()
+          popularPeople.append(contentsOf: resultPerson)
+        }
       }
     } catch {
-      errorMessage = "VM: Failed to fetch popular people: \(error.localizedDescription)"
+      errorMessage = "Failed to fetch upcoming movies: \(error.localizedDescription)"
+    }
+  }
+  
+  @MainActor
+  func getPerson(id: Int) async throws {
+    do {
+      self.detailPerson = try await useCase.getPerson(id: id)
+    } catch {
+      errorMessage = "Failed to fetch person detail: \(error.localizedDescription)"
     }
   }
 }

@@ -11,7 +11,7 @@ struct PeopleList: View {
   @StateObject var vm = PeopleViewModel()
   @State private var isLoading = false
   @State private var showingSheet = false
-  @State private var selectedSerie: TV?
+  @State private var selectedPerson: People?
   
   var body: some View {
     NavigationView {
@@ -28,6 +28,10 @@ struct PeopleList: View {
               GridRow {
                 ForEach(peoplePair, id: \.id) { person in
                   PeopleCard(person: person)
+                    .onTapGesture {
+                      selectedPerson = person
+                      showingSheet = true
+                    } .padding(.bottom, 8)
                 }
               }
             }
@@ -38,13 +42,13 @@ struct PeopleList: View {
       }
     }
     .sheet(isPresented: $showingSheet) {
-      if let selectedSerie = selectedSerie {
-        TVDetailView(tv: selectedSerie)
+      if let selectedPerson = selectedPerson {
+        PeopleDetailView(person: selectedPerson)
       }
     }
     .onAppear {
       Task {
-        await vm.getPopular()
+        await vm.getPopular(pages: 2)
       }
     }
   }

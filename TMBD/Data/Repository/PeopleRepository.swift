@@ -17,6 +17,7 @@ struct PeopleApi {
 
 protocol PeopleApiProtocol {
   func getPopular(page: Int) async throws -> [People]
+  func getPerson(id: Int) async throws -> DetailPeople
 }
 
 class PeopleRepository: PeopleApiProtocol {
@@ -39,6 +40,21 @@ class PeopleRepository: PeopleApiProtocol {
       return response.results
     } catch {
       debugPrint("Rep: Error fetching popular people: \(error)")
+      throw error
+    }
+  }
+  
+  func getPerson(id: Int) async throws -> DetailPeople {
+    let apiUrl = "\(PeopleApi.base)/\(id)"
+    guard let url = constructURL(apiUrl: apiUrl) else {
+      debugPrint("Rep: Invalid URL")
+      throw NetworkError.invalidURL
+    }
+    
+    do {
+      return try await service.get(url: url, method: .get)
+    } catch {
+      debugPrint("Rep: Error fetching person details: \(error)")
       throw error
     }
   }

@@ -31,28 +31,6 @@ struct PeopleCard: View {
         .font(.subheadline)
         .foregroundColor(.gray)
       
-      // Rating
-      HStack {
-        Text("Rating:")
-          .font(.subheadline)
-          .foregroundColor(.gray)
-        
-        let popularity = person.popularity
-        
-//        if rating == 0.0 {
-//          Text("No rating yet")
-//            .font(.subheadline)
-//            .foregroundColor(.orange)
-//          
-//        } else {
-//          let ratingText = String(format: "%.1f/10", rating)
-//          
-//          Text(ratingText)
-//            .font(.subheadline)
-//            .foregroundColor(rating >= 8.0 ? .green : (rating >= 5.0 ? .yellow : .red))
-//        }
-      }
-      
     }
     .frame(minWidth: 0, maxWidth: 150, minHeight: 0, maxHeight: .infinity)
     .padding()
