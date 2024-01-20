@@ -8,11 +8,11 @@
 import Foundation
 
 protocol TVUseCaseProtocol {
-  func getPopular(page: Int) async throws -> [TV]?
-  func getTopRated(page: Int) async throws -> [TV]?
-  func getAiringToday(page: Int) async throws -> [TV]?
-  func getOnTheAir(page: Int) async throws -> [TV]?
-  func getTrending(page: Int) async throws -> [TV]?
+  func getPopular() async throws -> [TV]?
+  func getTopRated() async throws -> [TV]?
+  func getAiringToday() async throws -> [TV]?
+  func getOnTheAir() async throws -> [TV]?
+  func getTrending() async throws -> [TV]?
   func getTVDetail(id: Int) async throws -> DetailTV
   func getTVCredits(id: Int, season: Int) async throws -> (cast: [Cast], crew: [Crew])
   func getEpisodes(id: Int, season: Int) async throws -> SeasonDetail
@@ -26,24 +26,24 @@ class TVUseCase: TVUseCaseProtocol {
     self.repository = repository
   }
   
-  func getPopular(page: Int) async throws -> [TV]? {
-    return try await repository.getPopular(page: page)
+  func getPopular() async throws -> [TV]? {
+    return try await repository.getPopular()
   }
   
-  func getTopRated(page: Int) async throws -> [TV]? {
-    return try await repository.getTopRated(page: page)
+  func getTopRated() async throws -> [TV]? {
+    return try await repository.getTopRated()
   }
   
-  func getAiringToday(page: Int) async throws -> [TV]? {
-    return try await repository.getAiringToday(page: page)
+  func getAiringToday() async throws -> [TV]? {
+    return try await repository.getAiringToday()
   }
   
-  func getOnTheAir(page: Int) async throws -> [TV]? {
-    return try await repository.getOnTheAir(page: page)
+  func getOnTheAir() async throws -> [TV]? {
+    return try await repository.getOnTheAir()
   }
   
-  func getTrending(page: Int) async throws -> [TV]? {
-    return try await repository.getTrending(page: page)
+  func getTrending() async throws -> [TV]? {
+    return try await repository.getTrending()
   }
   
   func getTVDetail(id: Int) async throws -> DetailTV {

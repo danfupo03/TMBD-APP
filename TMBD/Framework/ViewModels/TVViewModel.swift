@@ -10,11 +10,6 @@ import Foundation
 class TVViewModel: ObservableObject {
   private let useCase: TVUseCase
   
-  private var popularPage = 1
-  private var topPage = 1
-  private var airingPage = 1
-  private var onAirPage = 1
-  private var trendingPage = 1
   @Published var errorMessage: String?
   
   @Published var popularTV: [TV] = []
@@ -60,10 +55,10 @@ class TVViewModel: ObservableObject {
   @MainActor
   func getPopular() async {
     do {
-      let resultTV = try await useCase.getPopular(page: popularPage)
+      let resultTV = try await useCase.getPopular()
       if let resultTV = resultTV {
+        popularTV.removeAll()
         popularTV.append(contentsOf: resultTV)
-        popularPage += 1
       }
     } catch {
       errorMessage = "VM: Failed to fetch popular series: \(error.localizedDescription)"
@@ -73,10 +68,10 @@ class TVViewModel: ObservableObject {
   @MainActor
   func getTopRated() async {
     do {
-      let resultTV = try await useCase.getTopRated(page: topPage)
+      let resultTV = try await useCase.getTopRated()
       if let resultTV = resultTV {
+        topRatedTV.removeAll()
         topRatedTV.append(contentsOf: resultTV)
-        topPage += 1
       }
     } catch {
       errorMessage = "VM: Failed to fetch popular series: \(error.localizedDescription)"
@@ -86,10 +81,10 @@ class TVViewModel: ObservableObject {
   @MainActor
   func getAiringToday() async {
     do {
-      let resultTV = try await useCase.getAiringToday(page: airingPage)
+      let resultTV = try await useCase.getAiringToday()
       if let resultTV = resultTV {
+        airingTV.removeAll()
         airingTV.append(contentsOf: resultTV)
-        airingPage += 1
       }
     } catch {
       errorMessage = "VM: Failed to fetch popular series: \(error.localizedDescription)"
@@ -99,10 +94,10 @@ class TVViewModel: ObservableObject {
   @MainActor
   func getOnTheAir() async {
     do {
-      let resultTV = try await useCase.getOnTheAir(page: onAirPage)
+      let resultTV = try await useCase.getOnTheAir()
       if let resultTV = resultTV {
+        onAirTV.removeAll()
         onAirTV.append(contentsOf: resultTV)
-        onAirPage += 1
       }
     } catch {
       errorMessage = "VM: Failed to fetch popular series: \(error.localizedDescription)"
@@ -112,10 +107,10 @@ class TVViewModel: ObservableObject {
   @MainActor
   func getTrending(pages: Int) async {
     do {
-      let resultTV = try await useCase.getTrending(page: trendingPage)
+      let resultTV = try await useCase.getTrending()
       if let resultTV = resultTV {
+        trendingTV.removeAll()
         trendingTV.append(contentsOf: resultTV)
-        trendingPage += 1
       }
     } catch {
       errorMessage = "Failed to fetch popular series: \(error.localizedDescription)"

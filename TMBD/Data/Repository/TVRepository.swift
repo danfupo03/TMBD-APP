@@ -21,11 +21,11 @@ struct TVApi {
 }
 
 protocol TVApiProtocol {
-  func getPopular(page: Int) async throws -> [TV]
-  func getTopRated(page: Int) async throws -> [TV]
-  func getAiringToday(page: Int) async throws -> [TV]
-  func getOnTheAir(page: Int) async throws -> [TV]
-  func getTrending(page: Int) async throws -> [TV]
+  func getPopular() async throws -> [TV]
+  func getTopRated() async throws -> [TV]
+  func getAiringToday() async throws -> [TV]
+  func getOnTheAir() async throws -> [TV]
+  func getTrending() async throws -> [TV]
   func getTVDetail(id: Int) async throws -> DetailTV
   func getTVCredits(id: Int, season: Int) async throws -> (cast: [Cast], crew: [Crew])
   func getEpisodes(id: Int, season: Int) async throws -> SeasonDetail
@@ -39,9 +39,9 @@ class TVRepository: TVApiProtocol {
     self.service = service
   }
   
-  func getPopular(page: Int) async throws -> [TV] {
+  func getPopular() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.popularTV)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return []
     }
@@ -55,9 +55,9 @@ class TVRepository: TVApiProtocol {
     }
   }
   
-  func getTopRated(page: Int) async throws -> [TV] {
+  func getTopRated() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.topRatedTV)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return[]
     }
@@ -71,9 +71,9 @@ class TVRepository: TVApiProtocol {
     }
   }
   
-  func getAiringToday(page: Int) async throws -> [TV] {
+  func getAiringToday() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.airingTodayTV)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return[]
     }
@@ -87,9 +87,9 @@ class TVRepository: TVApiProtocol {
     }
   }
   
-  func getOnTheAir(page: Int) async throws -> [TV] {
+  func getOnTheAir() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.onTheAirTV)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return[]
     }
@@ -103,9 +103,9 @@ class TVRepository: TVApiProtocol {
     }
   }
   
-  func getTrending(page: Int) async throws -> [TV] {
+  func getTrending() async throws -> [TV] {
     let apiUrl = "\(TVApi.baseT)\(TVApi.Routes.trendingToday)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return[]
     }
@@ -168,12 +168,6 @@ class TVRepository: TVApiProtocol {
   /// Helper method to construct the URL without the page parameter
   private func constructURL(apiUrl: String) -> URL? {
     let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)"
-    return URL(string: urlString)
-  }
-  
-  /// Helper method to construct the URL with the page parameter
-  private func constructURL(apiUrl: String, page: Int) -> URL? {
-    let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)&page=\(page)"
     return URL(string: urlString)
   }
 }
