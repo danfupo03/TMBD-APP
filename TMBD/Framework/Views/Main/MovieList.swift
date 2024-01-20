@@ -106,7 +106,7 @@ struct MovieList: View {
         await vm.getTopRated()
         await vm.getNowPlaying()
         await vm.getUpcoming(pages: 5)
-        await vm.getTrending(pages: 2)
+        await vm.getTrending()
       }
     }
   }

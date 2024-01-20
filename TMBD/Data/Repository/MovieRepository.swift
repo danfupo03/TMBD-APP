@@ -21,11 +21,11 @@ struct MovieApi {
 }
 
 protocol MovieApiProtocol {
-  func getPopular(page: Int) async throws -> [Movie]
-  func getTopRated(page: Int) async throws -> [Movie]
-  func getNowPlaying(page: Int) async throws -> [Movie]
+  func getPopular() async throws -> [Movie]
+  func getTopRated() async throws -> [Movie]
+  func getNowPlaying() async throws -> [Movie]
   func getUpcoming(page: Int) async throws -> [Movie]
-  func getTrending(page: Int) async throws -> [Movie]
+  func getTrending() async throws -> [Movie]
   func getMovieDetail(id: Int) async throws -> DetailMovie
   func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew])
 }
@@ -41,9 +41,9 @@ class MovieRepository: MovieApiProtocol {
   /// A function to get movies from the API
   /// - Parameter page: The page to get movies from
   /// - Returns: Returns an array of movies
-  func getPopular(page: Int) async throws -> [Movie] {
+  func getPopular() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.popularMovies)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return []
     }
@@ -57,9 +57,9 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
-  func getTopRated(page:Int) async throws -> [Movie] {
+  func getTopRated() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.topRatedMovies)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return[]
     }
@@ -73,9 +73,9 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
-  func getNowPlaying(page:Int) async throws -> [Movie] {
+  func getNowPlaying() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.nowPlayingMovies)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return[]
     }
@@ -105,9 +105,9 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
-  func getTrending(page:Int) async throws -> [Movie] {
+  func getTrending() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.baseT)\(MovieApi.Routes.trendingToday)"
-    guard let url = constructURL(apiUrl: apiUrl, page: page) else {
+    guard let url = constructURL(apiUrl: apiUrl) else {
       debugPrint("Invalid URL")
       return[]
     }

@@ -8,11 +8,11 @@
 import Foundation
 
 protocol MovieUseCaseProtocol {
-  func getPopular(page: Int) async throws -> [Movie]?
-  func getTopRated(page: Int) async throws -> [Movie]?
-  func getNowPlaying(page: Int) async throws -> [Movie]?
+  func getPopular() async throws -> [Movie]?
+  func getTopRated() async throws -> [Movie]?
+  func getNowPlaying() async throws -> [Movie]?
   func getUpcoming(page: Int) async throws -> [Movie]?
-  func getTrending(page:Int) async throws -> [Movie]?
+  func getTrending() async throws -> [Movie]?
   func getMovieDetail(id: Int) async throws -> DetailMovie
   func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew])
 }
@@ -28,24 +28,24 @@ class MovieUseCase: MovieUseCaseProtocol {
   /// A function to get movies from the API
   /// - Parameter page: The page to get movies from
   /// - Returns: Returns an array of movies
-  func getPopular(page: Int) async throws -> [Movie]? {
-    return try await repository.getPopular(page: page)
+  func getPopular() async throws -> [Movie]? {
+    return try await repository.getPopular()
   }
   
-  func getTopRated(page: Int) async throws -> [Movie]? {
-    return try await repository.getTopRated(page: page)
+  func getTopRated() async throws -> [Movie]? {
+    return try await repository.getTopRated()
   }
   
-  func getNowPlaying(page: Int) async throws -> [Movie]? {
-    return try await repository.getNowPlaying(page: page)
+  func getNowPlaying() async throws -> [Movie]? {
+    return try await repository.getNowPlaying()
   }
   
   func getUpcoming(page: Int) async throws -> [Movie]? {
     return try await repository.getUpcoming(page: page)
   }
   
-  func getTrending(page: Int) async throws -> [Movie]? {
-    return try await repository.getUpcoming(page: page)
+  func getTrending() async throws -> [Movie]? {
+    return try await repository.getTrending()
   }
   
   func getMovieDetail(id: Int) async throws -> DetailMovie {
