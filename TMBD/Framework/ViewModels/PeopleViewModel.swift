@@ -10,7 +10,7 @@ import Foundation
 class PeopleViewModel: ObservableObject {
   private let useCase: PeopleUseCase
   
-  private var popularPage = 1
+  private var page = 1
   @Published var errorMessage: String?
   
   @Published var popularPeople: [People] = []
@@ -28,7 +28,7 @@ class PeopleViewModel: ObservableObject {
   func getPopular(pages: Int) async {
     do {
       for _ in 1...pages {
-        let resultPerson = try await useCase.getPopular(page: popularPage)
+        let resultPerson = try await useCase.getPopular(page: page)
         if let resultPerson = resultPerson {
           popularPeople.removeAll()
           popularPeople.append(contentsOf: resultPerson)

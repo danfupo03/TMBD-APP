@@ -114,9 +114,27 @@ struct PeopleDetailView: View {
             }
             
               ForEach(person.known_for, id: \.id) { content in
-                Text("· \(content.title ?? "") - \(content.media_type)")
-                  .foregroundStyle(.white)
-                  .font(.subheadline)
+                HStack {
+                  if content.media_type == "movie" {
+                    Text("· \(content.title ?? "")")
+                      .foregroundStyle(.white)
+                      .font(.subheadline)
+                    
+                    Image(systemName: "movieclapper")
+                      .foregroundStyle(.white)
+                      .font(.subheadline)
+                  }
+                  
+                  if content.media_type == "tv" {
+                    Text("· \(content.title ?? "Name not available")")
+                      .foregroundStyle(.white)
+                      .font(.subheadline)
+                    
+                    Image(systemName: "tv")
+                      .foregroundStyle(.white)
+                      .font(.subheadline)
+                  }
+                }
               }
             
           }

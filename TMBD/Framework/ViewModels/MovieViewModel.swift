@@ -73,11 +73,14 @@ class MovieViewModel: ObservableObject {
   @MainActor
   func getUpcoming(pages: Int) async {
     do {
-      for _ in 1...pages {
-        let resultMovie = try await useCase.getUpcoming(page: page)
-        if let resultMovie = resultMovie {
-          upcomingMovies.append(contentsOf: resultMovie)
-          page += 1
+      // Only fetch new movies if the array is empty
+      if upcomingMovies.isEmpty {
+        for _ in 1...pages {
+          let resultMovie = try await useCase.getUpcoming(page: page)
+          if let resultMovie = resultMovie {
+            upcomingMovies.append(contentsOf: resultMovie)
+            page += 1
+          }
         }
       }
     } catch {
