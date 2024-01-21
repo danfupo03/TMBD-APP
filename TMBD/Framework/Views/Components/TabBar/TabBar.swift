@@ -12,10 +12,7 @@ struct TabBar: View {
   @Namespace private var animation
   @State private var tabShapePosition: CGPoint = .zero
   
-  let goRoot: () -> Void
-  
-  init(goRoot: @escaping () -> Void) {
-    self.goRoot = goRoot
+  init() {
     UITabBar.appearance().isHidden = true
   }
   
@@ -34,8 +31,8 @@ struct TabBar: View {
           .tag(Tab.actors)
         //.toolbar(.hidden, for: .tabBar)
         
-        ProfileView(goRoot: goRoot)
-          .tag(Tab.profile)
+        Text("")
+          .tag(Tab.search)
         //.toolbar(.hidden, for: .tabBar)
       }
       

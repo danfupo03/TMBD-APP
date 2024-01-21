@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-  let goRoot: () -> Void
   
   var body: some View {
-    TabBar(goRoot: goRoot)
+    TabBar()
       .preferredColorScheme(.light)
   }
 }
 
 #Preview {
-  ContentView(goRoot: {})
+  ContentView()
 }
