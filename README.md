@@ -5,37 +5,45 @@ Welcome to the Movie App! This Swift and SwiftUI-based application allows you to
 ## Features
 
 ### Movies
+
 - Discover Movies: Explore popular, trending, upcoming, and currently playing movies.
 - Movie Details: Click on a movie to view its detailed information, including synopsis, release date, and more.
 
 ### TV Shows
+
 - Discover TV Shows: Find popular TV shows, those currently on air, airing today, and top-rated TV shows.
 - Seasons and Episodes: For TV shows, view details about seasons, episodes, and the latest aired episode. If it's a returning series, also see information about the next episode.
 
-
 ### People
+
 - Trending People: Discover trending actors and other influential figures in the entertainment industry.
 - Biographies: Click on a person to read their biography and learn more about their career.
 
 ## How to Use
 
 1. Clone the repository to your local machine.
+
 ```
 git clone https://github.com/danfupo03/TMBD-APP.git
 ```
 
 2. Open the project in Xcode.
 3. Add your TMDB API key to the `NetworkApiService.swift` file.
+
 ```
 let apiKey = "YOUR_API_KEY_HERE"
 ```
 
 ## Video Walkthrough
 
+Video on Youtube [Youtube](https://youtu.be/CaanV6CEM9o?si=hDRzW5YmPgjKLui_).
+
 ## Dependencies
-* Alamofire: Elegant HTTP networking in Swift.
-* SDWebImageSwiftUI: SwiftUI image loading and caching.
+
+- Alamofire: Elegant HTTP networking in Swift.
+- SDWebImageSwiftUI: SwiftUI image loading and caching.
 
 ## TODO
+
 - [ ] Add search functionality
 - [ ] Add favorites list
