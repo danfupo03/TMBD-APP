@@ -30,10 +30,6 @@ struct TabBar: View {
         PeopleList()
           .tag(Tab.actors)
         //.toolbar(.hidden, for: .tabBar)
-        
-        Text("")
-          .tag(Tab.search)
-        //.toolbar(.hidden, for: .tabBar)
       }
       
       CustomTabBar()

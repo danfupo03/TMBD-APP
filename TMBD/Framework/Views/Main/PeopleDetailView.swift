@@ -33,7 +33,6 @@ struct PeopleDetailView: View {
             
             Spacer()
             
-            ViewButtons(action: {}, systemName: "bookmark")
           }
           .padding()
         }

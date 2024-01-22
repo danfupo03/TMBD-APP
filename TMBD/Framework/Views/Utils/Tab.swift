@@ -11,7 +11,6 @@ enum Tab: String, CaseIterable {
   case movies = "Movies"
   case series = "Series"
   case actors = "Actors"
-  case search = "Search"
   
   var systemImage: String {
     switch self {
@@ -21,8 +20,6 @@ enum Tab: String, CaseIterable {
       return "tv"
     case .actors:
       return "star.circle"
-    case .search:
-      return "magnifyingglass"
     }
   }
   

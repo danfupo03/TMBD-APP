@@ -32,8 +32,6 @@ struct MovieDetailView: View {
             }, systemName: "xmark")
             
             Spacer()
-            
-            ViewButtons(action: {}, systemName: "bookmark")
           }
           .padding()
         }
