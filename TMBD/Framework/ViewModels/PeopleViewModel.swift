@@ -25,17 +25,38 @@ class PeopleViewModel: ObservableObject {
   }
   
   @MainActor
-  func getPopular(pages: Int) async {
+  func getPopular() async {
     do {
-      for _ in 1...pages {
-        let resultPerson = try await useCase.getPopular(page: page)
-        if let resultPerson = resultPerson {
-          popularPeople.removeAll()
-          popularPeople.append(contentsOf: resultPerson)
-        }
+      let resultPeople = try await useCase.getPopular(page: page)
+      if let resultPeople = resultPeople {
+        popularPeople.removeAll()
+        popularPeople.append(contentsOf: resultPeople)
       }
     } catch {
-      errorMessage = "Failed to fetch upcoming movies: \(error.localizedDescription)"
+      errorMessage = "Failed to fetch popular people: \(error.localizedDescription)"
+    }
+  }
+  
+  func goBack() {
+    if page > 1 {
+      page -= 1
+      Task {
+        await getPopular()
+      }
+    }
+  }
+  
+  func goNext() {
+    page += 1
+    Task {
+      await getPopular()
+    }
+  }
+  
+  func resetPage() {
+    page = 1
+    Task {
+      await getPopular()
     }
   }
   

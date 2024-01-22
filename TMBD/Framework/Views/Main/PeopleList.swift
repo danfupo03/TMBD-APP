@@ -16,10 +16,13 @@ struct PeopleList: View {
   var body: some View {
     NavigationView {
       ScrollView(showsIndicators: false) {
-        VStack(alignment: .leading) {
+        VStack {
           
           //Trending people
-          Text("Trending people").font(.title).fontWeight(.bold)
+          Text("Trending people")
+            .font(.title)
+            .fontWeight(.bold)
+            .frame(maxWidth: .infinity, alignment: .leading)
           
           let peoplePairs = vm.popularPeople.chunked(into: 2)
           
@@ -34,7 +37,16 @@ struct PeopleList: View {
                     } .padding(.bottom, 8)
                 }
               }
+              .frame(height: 300)
             }
+          }
+          
+          HStack {
+            ViewButtons(action: { vm.goBack() }, systemName: "arrow.left")
+            Spacer()
+            ViewButtons(action: { vm.resetPage() }, systemName: "arrow.circlepath")
+            Spacer()
+            ViewButtons(action: { vm.goNext() }, systemName: "arrow.right")
           }
           
         }
@@ -48,7 +60,7 @@ struct PeopleList: View {
     }
     .onAppear {
       Task {
-        await vm.getPopular(pages: 2)
+        await vm.getPopular()
       }
     }
   }

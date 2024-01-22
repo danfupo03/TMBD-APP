@@ -25,6 +25,7 @@ struct KnownFor: Codable, Identifiable, Hashable {
   var id: Int
   var backdrop_path: String?
   var title: String?
+  var name: String?
   var overview: String
   var poster_path: String?
   var media_type: String

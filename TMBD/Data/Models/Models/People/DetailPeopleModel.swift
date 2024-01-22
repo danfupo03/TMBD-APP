@@ -10,7 +10,7 @@ import Foundation
 struct DetailPeople: Codable, Identifiable {
   var id: Int
   var biography: String
-  var birthday: String
+  var birthday: String?
   var deathday: String?
-  var place_of_birth: String
+  var place_of_birth: String?
 }
