@@ -32,6 +32,7 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get popular movies
   func getPopular() async {
     do {
       let resultMovie = try await useCase.getPopular()
@@ -45,6 +46,7 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get top rated movies
   func getTopRated() async {
     do {
       let resultMovie = try await useCase.getTopRated()
@@ -58,6 +60,7 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get now playing movies
   func getNowPlaying() async {
     do {
       let resultMovie = try await useCase.getNowPlaying()
@@ -71,6 +74,8 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get upcoming movies
+  /// - Parameter pages: The number of pages to fetch
   func getUpcoming(pages: Int) async {
     do {
       // Only fetch new movies if the array is empty
@@ -89,6 +94,7 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get trending movies
   func getTrending() async {
     do {
       let resultMovie = try await useCase.getTrending()
@@ -101,6 +107,8 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get movie detail
+  /// - Parameter id: Movie id
   func getMovieDetail(id: Int) async throws {
     do {
       self.detailMovie = try await useCase.getMovieDetail(id: id)
@@ -110,6 +118,8 @@ class MovieViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get movie credits
+  /// - Parameter id: Movie id
   func getMovieCredits(id: Int) async {
     do {
       let (cast, crew) = try await useCase.getMovieCredits(id: id)

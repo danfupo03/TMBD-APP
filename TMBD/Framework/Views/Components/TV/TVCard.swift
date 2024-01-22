@@ -28,7 +28,7 @@ struct TVCard: View {
           .frame(width: 150, height: 225)
       }
       
-      // Movie Title
+      // Show Title
       Text(tv.name)
         .font(.headline)
         .lineLimit(5)

@@ -25,6 +25,7 @@ class PeopleViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get popular people
   func getPopular() async {
     do {
       let resultPeople = try await useCase.getPopular(page: page)
@@ -37,6 +38,7 @@ class PeopleViewModel: ObservableObject {
     }
   }
   
+  /// Go back to previous page
   func goBack() {
     if page > 1 {
       page -= 1
@@ -46,6 +48,7 @@ class PeopleViewModel: ObservableObject {
     }
   }
   
+  /// Go to next page
   func goNext() {
     page += 1
     Task {
@@ -53,6 +56,7 @@ class PeopleViewModel: ObservableObject {
     }
   }
   
+  /// Reset page to 1
   func resetPage() {
     page = 1
     Task {
@@ -61,6 +65,8 @@ class PeopleViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get person details
+  /// - Parameter id: Person id
   func getPerson(id: Int) async throws {
     do {
       self.detailPerson = try await useCase.getPerson(id: id)

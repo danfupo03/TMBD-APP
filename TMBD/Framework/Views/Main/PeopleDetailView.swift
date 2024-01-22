@@ -20,7 +20,7 @@ struct PeopleDetailView: View {
         
         ZStack(alignment: .top) {
           
-          // Poster
+          // Picture
           if person.profile_path == nil {
             WebImage(url: URL(string: "https://media.istockphoto.com/id/1402985768/vector/pictogram-of-a-standing-person.jpg?s=612x612&w=0&k=20&c=c_ddVP2Dequ7CsQ_KKTSXVF628GueXTE5TxkRBk0eYQ="))
               .resizable()
@@ -31,7 +31,7 @@ struct PeopleDetailView: View {
               .aspectRatio(contentMode: .fit)
           }
           
-          // View Buttons
+          // Dismiss button
           HStack {
             ViewButtons(action: {
               dismiss()
@@ -43,7 +43,7 @@ struct PeopleDetailView: View {
           .padding()
         }
         
-        // Movie Information Section
+        // Person biography
         ZStack {
           Color.black
             .shadow(color: .gray, radius: 10)

@@ -23,7 +23,7 @@ struct TVRec: View {
         Spacer()
       }
       
-      // Poster Image
+      // Backdrop image
       WebImage(url: tv.fullBackDrop)
         .resizable()
         .aspectRatio(contentMode: .fit)
@@ -45,6 +45,7 @@ struct TVRec: View {
       HStack(spacing: 3) {
         Spacer()
         
+        // Genres pills
         ForEach(genreNames(for: tv.genre_ids), id: \.self) { genreName in
           Text(genreName)
             .padding(.horizontal, 10)

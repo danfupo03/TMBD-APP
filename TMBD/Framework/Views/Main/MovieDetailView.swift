@@ -25,7 +25,7 @@ struct MovieDetailView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
           
-          // View Buttons
+          // Dismiss button
           HStack {
             ViewButtons(action: {
               dismiss()

@@ -13,7 +13,7 @@ struct PeopleCard: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      // Poster Image
+      // Person Image
       if person.profile_path == nil {
         WebImage(url: URL(string: "https://media.istockphoto.com/id/1402985768/vector/pictogram-of-a-standing-person.jpg?s=612x612&w=0&k=20&c=c_ddVP2Dequ7CsQ_KKTSXVF628GueXTE5TxkRBk0eYQ="))
           .resizable()
@@ -24,13 +24,13 @@ struct PeopleCard: View {
           .aspectRatio(contentMode: .fit)
       }
       
-      // Movie Title
+      // Name
       Text(person.name)
         .font(.headline)
         .lineLimit(5)
         .multilineTextAlignment(.leading)
       
-      // Release Date
+      // Department
       Text(person.known_for_department)
         .font(.subheadline)
         .foregroundColor(.gray)

@@ -53,6 +53,7 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get popular tv shows
   func getPopular() async {
     do {
       let resultTV = try await useCase.getPopular()
@@ -66,6 +67,7 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get top rated tv shows
   func getTopRated() async {
     do {
       let resultTV = try await useCase.getTopRated()
@@ -79,6 +81,7 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get airing today tv shows
   func getAiringToday() async {
     do {
       let resultTV = try await useCase.getAiringToday()
@@ -92,6 +95,7 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get on the air tv shows
   func getOnTheAir() async {
     do {
       let resultTV = try await useCase.getOnTheAir()
@@ -105,7 +109,8 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
-  func getTrending(pages: Int) async {
+  /// Get trending tv shows
+  func getTrending() async {
     do {
       let resultTV = try await useCase.getTrending()
       if let resultTV = resultTV {
@@ -118,6 +123,8 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get tv show details
+  /// - Parameter id: TV show id
   func getTVDetail(id: Int) async throws {
     do {
       self.detailTV = try await useCase.getTVDetail(id: id)
@@ -127,6 +134,10 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get tv show credits
+  /// - Parameters:
+  ///   - id: TV show id
+  ///   - season: Season number
   func getTVCredits(id: Int, season: Int) async {
     do {
       let (cast, crew) = try await useCase.getTVCredits(id: id, season: season)
@@ -137,6 +148,10 @@ class TVViewModel: ObservableObject {
   }
   
   @MainActor
+  /// Get season details
+  /// - Parameters:
+  ///   - id: Tv show id
+  ///   - season: Season number
   func getEpisodes(id: Int, season: Int) async {
     do {
       self.seasonDetail = try await useCase.getEpisodes(id: id, season: season)

@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+/// <#Description#>
+/// - Parameter status: <#status description#>
+/// - Returns: <#description#>
 func getStatusColor(status: String) -> Color {
   switch status {
   case "Ended":

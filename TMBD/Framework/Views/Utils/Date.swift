@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// <#Description#>
+/// - Parameter date: <#date description#>
+/// - Returns: <#description#>
 func dateFormatter(date: String) -> String {
   let dateFormatter = DateFormatter()
   dateFormatter.dateFormat = "yyyy-mm-dd"

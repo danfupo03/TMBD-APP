@@ -19,7 +19,7 @@ struct MovieList: View {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
           
-          //Random recommendation of the day
+          //Trending movie recommendation of the day
           ForEach(vm.trendingMovies.prefix(1)) { movie in
             MovieRec(movie: movie)
               .onTapGesture {

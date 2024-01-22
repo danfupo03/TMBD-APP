@@ -18,7 +18,7 @@ struct TVList: View {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
           
-          //Random recommendation of the day
+          //Trending recommendation of the day
           ForEach(vm.trendingTV.prefix(1)) { tv in
             TVRec(tv: tv)
               .onTapGesture {
@@ -27,7 +27,7 @@ struct TVList: View {
               } .padding(.bottom, 8)
           }
           
-          //Trending movies
+          //Trending tv shows
           Text("Trending Today").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -42,7 +42,7 @@ struct TVList: View {
             }
           } .padding(.bottom, 8)
           
-          //Top rated movies
+          //Top rated tv shows
           Text("People's Favorites").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -57,7 +57,7 @@ struct TVList: View {
             }
           } .padding(.bottom, 8)
           
-          //Now playing movies
+          //On the air shows
           Text("On the air").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -72,7 +72,7 @@ struct TVList: View {
             }
           } .padding(.bottom, 8)
           
-          //Upcoming movies
+          //Airing shows
           Text("Airing today").font(.title).fontWeight(.bold)
           
           ScrollView(.horizontal, showsIndicators: false) {
@@ -102,7 +102,7 @@ struct TVList: View {
         await vm.getTopRated()
         await vm.getOnTheAir()
         await vm.getAiringToday()
-        await vm.getTrending(pages: 3)
+        await vm.getTrending()
       }
     }
   }

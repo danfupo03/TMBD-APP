@@ -65,6 +65,7 @@ struct SeasonCard: View {
       }
       .padding(.bottom)
       
+      // Season overview
       if season.overview != "" {
         Text("Overview:")
         

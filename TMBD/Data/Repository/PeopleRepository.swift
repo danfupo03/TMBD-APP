@@ -28,6 +28,9 @@ class PeopleRepository: PeopleApiProtocol {
     self.service = service
   }
   
+  /// Get popular people
+  /// - Parameter page: Page number
+  /// - Returns: Array of people
   func getPopular(page: Int) async throws -> [People] {
     let apiUrl = "\(PeopleApi.base)\(PeopleApi.Routes.popularPeople)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
@@ -44,6 +47,9 @@ class PeopleRepository: PeopleApiProtocol {
     }
   }
   
+  /// Get person details
+  /// - Parameter id: Person id
+  /// - Returns: DetailPeople object
   func getPerson(id: Int) async throws -> DetailPeople {
     let apiUrl = "\(PeopleApi.base)/\(id)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -59,13 +65,20 @@ class PeopleRepository: PeopleApiProtocol {
     }
   }
   
-  /// Helper method to construct the URL without the page parameter
+  /// Method to construct URL
+  /// - Parameter apiUrl: API URL
+  /// - Returns: The constructed URL
   private func constructURL(apiUrl: String) -> URL? {
     let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)"
     return URL(string: urlString)
   }
   
-  /// Helper method to construct the URL with the page parameter
+  
+  /// Method to construct URL with page number
+  /// - Parameters:
+  ///   - apiUrl: API URL
+  ///   - page: Page number
+  /// - Returns: The constructed URL
   private func constructURL(apiUrl: String, page: Int) -> URL? {
     let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)&page=\(page)"
     return URL(string: urlString)

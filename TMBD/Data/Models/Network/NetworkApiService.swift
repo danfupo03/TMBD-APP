@@ -19,12 +19,13 @@ class NetworkApiService {
   
   let apiKey = "12e629d7051e2adf10c4ba97a9c12fcb"
   
-  /// Function to make a generic API request
+  
+  /// Method to get data from API
   /// - Parameters:
-  ///   - url: The URL for the request
-  ///   - method: The HTTP method for the request
-  ///   - parameters: The parameters for the request
-  /// - Returns: The response data
+  ///   - url: API URL
+  ///   - method: The HTTP method
+  ///   - parameters: The parameters to be encoded in the request
+  /// - Returns: The decoded data
   func get<T: Decodable>(url: URL, method: HTTPMethod, parameters: Parameters? = nil) async throws -> T {
     var headers: HTTPHeaders = [:]
     headers["Authorization"] = "Bearer \(apiKey)"

@@ -20,10 +20,16 @@ class PeopleUseCase: PeopleUseCaseProtocol {
     self.repository = repository
   }
   
+  /// Get popular people
+  /// - Parameter page: Page number
+  /// - Returns: People array
   func getPopular(page: Int) async throws -> [People]? {
     return try await repository.getPopular(page: page)
   }
   
+  /// Get person details
+  /// - Parameter id: DetailPeople object
+  /// - Returns: DetailPeople object
   func getPerson(id: Int) async throws -> DetailPeople {
     return try await repository.getPerson(id: id)
   }

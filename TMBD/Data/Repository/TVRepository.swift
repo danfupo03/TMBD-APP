@@ -39,6 +39,8 @@ class TVRepository: TVApiProtocol {
     self.service = service
   }
   
+  /// Get popular tv shows
+  /// - Returns: Array of tv shows
   func getPopular() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.popularTV)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -55,6 +57,8 @@ class TVRepository: TVApiProtocol {
     }
   }
   
+  /// Get top rated tv shows
+  /// - Returns: Array of tv shows
   func getTopRated() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.topRatedTV)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -71,6 +75,8 @@ class TVRepository: TVApiProtocol {
     }
   }
   
+  /// Get airing today tv shows
+  /// - Returns: Array of tv shows
   func getAiringToday() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.airingTodayTV)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -87,6 +93,8 @@ class TVRepository: TVApiProtocol {
     }
   }
   
+  /// Get on the air tv shows
+  /// - Returns: Array of tv shows
   func getOnTheAir() async throws -> [TV] {
     let apiUrl = "\(TVApi.base)\(TVApi.Routes.onTheAirTV)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -103,6 +111,8 @@ class TVRepository: TVApiProtocol {
     }
   }
   
+  /// Get trending tv shows
+  /// - Returns: Array of tv shows
   func getTrending() async throws -> [TV] {
     let apiUrl = "\(TVApi.baseT)\(TVApi.Routes.trendingToday)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -119,6 +129,9 @@ class TVRepository: TVApiProtocol {
     }
   }
   
+  /// Get tv show details
+  /// - Parameter id: Tv show id
+  /// - Returns: DetailTV object
   func getTVDetail(id: Int) async throws -> DetailTV {
     let apiURL = "\(TVApi.base)/\(id)"
     guard let url = constructURL(apiUrl: apiURL) else {
@@ -134,6 +147,11 @@ class TVRepository: TVApiProtocol {
     }
   }
   
+  /// Get tv show credits
+  /// - Parameters:
+  ///   - id: Tv show id
+  ///   - season: Tv show season
+  /// - Returns: Tuple of cast and crew
   func getTVCredits(id: Int, season: Int) async throws -> (cast: [Cast], crew: [Crew]) {
     let apiUrl = "\(TVApi.base)/\(id)/season/\(season)/credits"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -150,6 +168,11 @@ class TVRepository: TVApiProtocol {
     }
   }
   
+  /// Get season episodes
+  /// - Parameters:
+  ///   - id: Tv show id
+  ///   - season: Season number
+  /// - Returns: SeasonDetail object
   func getEpisodes(id: Int, season: Int) async throws -> SeasonDetail {
     let apiURL = "\(TVApi.base)/\(id)/season/\(season)"
     guard let url = constructURL(apiUrl: apiURL) else {
@@ -165,7 +188,10 @@ class TVRepository: TVApiProtocol {
     }
   }
   
-  /// Helper method to construct the URL without the page parameter
+  
+  /// Method to construct URL
+  /// - Parameter apiUrl: API URL
+  /// - Returns: The constructed URL
   private func constructURL(apiUrl: String) -> URL? {
     let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)"
     return URL(string: urlString)

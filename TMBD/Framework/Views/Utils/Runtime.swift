@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// <#Description#>
+/// - Parameter runtime: <#runtime description#>
+/// - Returns: <#description#>
 func runtimeFormatter(runtime: Int) -> String {
   var result: Int
   

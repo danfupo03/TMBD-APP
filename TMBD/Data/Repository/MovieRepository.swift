@@ -38,9 +38,8 @@ class MovieRepository: MovieApiProtocol {
     self.service = service
   }
   
-  /// A function to get movies from the API
-  /// - Parameter page: The page to get movies from
-  /// - Returns: Returns an array of movies
+  /// Get popular movies
+  /// - Returns: Array of movies
   func getPopular() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.popularMovies)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -57,6 +56,8 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
+  /// Get top rated movies
+  /// - Returns: Array of movies
   func getTopRated() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.topRatedMovies)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -73,6 +74,8 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
+  /// Get now playing movies
+  /// - Returns: Array of movies
   func getNowPlaying() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.nowPlayingMovies)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -89,6 +92,9 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
+  /// Get upcoming movies
+  /// - Parameter page: Page number
+  /// - Returns: Array of movies
   func getUpcoming(page:Int) async throws -> [Movie] {
     let apiUrl = "\(MovieApi.base)\(MovieApi.Routes.upcomingMovies)"
     guard let url = constructURL(apiUrl: apiUrl, page: page) else {
@@ -105,6 +111,8 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
+  /// Get trending movies
+  /// - Returns: Array of movies
   func getTrending() async throws -> [Movie] {
     let apiUrl = "\(MovieApi.baseT)\(MovieApi.Routes.trendingToday)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -121,6 +129,9 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
+  /// Get movie detail
+  /// - Parameter id: Movie id
+  /// - Returns: DetailMovie object
   func getMovieDetail(id: Int) async throws -> DetailMovie {
     let apiUrl = "\(MovieApi.base)/\(id)"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -136,6 +147,9 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
+  /// Get movie credits (cast and crew)
+  /// - Parameter id: Movie id
+  /// - Returns: Tuple of cast and crew
   func getMovieCredits(id: Int) async throws -> (cast: [Cast], crew: [Crew]) {
     let apiUrl = "\(MovieApi.base)/\(id)/credits"
     guard let url = constructURL(apiUrl: apiUrl) else {
@@ -152,13 +166,21 @@ class MovieRepository: MovieApiProtocol {
     }
   }
   
-  /// Helper method to construct the URL without the page parameter
+  
+  /// Method to construct URL
+  /// - Parameter apiUrl: API URL
+  /// - Returns: The constructed URL
   private func constructURL(apiUrl: String) -> URL? {
     let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)"
     return URL(string: urlString)
   }
   
-  /// Helper method to construct the URL with the page parameter
+  
+  /// Method to construct URL with page number
+  /// - Parameters:
+  ///   - apiUrl: API URL
+  ///   - page: Page number
+  /// - Returns: The constructed URL
   private func constructURL(apiUrl: String, page: Int) -> URL? {
     let urlString = "\(apiUrl)?api_key=\(NetworkApiService.shared.apiKey)&page=\(page)"
     return URL(string: urlString)

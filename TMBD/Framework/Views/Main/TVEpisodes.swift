@@ -18,6 +18,7 @@ struct TVEpisodes: View {
       ZStack {
         Color.black
         
+        // Seasons list
         VStack(alignment: .leading) {
           VStack(alignment: .leading) {
             Text("Seasons").font(.title)
@@ -29,11 +30,13 @@ struct TVEpisodes: View {
           }
           .padding(.bottom, 20)
           
+          // Last episode to air
           VStack(alignment: .leading) {
             Text("Last episode to air").font(.title)
             LastEpisode(last: vm.detailTV.last_episode_to_air)
           }
           
+          // Next episode to air
           if vm.detailTV.next_episode_to_air != nil {
             VStack(alignment: .leading) {
               Text("Next episode to air")

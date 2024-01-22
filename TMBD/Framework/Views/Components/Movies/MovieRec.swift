@@ -23,7 +23,7 @@ struct MovieRec: View {
         Spacer()
       }
       
-      // Poster Image
+      // Backdrop Image
       WebImage(url: movie.fullBackDrop)
         .resizable()
         .aspectRatio(contentMode: .fit)
@@ -45,6 +45,7 @@ struct MovieRec: View {
       HStack(spacing: 3) {
         Spacer()
         
+        // Genres pills
         ForEach(genreNames(for: movie.genre_ids), id: \.self) { genreName in
           Text(genreName)
             .padding(.horizontal, 10)

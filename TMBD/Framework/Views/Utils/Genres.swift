@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// <#Description#>
+/// - Parameter genreIds: <#genreIds description#>
+/// - Returns: <#description#>
 func genreNames(for genreIds: [Int]) -> [String] {
   let genreMapping: [Int: String] = [
     12: "Adventure",

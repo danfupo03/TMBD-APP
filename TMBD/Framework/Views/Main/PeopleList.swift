@@ -41,6 +41,7 @@ struct PeopleList: View {
             }
           }
           
+          // Pages buttons
           HStack {
             ViewButtons(action: { vm.goBack() }, systemName: "arrow.left")
             Spacer()

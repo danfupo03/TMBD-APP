@@ -26,6 +26,7 @@ struct LastEpisode: View {
       
       VStack(alignment: .leading, spacing: 10){
         
+        // Last episode poster
         if last.still_path == nil {
           WebImage(url: URL(string: "https://media.gq.com/photos/5df5a3794e7a380009b83bbd/16:9/w_2560%2Cc_limit/BestShows.jpg"))
             .resizable()
@@ -40,6 +41,7 @@ struct LastEpisode: View {
             .clipped()
         }
         
+        // Season number, runtime and episode name
         VStack(alignment: .leading, spacing: 4) {
           Text("\(last.name) · S\(season_number) E\(episode_number) · \(runtimeFormatter(runtime: last.runtime ?? 0))")
             .font(.subheadline)
@@ -53,6 +55,7 @@ struct LastEpisode: View {
             .font(.subheadline)
             .foregroundStyle(.gray)
           
+          // Rating
           HStack {
             Text("Rating:")
               .font(.subheadline)
