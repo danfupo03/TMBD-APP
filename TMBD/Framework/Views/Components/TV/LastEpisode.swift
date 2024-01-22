@@ -20,16 +20,25 @@ struct LastEpisode: View {
       RoundedRectangle(cornerRadius: cornerRadius)
         .strokeBorder(Color.black, lineWidth: 1)
         .frame(maxWidth: cardAndImageWidth, maxHeight: cardHeight)
-    
+      
       let episode_number = String(last.episode_number)
       let season_number = String(last.season_number)
       
       VStack(alignment: .leading, spacing: 10){
-        WebImage(url: last.stillPath)
-          .resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(width: cardAndImageWidth)
-          .clipped()
+        
+        if last.still_path == nil {
+          WebImage(url: URL(string: "https://media.gq.com/photos/5df5a3794e7a380009b83bbd/16:9/w_2560%2Cc_limit/BestShows.jpg"))
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: cardAndImageWidth)
+            .clipped()
+        } else {
+          WebImage(url: last.stillPath)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: cardAndImageWidth)
+            .clipped()
+        }
         
         VStack(alignment: .leading, spacing: 4) {
           Text("\(last.name) · S\(season_number) E\(episode_number) · \(runtimeFormatter(runtime: last.runtime ?? 0))")

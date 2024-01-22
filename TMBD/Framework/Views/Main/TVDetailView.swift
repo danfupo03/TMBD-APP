@@ -22,9 +22,15 @@ struct TVDetailView: View {
           ZStack(alignment: .top) {
             
             // Poster
-            WebImage(url: tv.fullPoster)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
+            if tv.poster_path == nil {
+              WebImage(url: URL(string: "https://w0.peakpx.com/wallpaper/414/855/HD-wallpaper-television-is-back-block-blurred-vision-communication-evanthia-palatou-life-lines-movie-signal-television-tv.jpg"))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            } else {
+              WebImage(url: tv.fullPoster)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            }
             
             // View Buttons
             HStack {
